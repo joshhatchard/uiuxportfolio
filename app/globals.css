@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Design system colors */
+  --color-primary: #7B5CF5;
+  --color-secondary: #EDE3C8;
+  --color-grey: #555555;
+  --color-bg-black: #0D0D0D;
+  --nav-item-text: #252525;
+  --nav-item-bg: #1C1C1C;
+  --nav-highlight-bg: rgba(255,255,255,0.06);
+
+  /* app theme tokens */
+  --background: var(--color-bg-black);
+  --foreground: var(--color-secondary);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* removed non-standard @theme rule */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-nav-item {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.text-hero-caption {
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+}
+
+.text-hero-main {
+  font-family: inherit;
+  font-size: 128px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.text-hero-sub {
+  font-family: inherit;
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-grey);
+}
+
+
+.site-header {
+  background: var(--background) !important;
+  position: relative;
+  z-index: 40;
+}
+
+
+
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #111111;
+  color: #f3f1ec;
 }
