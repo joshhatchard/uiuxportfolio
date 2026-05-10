@@ -1,33 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  /* Design system colors */
   --color-primary: #7B5CF5;
   --color-secondary: #EDE3C8;
   --color-grey: #555555;
   --color-bg-black: #0D0D0D;
   --nav-item-text: #252525;
   --nav-item-bg: #1C1C1C;
-  --nav-highlight-bg: rgba(255,255,255,0.06);
-
-  /* app theme tokens */
+  --nav-highlight-bg: rgba(255, 255, 255, 0.06);
   --background: var(--color-bg-black);
   --foreground: var(--color-secondary);
 }
 
-/* removed non-standard @theme rule */
-
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;       /* 14px — mobile */
+
+  @media (min-width: 768px) {
+    font-size: 1rem;         /* 16px — tablet */
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 1.125rem;     /* 18px — desktop */
+  }
 }
 
+/* ── Nav (untouched) ───────────────────────── */
 .text-nav-item {
   font-family: inherit;
   font-size: 14px;
@@ -36,46 +45,158 @@ body {
   line-height: 1;
 }
 
+/* ── Hero ──────────────────────────────────── */
 .text-hero-caption {
   font-family: inherit;
-  font-size: 24px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: -0.03em;
   line-height: 1.2;
+
+  font-size: 1rem;        /* 12px — mobile */
+
+  @media (min-width: 768px) {
+    font-size: 1.25em;         /* 16px — tablet */
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 1.5rem;       /* 24px — desktop */
+  }
 }
 
 .text-hero-main {
   font-family: inherit;
-  font-size: 128px;
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1;
+
+  font-size: 6rem;           /* 64px — mobile */
+
+  @media (min-width: 768px) {
+    font-size: 6rem;         /* 96px — tablet */
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 8rem;         /* 128px — desktop */
+  }
 }
 
 .text-hero-sub {
   font-family: inherit;
-  font-size: 64px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--color-grey);
+
+  font-size: 2rem;           /* 32px — mobile */
+
+  @media (min-width: 768px) {
+    font-size: 3rem;         /* 48px — tablet */
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 3.5rem;         /* 64px — desktop */
+  }
+}
+
+.text-body-caption {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--color-grey);
+
+  font-size: 2rem;           /* 32px — mobile */
+
+  @media (min-width: 768px) {
+    font-size: 3rem;         /* 48px — tablet */
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 3.5rem;         /* 64px — desktop */
+  }
+}
+
+.text-case-study-title {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-secondary);
+
+  font-size: 1rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 1.5rem;
+  }
+}
+
+/* ── Footer links ───────────────────────────── */
+.text-footer-link {
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1.2;
+  color: var(--color-secondary);
+  font-size: 1rem; /* 16px */
+}
+
+.text-about-heading {
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-size: 1.25rem; /* 20px */
 }
 
 
+.text-about-body {
+  font-family: inherit;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.5;
+  font-size: 1rem; /* 18px */
+  color: #999999;
+}
+
+.text-heading-small {
+  font-family: inherit;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1;
+
+  font-size: 3rem;
+
+  @media (min-width: 768px) {
+    font-size: 3.5rem;
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 4rem;
+  }
+}
+
+
+/* ── Layout ────────────────────────────────── */
+.page-container {
+  width: 100%;
+}
+
+/* ── Misc ──────────────────────────────────── */
 .site-header {
   background: var(--background) !important;
   position: relative;
   z-index: 40;
 }
 
-
-
 .logo-mark {
   width: 28px;
   height: 28px;
   display: inline-block;
 }
-
 
 a {
   color: inherit;

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed } from "next/font/google";
+import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
-import { NavBar } from "@/components/nav-bar";
+import { SiteChrome } from "@/components/SiteChrome";
 
 const barlowCondensed = Barlow_Condensed({
 	weight: ["400", "700", "900"],
 	subsets: ["latin"],
 });
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Portfolio Prototype",
@@ -20,10 +22,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={barlowCondensed.className}>
-				<NavBar />
-				<main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-					{children}
+			<body className={inter.className}>
+				<main className="mx-auto w-full max-w-7xl px-12 py-0 md:px-16 lg:px-24">
+					<SiteChrome>{children}</SiteChrome>
 				</main>
 			</body>
 		</html>

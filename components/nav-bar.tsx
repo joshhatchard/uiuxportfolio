@@ -16,7 +16,7 @@ const navItems = [
 
 const externalLinks = [
   { href: "https://www.linkedin.com/in/joshhatchard", label: "LINKEDIN" },
-  { href: "mailto:joshualhatchard@gmailcom", label: "CONTACT" },
+  { href: "mailto:joshualhatchard@gmail.com", label: "CONTACT" },
 ];
 
 // ─── Shared external link ────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ function ExternalLink({ href, label, showArrow = false, onClick }: ExternalLinkP
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noreferrer"}
       onClick={onClick}
-      className="text-nav-item flex items-center gap-1 px-6 py-4 transition-opacity hover:opacity-80"
+      className="text-nav-item flex items-center gap-1 px-4 transition-opacity hover:opacity-80"
       style={{ color: "var(--color-grey)" }}
     >
       {label}
@@ -69,24 +69,17 @@ export function NavBar() {
 
   return (
     <header className={`site-header ${inter.className}`}>
-      {/* 
-        Breakpoints:
-          mobile  — default (<640px): nav in flow, small pill items, @ button
-          tablet  — sm (640–1023px):  nav absolutely centred, @ button
-          desktop — lg (1024px+):     nav absolutely centred, text links
-      */}
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 sm:gap-8 sm:px-8 lg:px-12">
+      <div className="page-container grid grid-cols-3 items-center py-8">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 px-3 py-2 transition-opacity hover:opacity-80">
-          <img src="/logo.svg" alt="" aria-hidden className="h-6 w-auto" />
-        </Link>
+        {/* Left — Logo */}
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center gap-3 px-3 py-2 -mx-3 transition-opacity hover:opacity-80">
+            <img src="/logo.svg" alt="" aria-hidden className="h-6 w-auto" />
+          </Link>
+        </div>
 
-        {/* Nav pill — in flow on mobile, absolute centre on tablet + desktop */}
-        <nav
-          aria-label="Primary"
-          className="flex items-center sm:absolute sm:left-1/2 sm:-translate-x-1/2"
-        >
+        {/* Centre — Nav pill */}
+        <nav aria-label="Primary" className="flex items-center justify-center">
           <div
             className="inline-flex items-center rounded-full px-1 py-1"
             style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
@@ -120,19 +113,20 @@ export function NavBar() {
           </div>
         </nav>
 
-        {/* Right side — desktop text links / tablet+mobile @ dropdown */}
-        <div className="flex h-12 items-center">
+        {/* Right — desktop links / mobile+tablet @ dropdown */}
+        <div className="flex h-12 items-center justify-end">
 
-          {/* Desktop: plain text links */}
-          <div className="hidden lg:flex items-center gap-0">
+          {/* md+: plain text links */}
+          <div className="hidden lg:flex items-center h-full -mr-4">
             {externalLinks.map((link) => (
               <ExternalLink key={link.href} {...link} showArrow />
             ))}
           </div>
 
-          {/* Mobile + tablet: @ button with dropdown */}
+          {/* mobile only: @ button with dropdown */}
           <div className="relative lg:hidden" ref={dropdownRef}>
             <button
+              type="button"
               onClick={() => setIsDropdownOpen((prev) => !prev)}
               aria-label="Contact links"
               aria-expanded={isDropdownOpen}
@@ -148,7 +142,7 @@ export function NavBar() {
 
             {isDropdownOpen && (
               <div
-                className="absolute right-0 top-full mt-4 min-w-max overflow-hidden rounded-2xl"
+                className="absolute right-0 top-full mt-4 px-2 py-4 min-w-max overflow-hidden rounded-2xl flex flex-col gap-4"
                 style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
               >
                 {externalLinks.map((link) => (

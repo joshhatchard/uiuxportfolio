@@ -1,24 +1,52 @@
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Inter } from "next/font/google";
+import { Barlow_Condensed } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+const barlowCondensed = Barlow_Condensed({ weight: ["400", "700", "900"], subsets: ["latin"] });
+
+const captions = ["A DESIGNER AND <DEVELOPER>", "A CREATIVE AND <TECHNICAL>"];
+
 export function HeroSection() {
+
   return (
-    <section className="py-16 sm:py-24">
-      <div className="space-y-6">
+    <section className="page-container pt-16 lg:pt-24">
+      <div className="space-y-0">
         {/* Caption */}
-        <p className="text-hero-caption">
-          <span style={{ color: "var(--color-secondary)" }}>JOSH HATCHARD</span>
-          <span style={{ color: "var(--color-grey)" }}> - DESIGNER AND </span>
-          <span style={{ color: "var(--color-secondary)" }}>&lt;DEVELOPER&gt;</span>
-        </p>
+          <p className={`text-hero-caption ${inter.className}`}>
+            <span style={{ color: "var(--color-grey)" }}>HI, I'M JOSH HATCHARD</span>
+          </p>
 
         {/* Main Heading */}
-        <h1 className="text-hero-main">
+        <h1 className={`text-hero-main ${barlowCondensed.className}`}>
           <span style={{ color: "var(--color-secondary)" }}>I'M A </span>
           <span style={{ color: "var(--color-primary)" }}>UI/UX DESIGNER</span>
         </h1>
 
         {/* Sub Heading */}
-        <h2 className="text-hero-sub">
-          <span style={{ color: "var(--color-grey)" }}>// I ALSO CODE PRODUCTS, END TO END</span>
+        <h2 className={`text-hero-sub ${barlowCondensed.className}`}>
+          <span style={{ color: "var(--color-grey)" }}>// I ALSO CODE PRODUCTS FROM END TO END</span>
         </h2>
+
+        {/* CTA and Location */}
+        <div className={`flex items-center justify-between pt-20 ${inter.className}`}>
+          <Link
+            href="#selected-work"
+            className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
+            style={{ background: "var(--color-secondary)", color: "var(--color-bg-black)" }}
+          >
+            EXPLORE WORK
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </Link>
+          <p className="text-nav-item flex items-center gap-2" style={{ color: "var(--color-grey)" }}>
+            <span className="inline-block h-3 w-3 rounded-full" style={{ backgroundColor: "#00852C" }}></span>
+            DESIGNER BASED IN SYDNEY
+          </p>
+        </div>
       </div>
     </section>
   );
