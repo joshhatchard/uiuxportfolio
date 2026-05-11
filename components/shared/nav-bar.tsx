@@ -149,14 +149,12 @@ export function NavBar() {
                   <ExternalLink
                     key={link.href}
                     {...link}
-                    showArrow
                     onClick={() => setIsDropdownOpen(false)}
                   />
                 ))}
               </div>
             )}
           </div>
-
         </div>
       </div>
     </header>

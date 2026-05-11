@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import { caseStudies, getCaseStudy } from "@/lib/portfolio";
+import { caseStudies, getCaseStudy } from "@/lib/project-cards";
 import { getCaseStudyContent } from "@/lib/case-study-content";
-import { CaseStudyTemplate } from "@/components/CaseStudyTemplate";
+import { DetailTemplate } from "@/components/shared/DetailTemplate";
 
 type WorkPageProps = {
   params: Promise<{ slug: string }>;
@@ -20,5 +20,5 @@ export default async function WorkDetailPage({ params }: WorkPageProps) {
     notFound();
   }
 
-  return <CaseStudyTemplate content={content} />;
+  return <DetailTemplate content={content} />;
 }

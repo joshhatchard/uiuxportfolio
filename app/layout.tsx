@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
-import { SiteChrome } from "@/components/SiteChrome";
+import { SiteChrome } from "@/components/shared/SiteChrome";
 
 const barlowCondensed = Barlow_Condensed({
 	weight: ["400", "700", "900"],
@@ -11,8 +11,11 @@ const barlowCondensed = Barlow_Condensed({
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Portfolio Prototype",
-	description: "Low-fidelity UI/UX portfolio prototype",
+	title: "Josh Hatchard - UI/UX Designer",
+	description: "Portfolio of Josh Hatchard - designing and coding clean, user-centred digital products from end to end.",
+	icons: {
+		icon: "/favicon.png",
+	},
 };
 
 export default function RootLayout({

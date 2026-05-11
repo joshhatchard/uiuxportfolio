@@ -1,0 +1,8 @@
+import { ProjectCards } from "@/components/shared/ProjectCards";
+import { creativeCards } from "@/lib/project-cards";
+
+export function CreativeProjectCards() {
+  return <ProjectCards cards={creativeCards} sectionId="creative-projects" spacing="mt-16 scroll-mt-8 lg:mt-20" />;
+}
+
+export default CreativeProjectCards;

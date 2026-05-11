@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-type SelectedWorkCard = {
+export type ProjectCard = {
   href: string;
   imageSrc: string;
   imageAlt: string;
@@ -8,37 +8,26 @@ type SelectedWorkCard = {
   subtitle: string;
 };
 
-const selectedWorkCards: SelectedWorkCard[] = [
-  {
-    href: "/work/case-study-one",
-    imageSrc: "/casethumbnails/granic.jpg",
-    imageAlt: "Granic deadline tracker preview",
-    title: "GRANIC - DEADLINE TRACKER",
-    subtitle: "SAAS | PRODUCT DESIGN",
-  },
-  {
-    href: "/work/case-study-two",
-    imageSrc: "/casethumbnails/canvas.jpg",
-    imageAlt: "USYD first nations support preview",
-    title: "USYD - FIRST NATIONS SUPPORT",
-    subtitle: "UI DESIGN | DEVELOPMENT",
-  },
-];
+type ProjectCardsProps = {
+  cards: ProjectCard[];
+  sectionId: string;
+  spacing?: string;
+};
 
-function SelectedWorkCardView({
+function ProjectCardView({
   href,
   imageSrc,
   imageAlt,
   title,
   subtitle,
-}: SelectedWorkCard) {
+}: ProjectCard) {
   return (
     <Link href={href} className="group block transition-opacity hover:opacity-90">
       <div className="aspect-square overflow-hidden">
         <img src={imageSrc} alt={imageAlt} className="block h-full w-full object-cover object-center" />
       </div>
 
-      <div className="mt-6 space-y-4">
+      <div className="mt-6 space-y-2">
         <div className="flex items-center justify-between">
           <h3 className="text-case-study-title">{title}</h3>
           <svg
@@ -55,25 +44,22 @@ function SelectedWorkCardView({
             <path d="M12 5l7 7-7 7" />
           </svg>
         </div>
-        <p className="text-nav-item text-white/35">{subtitle}</p>
+        <p className="text-nav-item text-(--color-grey)">{subtitle}</p>
       </div>
     </Link>
   );
 }
 
-export function SelectedWorkSection() {
+export function ProjectCards({ cards, sectionId, spacing = "mt-12 scroll-mt-8 lg:mt-16" }: ProjectCardsProps) {
   return (
-    <section id="selected-work" className="page-container mt-12 scroll-mt-8 lg:mt-16">
-      <div className="mb-6 sm:mb-8">
-      </div>
-
+    <section id={sectionId} className={`page-container ${spacing}`}>
       <div className="grid gap-8 md:grid-cols-2 md:gap-10">
-        {selectedWorkCards.map((card) => (
-          <SelectedWorkCardView key={card.href} {...card} />
+        {cards.map((card) => (
+          <ProjectCardView key={card.href} {...card} />
         ))}
       </div>
     </section>
   );
 }
 
-export default SelectedWorkSection;
+export default ProjectCards;

@@ -1,3 +1,5 @@
+import type { DetailTemplateContent } from "@/components/shared/DetailTemplate";
+
 export type CaseStudyContentsLink = {
   id: string;
   label: string;
@@ -18,25 +20,12 @@ export type CaseStudyBlock = {
   reverse?: boolean;
 };
 
-export type CaseStudyTemplateContent = {
-  title: string;
-  subtitle: string;
-  contents: CaseStudyContentsLink[];
-  heroImage?: string;
-  heroImageAlt?: string;
-  infoCards: CaseStudyInfoCard[];
-  featureHeading: string;
-  featureEyebrow: string;
-  featureBody: string;
-  blocks: CaseStudyBlock[];
-};
+export type CaseStudyTemplateContent = DetailTemplateContent;
 
 export const caseStudyContent: Record<string, CaseStudyTemplateContent> = {
   "case-study-one": {
     title: "Deadline Tracker",
     subtitle: "Granic - DEC 2025",
-    heroImage: "/casethumbnails/granic.jpg",
-    heroImageAlt: "Granic case study thumbnail",
     contents: [
       { id: "overview", label: "Overview" },
       { id: "problem", label: "Problem" },

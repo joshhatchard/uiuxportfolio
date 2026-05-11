@@ -25,7 +25,7 @@ export function ContactSection() {
           <span style={{ color: "var(--color-secondary)" }}>LET'S WORK </span>
           <span style={{ color: "var(--color-primary)" }}>TOGETHER!</span>
         </h2>
-        <p className="mt-16 text-[24px] font-semibold text-white/30" style={{ letterSpacing: "-0.05em" }}>
+        <p className="mt-16 text-[24px] font-bold text-(--color-grey)" style={{ letterSpacing: "-0.05em" }}>
           {emailAddress}
         </p>
         <div className="mt-8 flex justify-center">
@@ -64,7 +64,7 @@ export function ContactSection() {
               rel="noreferrer"
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
-              <img src="/platforms/linkedin.svg" alt="LinkedIn" className="h-14 w-auto opacity-50" />
+              <img src="/platforms/linkedin.svg" alt="LinkedIn" className="h-14 w-auto" />
               <p className="text-nav-item text-white/35">LINKEDIN</p>
             </a>
 
@@ -74,7 +74,7 @@ export function ContactSection() {
               rel="noreferrer"
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
-              <img src="/platforms/github.svg" alt="GitHub" className="h-14 w-auto opacity-50" />
+              <img src="/platforms/github.svg" alt="GitHub" className="h-14 w-auto" />
               <p className="text-nav-item text-white/35">GITHUB</p>
             </a>
           </div>

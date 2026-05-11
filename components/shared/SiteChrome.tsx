@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { NavBar } from "@/components/nav-bar";
+import { NavBar } from "@/components/shared/nav-bar";
 
 type SiteChromeProps = {
   children: React.ReactNode;

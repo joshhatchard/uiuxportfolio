@@ -12,9 +12,9 @@ const storyTiles: StoryTile[] = [
   {
     image: "/about/flipped.jpg",
     alt: "Josh Hatchard doing a handstand on grass",
-    heading: "Background in design and Computer Science",
+    heading: "Design x Tech is kind of my thing",
     body:
-      "Background in design and computerscience, want to merge tech and desing. Went to USYD to study, ever since been deeply addicted to desinging and creating and startups and coding and building products that people enjoy and that move people. Have a crazy eye for detail and pushing pixels perfectly.",
+      "I'm currently studied Design and Computer Science at USYD and honestly it's just clicked. I've been hooked ever since, deep in startups, coding and building things people actually enjoy using.",
     textAbove: false,
   },
   {
@@ -22,23 +22,23 @@ const storyTiles: StoryTile[] = [
     alt: "Josh Hatchard balancing on rocks by the ocean",
     heading: "A bit about me",
     body:
-      "Hi, I’m Josh Hatchard and I love anything creative and anything technology. I cannot live without my MacBook Air Creative and spontaneous energy.",
+      "I'm Josh Hatchard. A creative who lives and breathes tech and genuienly can't sit still. If it involves building something, whether a product, an interface or an idea. I'm in.",
     textAbove: true,
   },
   {
     image: "/about/city.jpg",
     alt: "City skyline reflected on the water",
-    heading: "Creative and exploring infrastructure",
+    heading: "My moments in time",
     body:
-      "I love sketches, blueprints and drawings of buildings and architecture and exploring. Especially of landscapes and scenery. Picturesque view, and taking photos.",
+      "I'm always chasing the view. Beautiful landscapes and places that stop you in your tracks. I travel for those moments and snap and quick photo while I'm there.",
     textAbove: false,
   },
   {
     image: "/about/dock.jpg",
     alt: "Harbor and water at the beach",
-    heading: "Love the beach and free time",
+    heading: "Away from the screen",
     body:
-      "Outside of work i love the beach and water. Its where I mentally reset and all the stress washes away, along side I love driving, gym, learning little new skills, seeing the capabilities of AI, exploring and meeting people.",
+      "The beach is where I feel complete. Just the water and the sun. Other than that you'll find me at the gym, driving, exploring random places and picking up whatever new skill catches my eye.",
     textAbove: true,
   },
 ];
@@ -46,7 +46,7 @@ const storyTiles: StoryTile[] = [
 function StoryText({ heading, body }: Pick<StoryTile, "heading" | "body">) {
   return (
     <div className="max-w-xl px-4 py-8">
-      <h3 className="text-about-heading text-white/90">{heading}</h3>
+      <h3 className="text-about-heading" style={{ color: "var(--color-secondary)" }}>{heading}</h3>
       <p className="mt-4 text-about-body">{body}</p>
     </div>
   );
@@ -75,9 +75,15 @@ export function AboutStorySection() {
 
             <div className={`${tile.textAbove ? "mt-6 md:mt-[-8] mb-[-16] md:mb-4 order-2 md:order-1" : "mt-6 mb-[-24]"}`}>
                 <StoryText heading={tile.heading} body={tile.body} />
+                {index === 2 && (
+                  <div className="max-w-xl px-4 py-0">
+                    <h3 className="text-about-body" style={{ color: "var(--color-secondary)" }}>Thanks for stopping by :)</h3>
+                  </div>
+                )}
             </div>
           </div>
         ))}
+        
       </div>
     </section>
   );

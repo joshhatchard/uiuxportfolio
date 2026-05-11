@@ -1,7 +1,7 @@
-import { AboutHero } from "@/components/AboutHero";
-import { AboutStorySection } from "@/components/AboutStorySection";
-import { ContactSection } from "@/components/ContactSection";
-import { FooterSection } from "@/components/FooterSection";
+import { AboutHero } from "@/components/about/AboutHero";
+import { AboutStorySection } from "@/components/about/AboutStorySection";
+import { ContactSection } from "@/components/shared/ContactSection";
+import { FooterSection } from "@/components/shared/FooterSection";
 
 export default function AboutPage() {
 	return (

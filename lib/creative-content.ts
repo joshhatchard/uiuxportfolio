@@ -1,17 +1,12 @@
+import type { DetailTemplateContent } from "@/components/shared/DetailTemplate";
+
 export type CreativeImageBlock = {
   id: string;
   image: string;
   alt: string;
 };
 
-export type CreativeTemplateContent = {
-  title: string;
-  subtitle: string;
-  contents: { id: string; label: string }[];
-  heroImage: string;
-  heroImageAlt: string;
-  blocks: CreativeImageBlock[];
-};
+export type CreativeTemplateContent = DetailTemplateContent;
 
 export const creativeContent: Record<string, CreativeTemplateContent> = {
   "creative-one": {
@@ -25,7 +20,7 @@ export const creativeContent: Record<string, CreativeTemplateContent> = {
     ],
     heroImage: "/about/flipped.jpg",
     heroImageAlt: "Creative hero image",
-    blocks: [
+    galleryImages: [
       { id: "image-one", image: "/about/rocks.jpg", alt: "Creative image one" },
       { id: "image-two", image: "/about/city.jpg", alt: "Creative image two" },
       { id: "image-three", image: "/about/dock.jpg", alt: "Creative image three" },
@@ -42,7 +37,7 @@ export const creativeContent: Record<string, CreativeTemplateContent> = {
     ],
     heroImage: "/about/city.jpg",
     heroImageAlt: "Creative hero image",
-    blocks: [
+    galleryImages: [
       { id: "image-one", image: "/about/dock.jpg", alt: "Creative image one" },
       { id: "image-two", image: "/about/flipped.jpg", alt: "Creative image two" },
       { id: "image-three", image: "/about/rocks.jpg", alt: "Creative image three" },
