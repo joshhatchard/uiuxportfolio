@@ -15,22 +15,16 @@ export type ProjectCardData = {
 
 export const caseStudies: PortfolioItem[] = [
   {
-    slug: "case-study-one",
+    slug: "granic",
     title: "Case Study One",
     subtitle: "Product onboarding",
     summary: "A low-fidelity placeholder for a UX case study about onboarding.",
   },
   {
-    slug: "case-study-two",
+    slug: "canvas",
     title: "Case Study Two",
     subtitle: "Checkout flow",
     summary: "A low-fidelity placeholder for a UX case study about checkout.",
-  },
-  {
-    slug: "case-study-three",
-    title: "Case Study Three",
-    subtitle: "Dashboard design",
-    summary: "A low-fidelity placeholder for a UX case study about dashboards.",
   },
 ];
 
@@ -59,14 +53,14 @@ export function getCreativeWork(slug: string) {
 
 export const workCards: ProjectCardData[] = [
   {
-    href: "/work/case-study-one",
+    href: "/work/granic",
     imageSrc: "/casethumbnails/granic.jpg",
     imageAlt: "Granic deadline tracker preview",
     title: "GRANIC - COMPACTING DEADLINES",
     subtitle: "SAAS | PRODUCT DESIGN",
   },
   {
-    href: "/work/case-study-two",
+    href: "/work/canvas",
     imageSrc: "/casethumbnails/canvas.jpg",
     imageAlt: "USYD first nations support preview",
     title: "USYD - FIRST NATIONS SUPPORT",

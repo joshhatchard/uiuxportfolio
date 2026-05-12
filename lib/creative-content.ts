@@ -1,4 +1,4 @@
-import type { DetailTemplateContent } from "@/components/shared/DetailTemplate";
+import type { CaseTemplateContent } from "@/components/shared/CaseTemplate";
 
 export type CreativeImageBlock = {
   id: string;
@@ -6,41 +6,61 @@ export type CreativeImageBlock = {
   alt: string;
 };
 
-export type CreativeTemplateContent = DetailTemplateContent;
+export type CreativeContent = CaseTemplateContent;
 
-export const creativeContent: Record<string, CreativeTemplateContent> = {
-  "creative-one": {
-    title: "Creative One",
-    subtitle: "Visual experiments - 2026",
-    contents: [
-      { id: "overview", label: "Overview" },
-      { id: "image-one", label: "Image One" },
-      { id: "image-two", label: "Image Two" },
-      { id: "image-three", label: "Image Three" },
-    ],
-    heroImage: "/about/flipped.jpg",
-    heroImageAlt: "Creative hero image",
-    galleryImages: [
-      { id: "image-one", image: "/about/rocks.jpg", alt: "Creative image one" },
-      { id: "image-two", image: "/about/city.jpg", alt: "Creative image two" },
-      { id: "image-three", image: "/about/dock.jpg", alt: "Creative image three" },
+export const creativeContent: Record<string, CreativeContent> = {
+  "sudata-merchandise": {
+    title: "MERCHANDISE",
+    subtitle: "SUDATA - MAY 2026",
+    sections: [
+      {
+        type: "heroFeature",
+        id: "feature",
+        label: "Design Direction",
+        src: "/creative/merch/hoodie.png",
+        alt: "SUDATA merchandise hero image",
+        eyebrow: "Creative Process",
+        heading: "Brand-first merchandise strategy",
+        body:
+          "Every piece in this collection was designed to reflect SUDATA's core values and aesthetic. From packaging to product design, consistency and quality were paramount in creating a memorable brand experience.",
+      },
+      {
+        type: "gallery",
+        id: "gallery",
+        label: "Gallery",
+        images: [
+          { id: "image-one", image: "/creative/merch/hoodie.png", alt: "Merchandise hoodie" },
+          { id: "image-two", image: "/creative/merch/graphicv3.png", alt: "Merchandise graphic" },
+        ],
+      },
     ],
   },
-  "creative-two": {
-    title: "Creative Two",
-    subtitle: "Visual experiments - 2026",
-    contents: [
-      { id: "overview", label: "Overview" },
-      { id: "image-one", label: "Image One" },
-      { id: "image-two", label: "Image Two" },
-      { id: "image-three", label: "Image Three" },
-    ],
-    heroImage: "/about/city.jpg",
-    heroImageAlt: "Creative hero image",
-    galleryImages: [
-      { id: "image-one", image: "/about/dock.jpg", alt: "Creative image one" },
-      { id: "image-two", image: "/about/flipped.jpg", alt: "Creative image two" },
-      { id: "image-three", image: "/about/rocks.jpg", alt: "Creative image three" },
+  "sudata-logo-redesign": {
+    title: "LOGO REDESIGN",
+    subtitle: "SUDATA - APR 2026",
+    sections: [
+      {
+        type: "heroFeature",
+        id: "feature",
+        label: "Visual Evolution",
+        src: "/creative/logo/mock.png",
+        alt: "SUDATA logo redesign hero image",
+        eyebrow: "Brand Identity",
+        heading: "Modernizing the SUDATA mark",
+        body:
+          "The new logo maintains the essence of SUDATA while introducing contemporary design principles. The refined letterforms and improved spacing ensure clarity at any scale, from social media to large-format applications.",
+      },
+      {
+        type: "galleryGrid",
+        id: "gallery",
+        label: "Gallery",
+        images: [
+          { id: "image-one", image: "/creative/logo/variations.png", alt: "Logo redesign logo variations" },
+          { id: "image-two", image: "/creative/logo/colours.png", alt: "Logo redesign colors exploration" },
+          { id: "image-three", image: "/creative/logo/screens.png", alt: "Logo redesign screen applications" },
+          { id: "image-four", image: "/creative/logo/laptop.png", alt: "Logo redesign laptop mockup" },
+        ],
+      },
     ],
   },
 };

@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useState } from "react";
 import { Barlow_Condensed } from "next/font/google";
+import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 
 const barlowCondensed = Barlow_Condensed({
   weight: ["400", "700", "900"],
@@ -65,7 +66,10 @@ export function ContactSection() {
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
               <img src="/platforms/linkedin.svg" alt="LinkedIn" className="h-14 w-auto" />
-              <p className="text-nav-item text-white/35">LINKEDIN</p>
+              <p className="text-nav-item inline-flex items-center gap-1 text-white/35">
+                LINKEDIN
+                <ExternalArrow className="shrink-0" />
+              </p>
             </a>
 
             <a
@@ -75,7 +79,10 @@ export function ContactSection() {
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
               <img src="/platforms/github.svg" alt="GitHub" className="h-14 w-auto" />
-              <p className="text-nav-item text-white/35">GITHUB</p>
+              <p className="text-nav-item inline-flex items-center gap-1 text-white/35">
+                GITHUB
+                <ExternalArrow className="shrink-0" />
+              </p>
             </a>
           </div>
         </div>

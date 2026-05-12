@@ -41,7 +41,7 @@ body {
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.04em;
   line-height: 1;
 }
 
@@ -196,6 +196,23 @@ body {
 
   @media (min-width: 1280px) {
     font-size: 4rem;
+  }
+}
+
+.text-case-feature-heading {
+  font-family: inherit;
+  font-weight: 600; /* Inter Semibold */
+  letter-spacing: -0.06em; /* -6% */
+  line-height: 1.2;
+  color: var(--color-secondary);
+  font-size: 1.5rem; /* 24px — mobile */
+
+  @media (min-width: 768px) {
+    font-size: 1.875rem; /* 30px — tablet */
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 2.25rem; /* 36px — desktop */
   }
 }
 

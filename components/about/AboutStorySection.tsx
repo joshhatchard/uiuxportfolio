@@ -77,7 +77,7 @@ export function AboutStorySection() {
                 <StoryText heading={tile.heading} body={tile.body} />
                 {index === 2 && (
                   <div className="max-w-xl px-4 py-0">
-                    <h3 className="text-about-body" style={{ color: "var(--color-secondary)" }}>Thanks for stopping by :)</h3>
+                    <h3 className="text-about-body" style={{ color: "var(--color-secondary)", fontWeight: 600 }}>Thanks for stopping by :)</h3>
                   </div>
                 )}
             </div>

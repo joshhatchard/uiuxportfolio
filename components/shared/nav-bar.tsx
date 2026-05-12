@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Inter } from "next/font/google";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,9 +42,7 @@ function ExternalLink({ href, label, showArrow = false, onClick }: ExternalLinkP
     >
       {label}
       {showArrow && (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M7 17L17 7M17 7H7M17 7V17" />
-        </svg>
+        <ExternalArrow className="shrink-0" />
       )}
     </a>
   );
@@ -149,6 +148,7 @@ export function NavBar() {
                   <ExternalLink
                     key={link.href}
                     {...link}
+                    showArrow
                     onClick={() => setIsDropdownOpen(false)}
                   />
                 ))}

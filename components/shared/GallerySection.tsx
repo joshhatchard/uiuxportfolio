@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export type GalleryImage = {
   id: string;
   image: string;
@@ -12,9 +10,7 @@ type GallerySectionProps = {
 
 function GalleryFrame({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative min-h-72 overflow-hidden rounded-[40px] bg-[#2b2b2b] sm:min-h-96 lg:min-h-128">
-      <Image src={src} alt={alt} fill className="object-cover" sizes="(min-width: 1024px) 80vw, 100vw" />
-    </div>
+    <img src={src} alt={alt} className="w-full h-auto" />
   );
 }
 

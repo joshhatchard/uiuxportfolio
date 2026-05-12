@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { creativeWorks, getCreativeWork } from "../../../lib/project-cards";
-import { DetailTemplate } from "../../../components/shared/DetailTemplate";
+import { CaseTemplate } from "../../../components/shared/CaseTemplate";
 import { getCreativeContent } from "../../../lib/creative-content";
 
 type CreativePageProps = {
@@ -20,5 +20,5 @@ export default async function CreativeDetailPage({ params }: CreativePageProps) 
     notFound();
   }
 
-  return <DetailTemplate content={content} />;
+  return <CaseTemplate content={content} />;
 }
