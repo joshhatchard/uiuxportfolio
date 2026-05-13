@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
@@ -31,6 +32,7 @@ export default function RootLayout({
 				<main className="mx-auto w-full max-w-7xl px-12 py-0 md:px-16 lg:px-24">
 					<SiteChrome>{children}</SiteChrome>
 				</main>
+				<Analytics />
 			</body>
 		</html>
 	);
