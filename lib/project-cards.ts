@@ -56,7 +56,7 @@ export const workCards: ProjectCardData[] = [
     href: "/work/granic",
     imageSrc: "/casethumbnails/granic.jpg",
     imageAlt: "Granic deadline tracker preview",
-    title: "GRANIC - COMPACTING DEADLINES",
+    title: "GRANIC - VALIDATING THE PRODUCT",
     subtitle: "SAAS | PRODUCT DESIGN",
   },
   {

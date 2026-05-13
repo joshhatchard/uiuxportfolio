@@ -45,9 +45,9 @@ export type FeatureSection = {
   type: "feature";
   id: string;
   label: string;
-  eyebrow?: string;
   heading: string;
   body: string;
+  subEyebrow?: string;
   image?: string;
   imageAlt?: string;
 };
@@ -58,9 +58,9 @@ export type HeroFeatureSection = {
   label: string;
   src: string;
   alt?: string;
-  eyebrow?: string;
   heading: string;
   body: string;
+  subEyebrow?: string;
   image?: string;
   imageAlt?: string;
 };
@@ -124,7 +124,28 @@ export type CaseTemplateContent = {
 
 type CaseTemplateProps = {
   content: CaseTemplateContent;
+  backHref?: string;
 };
+
+function renderBodyWithLineBreaks(text: string) {
+  // Split by || for new paragraphs first
+  const paragraphs = text.split("||").map((para) => {
+    // Then split by | for line breaks within paragraphs
+    const lines = para.split("|").map((line) => line.trim());
+    return lines;
+  });
+
+  return paragraphs.map((lines, pIdx) => (
+    <p key={pIdx} className={pIdx > 0 ? "mt-4" : ""}>
+      {lines.map((line, lIdx) => (
+        <span key={lIdx}>
+          {line}
+          {lIdx < lines.length - 1 && <br />}
+        </span>
+      ))}
+    </p>
+  ));
+}
 
 function ImageSlot({ alt }: { alt?: string }) {
   return (
@@ -149,7 +170,7 @@ function InfoCardsSection({ cards, id = "overview" }: { cards: InfoCard[]; id?: 
               card && (
                 <div key={label} className="space-y-1">
                   <h3 className="text-nav-item text-(--color-secondary)">{card.label}</h3>
-                  <p className="text-about-body">{card.body}</p>
+                  <div className="text-about-body">{renderBodyWithLineBreaks(card.body)}</div>
                 </div>
               )
             );
@@ -163,7 +184,7 @@ function InfoCardsSection({ cards, id = "overview" }: { cards: InfoCard[]; id?: 
             return (
               <div className="space-y-1">
                 <h3 className="text-nav-item text-(--color-secondary)">{overview.label}</h3>
-                <p className="text-about-body max-w-2xl">{overview.body}</p>
+                <div className="text-about-body max-w-2xl">{renderBodyWithLineBreaks(overview.body)}</div>
               </div>
             );
           })()}
@@ -175,14 +196,16 @@ function InfoCardsSection({ cards, id = "overview" }: { cards: InfoCard[]; id?: 
 
 function FeatureSectionView({
   id = "feature",
-  eyebrow,
+  label,
+  subEyebrow,
   heading,
   body,
   image,
   imageAlt,
 }: {
   id?: string;
-  eyebrow?: string;
+  label: string;
+  subEyebrow?: string;
   heading: string;
   body: string;
   image?: string;
@@ -192,18 +215,18 @@ function FeatureSectionView({
     <>
       <section id={id} className="scroll-mt-24 space-y-8">
         <div className="space-y-4">
-          {eyebrow && (
+          {label && (
             <div className="flex items-center gap-2">
               <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
-              <p className="text-nav-item uppercase text-(--color-grey)">{eyebrow}</p>
+              <p className="text-nav-item uppercase text-(--color-grey)">{label}</p>
             </div>
           )}
           <h2 className="w-full text-case-feature-heading text-(--color-secondary)">{heading}</h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 md:items-start">
-          <p className="text-footer-link uppercase text-white/80">{eyebrow ?? ""}</p>
-          <p className="text-about-body max-w-xl">{body}</p>
+          <p className="text-footer-link uppercase text-white/80">{subEyebrow ?? ""}</p>
+          <div className="text-about-body max-w-xl">{renderBodyWithLineBreaks(body)}</div>
         </div>
 
         {image && (
@@ -256,7 +279,8 @@ function renderSection(section: CaseTemplateSection) {
       return (
         <FeatureSectionView
           id={section.id}
-          eyebrow={section.eyebrow}
+          label={section.label}
+          subEyebrow={section.subEyebrow}
           heading={section.heading}
           body={section.body}
           image={section.image}
@@ -270,7 +294,8 @@ function renderSection(section: CaseTemplateSection) {
           <div className="pt-12 sm:pt-16">
             <FeatureSectionView
               id={section.id}
-              eyebrow={section.eyebrow}
+              label={section.label}
+              subEyebrow={section.subEyebrow}
               heading={section.heading}
               body={section.body}
               image={section.image}
@@ -312,7 +337,7 @@ function renderSection(section: CaseTemplateSection) {
   }
 }
 
-export function CaseTemplate({ content }: CaseTemplateProps) {
+export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
   const isNavigableSection = (
     section: CaseTemplateSection
   ): section is
@@ -329,7 +354,8 @@ export function CaseTemplate({ content }: CaseTemplateProps) {
     ? content.sections.flatMap((section) => (isNavigableSection(section) && section.id && section.label ? [{ id: section.id, label: section.label }] : []))
     : content.contents ?? [];
 
-  const sidebarLabel = navItems[0]?.label ?? content.featureEyebrow ?? "CONTENTS";
+  const sidebarLabel = "CONTENT";
+  const formatNavLabel = (label: string) => label.slice(0, 1).toUpperCase() + label.slice(1).toLowerCase();
   
   const [activeId, setActiveId] = useState<string>(navItems[0]?.id ?? "");
 
@@ -360,7 +386,7 @@ export function CaseTemplate({ content }: CaseTemplateProps) {
         {/* Back button */}
         <div className="sticky top-16 self-start lg:pt-2 lg:z-20">
           <Link
-            href="/"
+            href={backHref}
             className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
             style={{ background: "var(--nav-item-bg)", color: "var(--color-secondary)" }}
           >
@@ -387,8 +413,9 @@ export function CaseTemplate({ content }: CaseTemplateProps) {
                 const nextSection = index < content.sections!.length - 1 ? content.sections![index + 1] : null;
                 const prevSection = index > 0 ? content.sections![index - 1] : null;
                 const nextIsInfo = nextSection?.type === "info";
+                const nextIsGallery = nextSection?.type === "gallery" || nextSection?.type === "galleryGrid";
                 const prevIsHero = prevSection?.type === "hero";
-                const shouldHideDivider = isHero && nextIsInfo;
+                const shouldHideDivider = (isHero && nextIsInfo) || (isHero && nextIsGallery);
                 const paddingClass = isInfo && prevIsHero ? "pb-12 sm:pb-16" : "py-12 sm:py-16";
 
                 return (
@@ -409,7 +436,8 @@ export function CaseTemplate({ content }: CaseTemplateProps) {
 
               {content.featureHeading && content.featureBody && (
                 <FeatureSectionView
-                  eyebrow={content.featureEyebrow}
+                  label={content.featureEyebrow ?? content.featureHeading}
+                  subEyebrow={content.featureEyebrow}
                   heading={content.featureHeading}
                   body={content.featureBody}
                   image={content.featureImage}
@@ -445,7 +473,7 @@ export function CaseTemplate({ content }: CaseTemplateProps) {
                     aria-current={isActive ? "true" : undefined}
                     style={{ color: isActive ? "white" : "rgba(255,255,255,0.35)" }}
                   >
-                    {item.label}
+                    {formatNavLabel(item.label)}
                   </a>
                 );
               })}

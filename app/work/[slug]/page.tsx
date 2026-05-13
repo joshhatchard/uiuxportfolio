@@ -20,5 +20,5 @@ export default async function WorkDetailPage({ params }: WorkPageProps) {
     notFound();
   }
 
-  return <CaseTemplate content={content} />;
+  return <CaseTemplate content={content} backHref="/" />;
 }

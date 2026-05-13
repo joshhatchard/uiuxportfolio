@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 	title: "Josh Hatchard - UI/UX Designer",
 	description: "Portfolio of Josh Hatchard - designing and coding clean, user-centred digital products from end to end.",
 	icons: {
-		icon: "/favicon.png",
+		icon: "/faviconv2.svg",
+		shortcut: "/faviconv2.svg",
+		apple: "/faviconv2.svg",
 	},
 };
 

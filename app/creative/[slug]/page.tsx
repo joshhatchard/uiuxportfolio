@@ -20,5 +20,5 @@ export default async function CreativeDetailPage({ params }: CreativePageProps) 
     notFound();
   }
 
-  return <CaseTemplate content={content} />;
+  return <CaseTemplate content={content} backHref="/creative" />;
 }
