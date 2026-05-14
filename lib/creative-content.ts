@@ -19,10 +19,10 @@ export const creativeContent: Record<string, CreativeContent> = {
         label: "OVERVIEW",
         src: "/creative/merch/hoodie.png",
         alt: "SUDATA merchandise hero image",
-        subEyebrow: "THE REVAMP",
-        heading: "A new identity to match their dominant presence",
+        subEyebrow: "Merch Design",
+        heading: "Merch that makes a statement",
         body:
-          "Every piece in this collection was designed to reflect SUDATA's core values and aesthetic. From packaging to product design, consistency and quality were paramount in creating a memorable brand experience.",
+          "Designed to be worn with intent, the SUDATA merch collection brings neobrutalism to campus. The black hoodie and tee put the mascot front and centre, using a sharp blue and white palette to create pieces that feel bold, unified, and unmistakably SUDATA.",
       },
       {
         type: "hero",
@@ -52,10 +52,10 @@ export const creativeContent: Record<string, CreativeContent> = {
         label: "OVERVIEW",
         src: "/creative/logo/mock.png",
         alt: "SUDATA logo redesign hero image",
-        subEyebrow: "Brand Identity",
-        heading: "A new identity to match their dominant presence",
+        subEyebrow: "Logo Design",
+        heading: "A mark built for scale",
         body:
-          "The new logo maintains the essence of SUDATA while introducing contemporary design principles. The refined letterforms and improved spacing ensure clarity at any scale, from social media to large-format applications.",
+          "With over 800 members, SUDATA had grown into one of the most dominant student communities on campus, but their visual identity hadn't kept pace. The new logo bridges that gap, weaving together the precision of data science, the uniformity of a professional organisation, and the energy of community into a mark that finally matches the scale of what they've built.",
       },
       {
         type: "galleryGrid",

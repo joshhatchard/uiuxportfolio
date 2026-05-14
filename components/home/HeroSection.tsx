@@ -42,7 +42,7 @@ export function HeroSection() {
               <path d="M7 17L17 7M17 7H7M17 7V17" />
             </svg>
           </Link>
-          <p className="text-nav-item flex flex-row-reverse min-[480px]:flex-row items-center gap-2" style={{ color: "var(--color-grey)" }}>
+          <p className="text-nav-item flex flex-row pl-2 min-[480px]:pl-0 min-[480px]:flex-row items-center gap-2" style={{ color: "var(--color-grey)" }}>
             <span className="inline-block h-3 w-3 rounded-full" style={{ backgroundColor: "#00852C" }}></span>
             DESIGNER BASED IN SYDNEY
           </p>
