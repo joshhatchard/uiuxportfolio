@@ -41,9 +41,7 @@ function ExternalLink({ href, label, showArrow = false, onClick }: ExternalLinkP
       style={{ color: "var(--color-grey)" }}
     >
       {label}
-      {showArrow && (
-        <ExternalArrow className="shrink-0" />
-      )}
+      {showArrow && <ExternalArrow className="shrink-0" />}
     </a>
   );
 }
@@ -68,95 +66,115 @@ export function NavBar() {
 
   return (
     <header className={`site-header ${inter.className}`}>
-      <div className="page-container grid grid-cols-3 items-center py-8">
+      <div className="flex items-center h-12 py-16 relative justify-center min-[480px]:justify-start">
 
-        {/* Left — Logo */}
-        <div className="flex items-center">
-          <Link href="/" className="flex items-center gap-3 px-3 py-2 -mx-3 transition-opacity hover:opacity-80">
-            <img src="/logo.svg" alt="" aria-hidden className="h-6 w-auto" />
-          </Link>
-        </div>
-
-        {/* Centre — Nav pill */}
-        <nav aria-label="Primary" className="flex items-center justify-center">
-          <div
-            className="inline-flex items-center rounded-full px-1 py-1"
-            style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
-          >
-            {navItems.map(({ href, label }) => {
-              const isActive =
-                pathname === href ||
-                pathname.startsWith(`${href}/`) ||
-                (href === "/" && pathname.startsWith("/work/"));
-
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`text-nav-item relative flex w-24 items-center justify-center rounded-full py-3 text-center transition-opacity ${!isActive && "hover:opacity-80"}`}
-                  style={{ color: isActive ? "var(--color-secondary)" : "var(--color-grey)" }}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="active-pill"
-                      className="absolute inset-0 rounded-full"
-                      style={{ background: "var(--nav-highlight-bg)" }}
-                      transition={{ type: "spring", stiffness: 400, damping: 35 }}
-                    />
-                  )}
-                  <span className="relative z-10">{label}</span>
-                </Link>
-              );
-            })}
-          </div>
-        </nav>
-
-        {/* Right — desktop links / mobile+tablet @ dropdown */}
-        <div className="flex h-12 items-center justify-end">
-
-          {/* md+: plain text links */}
-          <div className="hidden lg:flex items-center h-full -mr-4">
-            {externalLinks.map((link) => (
-              <ExternalLink key={link.href} {...link} showArrow />
-            ))}
-          </div>
-
-          {/* mobile only: @ button with dropdown */}
-          <div className="relative lg:hidden" ref={dropdownRef}>
-            <button
-              type="button"
-              onClick={() => setIsDropdownOpen((prev) => !prev)}
-              aria-label="Contact links"
-              aria-expanded={isDropdownOpen}
-              className="flex h-12 w-12 items-center justify-center rounded-full text-[20px] font-bold transition-opacity hover:opacity-80"
-              style={{
-                background: "var(--nav-item-bg)",
-                border: "1px solid #303030",
-                color: "var(--color-secondary)",
-              }}
+          {/* Logo — hidden below 480 px */}
+          <div className="hidden min-[480px]:flex items-center">
+            <Link
+              href="/"
+              className="flex items-center gap-3 px-3 py-2 -mx-3 transition-opacity hover:opacity-80"
             >
-              @
-            </button>
-
-            {isDropdownOpen && (
-              <div
-                className="absolute right-0 top-full mt-4 px-2 py-4 min-w-max overflow-hidden rounded-2xl flex flex-col gap-4"
-                style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
-              >
-                {externalLinks.map((link) => (
-                  <ExternalLink
-                    key={link.href}
-                    {...link}
-                    showArrow
-                    onClick={() => setIsDropdownOpen(false)}
-                  />
-                ))}
-              </div>
-            )}
+              <img src="/logo.svg" alt="" aria-hidden className="h-6 w-auto" />
+            </Link>
           </div>
+
+          {/*
+           * Nav pill
+           *
+           * <480px       static + ml-auto  →  hugs right, sits before the @ button
+           * 480px – lg   absolute centre   →  floats in the middle of the row
+           * lg+          absolute centre   →  same, logo left / links right
+           */}
+          <nav
+            aria-label="Primary"
+            className="
+              static flex items-center justify-center
+              min-[480px]:absolute min-[480px]:left-1/2 min-[480px]:-translate-x-1/2
+            "
+          >
+            <div
+              className="inline-flex items-center rounded-full px-1 py-1"
+              style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
+            >
+              {navItems.map(({ href, label }) => {
+                const isActive =
+                  pathname === href ||
+                  pathname.startsWith(`${href}/`) ||
+                  (href === "/" && pathname.startsWith("/work/"));
+
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`text-nav-item relative flex w-24 items-center justify-center rounded-full py-3 text-center transition-opacity ${
+                      !isActive && "hover:opacity-80"
+                    }`}
+                    style={{
+                      color: isActive ? "var(--color-secondary)" : "var(--color-grey)",
+                    }}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="active-pill"
+                        className="absolute inset-0 rounded-full"
+                        style={{ background: "var(--nav-highlight-bg)" }}
+                        transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                      />
+                    )}
+                    <span className="relative z-10">{label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </nav>
+
+          {/* Right — desktop links / @ dropdown */}
+          <div className="flex h-12 items-center justify-end ml-3 min-[480px]:ml-auto lg:-mr-4 shrink-0">
+
+            {/* lg+: plain text links */}
+            <div className="hidden lg:flex items-center h-full">
+              {externalLinks.map((link) => (
+                <ExternalLink key={link.href} {...link} showArrow />
+              ))}
+            </div>
+
+            {/* <lg: @ button with dropdown */}
+            <div className="relative lg:hidden" ref={dropdownRef}>
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                aria-label="Contact links"
+                aria-expanded={isDropdownOpen}
+                className="flex h-12 w-12 items-center justify-center rounded-full text-[20px] font-bold transition-opacity hover:opacity-80"
+                style={{
+                  background: "var(--nav-item-bg)",
+                  border: "1px solid #303030",
+                  color: "var(--color-secondary)",
+                }}
+              >
+                @
+              </button>
+
+              {isDropdownOpen && (
+                <div
+                  className="absolute right-0 top-full mt-4 px-2 py-4 min-w-max overflow-hidden rounded-2xl flex flex-col gap-4"
+                  style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
+                >
+                  {externalLinks.map((link) => (
+                    <ExternalLink
+                      key={link.href}
+                      {...link}
+                      showArrow
+                      onClick={() => setIsDropdownOpen(false)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
         </div>
-      </div>
     </header>
   );
 }

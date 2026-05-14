@@ -31,7 +31,7 @@ export function HeroSection() {
         </h2>
 
         {/* CTA and Location */}
-        <div className={`flex items-center justify-between pt-20 ${inter.className}`}>
+        <div className={`flex flex-col-reverse gap-6 pt-20 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-0 ${inter.className}`}>
           <Link
             href="#selected-work"
             className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
@@ -42,7 +42,7 @@ export function HeroSection() {
               <path d="M7 17L17 7M17 7H7M17 7V17" />
             </svg>
           </Link>
-          <p className="text-nav-item flex items-center gap-2" style={{ color: "var(--color-grey)" }}>
+          <p className="text-nav-item flex flex-row-reverse min-[480px]:flex-row items-center gap-2" style={{ color: "var(--color-grey)" }}>
             <span className="inline-block h-3 w-3 rounded-full" style={{ backgroundColor: "#00852C" }}></span>
             DESIGNER BASED IN SYDNEY
           </p>

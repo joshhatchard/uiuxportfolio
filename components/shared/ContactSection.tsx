@@ -27,8 +27,7 @@ export function ContactSection() {
           <span style={{ color: "var(--color-primary)" }}>TOGETHER!</span>
         </h2>
         <p
-          className="mt-16 max-w-full break-all px-4 text-[24px] font-bold text-(--color-grey)"
-          style={{ letterSpacing: "-0.05em" }}
+          className="mt-16 max-w-full break-all text-email"
         >
           {emailAddress}
         </p>

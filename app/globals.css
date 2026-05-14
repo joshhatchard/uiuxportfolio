@@ -69,7 +69,7 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
 
-  font-size: 6rem;           /* 64px — mobile */
+  font-size: 4.5rem;           /* 64px — mobile */
 
   @media (min-width: 768px) {
     font-size: 6rem;         /* 96px — tablet */
@@ -199,6 +199,23 @@ body {
   }
 }
 
+.text-email {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
+  color: var(--color-grey);
+  font-size: 1.25rem; /* 24px */
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 1280px) {
+    font-size: 1.75rem;
+  }
+}
+
 .text-case-feature-heading {
   font-family: inherit;
   font-weight: 600; /* Inter Semibold */
@@ -214,12 +231,6 @@ body {
   @media (min-width: 1280px) {
     font-size: 2.25rem; /* 36px — desktop */
   }
-}
-
-
-/* ── Layout ────────────────────────────────── */
-.page-container {
-  width: 100%;
 }
 
 /* ── Misc ──────────────────────────────────── */
