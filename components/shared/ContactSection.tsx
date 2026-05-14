@@ -8,7 +8,7 @@ const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
 });
 
-const emailAddress = "JOSHUALHATCHARD@GMAIL.COM";
+const emailAddress = "joshualhatchard@gmail.com";
 
 export function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -26,7 +26,10 @@ export function ContactSection() {
           <span style={{ color: "var(--color-secondary)" }}>LET'S WORK </span>
           <span style={{ color: "var(--color-primary)" }}>TOGETHER!</span>
         </h2>
-        <p className="mt-16 text-[24px] font-bold text-(--color-grey)" style={{ letterSpacing: "-0.05em" }}>
+        <p
+          className="mt-16 max-w-full break-all px-4 text-[24px] font-bold text-(--color-grey)"
+          style={{ letterSpacing: "-0.05em" }}
+        >
           {emailAddress}
         </p>
         <div className="mt-8 flex justify-center">

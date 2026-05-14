@@ -111,41 +111,79 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
     title: "First Nations Support",
     subtitle: "University of Sydney - NOV 2025",
     sections: [
-      { type: "hero", src: "/casethumbnails/canvas.jpg", alt: "University of Sydney first nations support hero image" },
-      {
+        { type: "hero", src: "/casethumbnails/canvas.jpg", alt: "University of Sydney first nations support hero image" },
+        {
         type: "info",
         id: "overview",
         label: "Overview",
         cards: [
-          { label: "Role", body: "Insert the role summary here." },
-          { label: "Team", body: "Insert the team members or team summary here." },
-          { label: "Timeline", body: "Insert the project timeline here." },
-          {
+            { label: "Role", body: "UI/UX Designer & Developer" },
+            { label: "Team", body: "Solo designer, working closely with a supervising project lead" },
+            { label: "Timeline", body: "3 Weeks - Nov 2025" },
+            {
             label: "Overview",
-            body: "Insert a short overview of the case study here. Keep it brief and direct.",
-          },
+            body: "As part of the University of Sydney's One Sydney, Many People initiative, I designed and developed a Canvas landing page centralising study resources for First Nations allied health students. || Working solo under a supervisor, I handled everything from information architecture and visual design to front-end development and academic handoff, delivered in three weeks.",
+            },
         ],
-      },
-      {
+        },
+        {
         type: "feature",
-        id: "feature",
-        label: "USER RESEARCH",
-        subEyebrow: "Subheading",
-        heading: "Yarning session suggests a tailored Canvas Support Page",
-        body:
-          "Insert the supporting paragraph here. This section is ideal for explaining the key concept, approach, or project story in a preformatted layout.",
-      },
-      {
+        id: "context",
+        label: "Context",
+        subEyebrow: "One Sydney, Many People",
+        heading: "A resource hub built from the ground up, for students who deserved better.",
+        body: "First Nations students in the Faculty of Medicine and Health had face-to-face support through Gadigal and faculty liaisons, but no central digital space for the resources they needed day to day. This project set out to build one.",
+        },
+        {
         type: "feature",
-        id: "feature-content-hubs",
-        label: "Content Hubs",
-        subEyebrow: "Resources",
-        heading: "Centralise culturally relevant resources and support",
-        body:
-          "Content hubs collect culturally specific resources, contact points and contextual guidance alongside support content. Hubs make it easier for students and staff to find culturally appropriate help, link to services, and surface summaries and local contacts for each topic.",
-      },
+        id: "challenge",
+        label: "Challenge",
+        subEyebrow: "Platform & Culture",
+        heading: "Two constraints, one solution.",
+        body: "Canvas is built for course delivery, not considered UX. It actively reformats custom code, collapses layouts and strips styling on save making intentional design an uphill battle. The brief also demanded genuine cultural sensitivity, not aesthetic tokenism. Both had to be solved together.",
+        },
+        {
+        type: "feature",
+        id: "discovery",
+        label: "Discovery",
+        subEyebrow: "Student Yarning Sessions",
+        heading: "The brief came from the students themselves.",
+        body: "Before this project began, yarning sessions were held with First Nations students to understand what they actually needed. The feedback was clear, resources were scattered and the platform didn't feel relevant to them. That feedback became the foundation of every decision that followed.",
+        },
+        {
+        type: "feature",
+        id: "design",
+        label: "Decisions",
+        subEyebrow: "Community-Led Design",
+        heading: "Structure shaped by community, not assumption.",
+        body: "The yarning session surfaced distinct categories of need, academic admin, study support, wellbeing, placements, and professionalism, each becoming its own module. A commissioned artwork was incorporated to ground the design in cultural identity and ensure the space felt like it genuinely belonged to the students using it.",
+        },
+        {
+        type: "feature",
+        id: "build",
+        label: "Constraint",
+        subEyebrow: "Canvas LMS",
+        heading: "Designed and built alongside a supervisor, inside a platform that fights back.",
+        body: "Canvas routinely reformatted and broke custom code on save, requiring constant workarounds to preserve layout and hierarchy. Regular check-ins with my supervisor helped navigate both the technical and cultural decisions throughout. Alongside the page, I produced a handoff document so the coordinating academics could maintain it long after my involvement ended.",
+        },
+        {
+        type: "feature",
+        id: "outcome",
+        label: "Outcome",
+        subEyebrow: "Faculty of Medicine and Health",
+        heading: "A single, trusted place for First Nations allied health students to find what they need.",
+        body: "The completed page consolidated everything students asked for, from academic calendars, wellbeing resources, placement support to culturally specific contacts. All merged into one accessible, considered space.",
+        },
+        {
+        type: "feature",
+        id: "reflection",
+        label: "Reflection",
+        subEyebrow: "Lessons Learned",
+        heading: "What the project taught me.",
+        body: "Real-world projects surface challenges no brief can anticipate. Working closely with a supervisor throughout grounded the process and sharpened my ability to communicate and justify design decisions. Following a structured design process also proved its value, beyond workflow it gave me a clear language to present ideas to stakeholders and build confidence at every stage.",
+        },
     ],
-  },
+    },
 };
 
 export function getCaseStudyContent(slug: string) {

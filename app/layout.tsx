@@ -29,7 +29,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<main className="mx-auto w-full max-w-7xl px-12 py-0 md:px-16 lg:px-24">
+				<main className="mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24">
 					<SiteChrome>{children}</SiteChrome>
 				</main>
 				<Analytics />

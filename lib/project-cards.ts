@@ -63,7 +63,7 @@ export const workCards: ProjectCardData[] = [
     href: "/work/canvas",
     imageSrc: "/casethumbnails/canvas.jpg",
     imageAlt: "USYD first nations support preview",
-    title: "USYD - FIRST NATIONS SUPPORT",
+    title: "USYD - DESIGNING FOR COUNTRY",
     subtitle: "UI DESIGN | DEVELOPMENT",
   },
 ];
