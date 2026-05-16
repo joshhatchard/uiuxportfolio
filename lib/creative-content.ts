@@ -10,7 +10,7 @@ export type CreativeContent = CaseTemplateContent;
 
 export const creativeContent: Record<string, CreativeContent> = {
   "sudata-merchandise": {
-    title: "MERCHANDISE",
+    title: "MERCH",
     subtitle: "SUDATA - MAY 2026",
     sections: [
       {

@@ -221,7 +221,7 @@ function FeatureSectionView({
               <p className="text-nav-item uppercase text-(--color-grey)">{label}</p>
             </div>
           )}
-          <h2 className="w-full text-case-feature-heading text-(--color-secondary)">{heading}</h2>
+          <h2 className="w-full max-w-full wrap-break-word text-case-feature-heading text-(--color-secondary)">{heading}</h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 md:items-start">
@@ -245,7 +245,7 @@ function TextSectionView({ block }: { block: TextBlock }) {
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
         <div className={`space-y-4 self-start lg:pt-2 ${block.reverse ? "lg:order-2" : ""}`}>
           <p className="text-nav-item text-white/25">{block.eyebrow}</p>
-          <h3 className="text-case-study-title text-(--color-secondary)">{block.heading}</h3>
+          <h3 className="max-w-full wrap-break-word text-case-study-title text-(--color-secondary)">{block.heading}</h3>
           <p className="text-about-body max-w-xl">{block.body}</p>
         </div>
 
@@ -401,7 +401,7 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
         <div className="space-y-0">
           {/* Header */}
           <header className=" mt-24 lg:mt-0 space-y-4 text-center">
-            <h1 className="text-heading-small text-(--color-secondary) uppercase">{content.title}</h1>
+            <h1 className="max-w-full wrap-break-word text-heading-small text-(--color-secondary) uppercase">{content.title}</h1>
             <p className="text-case-subheading text-(--color-grey)">{content.subtitle}</p>
           </header>
 

@@ -45,7 +45,7 @@ const storyTiles: StoryTile[] = [
 
 function StoryText({ heading, body }: Pick<StoryTile, "heading" | "body">) {
   return (
-    <div className="max-w-xl px-4 py-8">
+    <div className="max-w-xl px-0 sm:px-4 py-8">
       <h3 className="text-about-heading" style={{ color: "var(--color-secondary)" }}>{heading}</h3>
       <p className="mt-4 text-about-body">{body}</p>
     </div>
@@ -54,7 +54,7 @@ function StoryText({ heading, body }: Pick<StoryTile, "heading" | "body">) {
 
 export function AboutStorySection() {
   return (
-    <section className="page-container mt-16 lg:mt-24">
+    <section className="page-container mb-16 mt-16 lg:mb-24 lg:mt-24">
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">
         {storyTiles.map((tile, index) => (
           <div
@@ -76,7 +76,7 @@ export function AboutStorySection() {
             <div className={`${tile.textAbove ? "mt-6 md:mt-[-8] mb-[-16] md:mb-4 order-2 md:order-1" : "mt-6 mb-[-24]"}`}>
                 <StoryText heading={tile.heading} body={tile.body} />
                 {index === 2 && (
-                  <div className="max-w-xl px-4 py-0">
+                  <div className="max-w-xl px-0 sm:px-4 py-0">
                     <h3 className="text-about-body" style={{ color: "var(--color-secondary)", fontWeight: 600 }}>Thanks for stopping by :)</h3>
                   </div>
                 )}

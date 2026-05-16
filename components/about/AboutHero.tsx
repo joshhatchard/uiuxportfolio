@@ -8,8 +8,8 @@ const barlowCondensed = Barlow_Condensed({
 
 export function AboutHero() {
   return (
-    <section className="page-container pt-16 lg:pt-20">
-      <div className="space-y-6">
+    <section className="page-container pt-4 lg:pt-20">
+      <div className="space-y-2">
         <p className="text-hero-caption">
           <span style={{ color: "var(--color-grey)" }}>ABOUT ME</span>
         </p>
@@ -20,7 +20,7 @@ export function AboutHero() {
           <span style={{ color: "var(--color-secondary)" }}>THAT TELL A STORY</span>
         </h1>
 
-        <h2 className={`text-hero-sub ${barlowCondensed.className}`}>
+        <h2 className={`text-hero-sub mt-4 ${barlowCondensed.className}`}>
           <span style={{ color: "var(--color-grey)" }}>// AND I LOVE THE BEACH</span>
         </h2>
       </div>

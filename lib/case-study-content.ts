@@ -171,8 +171,8 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         id: "handoff",
         label: "Handoff",
         subEyebrow: "Code Documentation",
-        heading: "Fill out this heading!",
-        body: "Fill out this body text",
+        heading: "Built to outlast my involvement",
+        body: "Canvas components don't maintain themselves. Alongside the page, I produced a handoff document walking staff and academics through every custom module, how it was built, how to edit it safely, and how to reuse components without breaking the layout. The goal was a resource that could be maintained confidently by people who had never written a line of HTML.",
         },
         {
         type: "feature",

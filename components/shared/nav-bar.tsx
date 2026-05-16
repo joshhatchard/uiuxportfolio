@@ -83,6 +83,7 @@ export function NavBar() {
           <Link
             href="/"
             className="flex items-center gap-3 px-3 py-2 -mx-3 transition-opacity hover:opacity-80"
+            aria-label="Home"
           >
             <img src="/logo.svg" alt="logomark" aria-hidden className="h-6 w-auto" />
           </Link>
