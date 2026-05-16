@@ -25,19 +25,14 @@ export const creativeContent: Record<string, CreativeContent> = {
           "Designed to be worn with intent, the SUDATA merch collection brings neobrutalism to campus. The black hoodie and tee put the mascot front and centre, using a sharp blue and white palette to create pieces that feel bold, unified, and unmistakably SUDATA.",
       },
       {
-        type: "hero",
-        src: "/creative/merch/shirtv2.jpg",
-        alt: "SUDATA merchandise shirt version two",
-      },
-      {
         type: "galleryGrid",
         id: "gallery",
         label: "Gallery",
         images: [
-            { id: "image-one", image: "/creative/merch/hoodiefront.jpg", alt: "Merchandise hoodie front" },
-            { id: "image-two", image: "/creative/merch/shirtfront.jpg", alt: "Merchandise shirt front" },
-            { id: "image-three", image: "/creative/merch/hoodieback.jpg", alt: "Merchandise hoodie back" },
-            { id: "image-four", image: "/creative/merch/shirtback.jpg", alt: "Merchandise shirt back" },
+            { id: "image-one", image: "/creative/merch/shirtfront.jpg", alt: "Merchandise shirt front" },
+            { id: "image-two", image: "/creative/merch/shirtback.jpg", alt: "Merchandise shirt back" },
+            { id: "image-three", image: "/creative/merch/hoodiefront.jpg", alt: "Merchandise hoodie front" },
+            { id: "image-four", image: "/creative/merch/hoodieback.jpg", alt: "Merchandise hoodie back" },
         ],
       },
     ],

@@ -54,14 +54,14 @@ export function getCreativeWork(slug: string) {
 export const workCards: ProjectCardData[] = [
   {
     href: "/work/granic",
-    imageSrc: "/casethumbnails/granic.jpg",
+    imageSrc: "/casethumbnails/granicv2.jpg",
     imageAlt: "Granic deadline tracker preview",
     title: "GRANIC - VALIDATING THE PRODUCT",
     subtitle: "SAAS | PRODUCT DESIGN",
   },
   {
     href: "/work/canvas",
-    imageSrc: "/casethumbnails/canvas.jpg",
+    imageSrc: "/casethumbnails/canvasv2.jpg",
     imageAlt: "USYD first nations support preview",
     title: "USYD - DESIGNING FOR COUNTRY",
     subtitle: "UI DESIGN | DEVELOPMENT",
@@ -71,7 +71,7 @@ export const workCards: ProjectCardData[] = [
 export const creativeCards: ProjectCardData[] = [
   {
     href: "/creative/sudata-merchandise",
-    imageSrc: "/casethumbnails/hoodiev2.jpg",
+    imageSrc: "/casethumbnails/merch.jpg",
     imageAlt: "Creative work one preview",
     title: "SUDATA MERCHANDISE",
     subtitle: "GRAPHIC DESIGN | PRODUCT DESIGN",

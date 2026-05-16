@@ -50,6 +50,8 @@ export type FeatureSection = {
   subEyebrow?: string;
   image?: string;
   imageAlt?: string;
+  image2?: string;
+  imageAlt2?: string;
 };
 
 export type HeroFeatureSection = {
@@ -63,6 +65,8 @@ export type HeroFeatureSection = {
   subEyebrow?: string;
   image?: string;
   imageAlt?: string;
+  image2?: string;
+  imageAlt2?: string;
 };
 
 export type TextSection = {
@@ -128,9 +132,7 @@ type CaseTemplateProps = {
 };
 
 function renderBodyWithLineBreaks(text: string) {
-  // Split by || for new paragraphs first
   const paragraphs = text.split("||").map((para) => {
-    // Then split by | for line breaks within paragraphs
     const lines = para.split("|").map((line) => line.trim());
     return lines;
   });
@@ -149,14 +151,24 @@ function renderBodyWithLineBreaks(text: string) {
 
 function ImageSlot({ alt }: { alt?: string }) {
   return (
-    <div className="flex min-h-72 items-center justify-center rounded-[40px] bg-[#2b2b2b] p-8 text-center text-nav-item text-white/20 sm:min-h-96 lg:min-h-128">
+    <div className="flex min-h-72 items-center justify-center bg-[#2b2b2b] p-8 text-center text-nav-item text-white/20 sm:min-h-96 lg:min-h-128">
       {alt ?? "Image slot"}
     </div>
   );
 }
 
 function HeroImage({ src, alt }: { src: string; alt: string }) {
-  return <img src={src} alt={alt} className="block h-auto w-full" />;
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={1600}
+      height={900}
+      className="block h-auto w-full"
+      sizes="100vw"
+      priority
+    />
+  );
 }
 
 function InfoCardsSection({ cards, id = "overview" }: { cards: InfoCard[]; id?: string }) {
@@ -202,6 +214,8 @@ function FeatureSectionView({
   body,
   image,
   imageAlt,
+  image2,
+  imageAlt2,
 }: {
   id?: string;
   label: string;
@@ -210,32 +224,35 @@ function FeatureSectionView({
   body: string;
   image?: string;
   imageAlt?: string;
+  image2?: string;
+  imageAlt2?: string;
 }) {
   return (
-    <>
-      <section id={id} className="scroll-mt-24 space-y-8">
-        <div className="space-y-4">
-          {label && (
-            <div className="flex items-center gap-2">
-              <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
-              <p className="text-nav-item uppercase text-(--color-grey)">{label}</p>
-            </div>
-          )}
-          <h2 className="w-full max-w-full wrap-break-word text-case-feature-heading text-(--color-secondary)">{heading}</h2>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 md:items-start">
-          <p className="text-footer-link uppercase text-white/80">{subEyebrow ?? ""}</p>
-          <div className="text-about-body max-w-xl">{renderBodyWithLineBreaks(body)}</div>
-        </div>
-
-        {image && (
-          <div className="overflow-hidden rounded-[40px]">
-            <Image src={image} alt={imageAlt ?? heading} width={1600} height={900} className="h-auto w-full object-cover" />
+    <section id={id} className="scroll-mt-24 space-y-8">
+      <div className="space-y-4">
+        {label && (
+          <div className="flex items-center gap-2">
+            <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
+            <p className="text-nav-item uppercase text-(--color-grey)">{label}</p>
           </div>
         )}
-      </section>
-    </>
+        <h2 className="w-full max-w-full wrap-break-word text-case-feature-heading text-(--color-secondary)">{heading}</h2>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 md:items-start">
+        <p className="text-footer-link uppercase text-white/80">{subEyebrow ?? ""}</p>
+        <div className="text-about-body max-w-xl">{renderBodyWithLineBreaks(body)}</div>
+      </div>
+
+      {image && (
+        <div className="flex flex-col gap-4">
+          <Image src={image} alt={imageAlt ?? heading} width={1600} height={900} className="block h-auto w-full" sizes="100vw" />
+          {image2 && (
+            <Image src={image2} alt={imageAlt2 ?? heading} width={1600} height={900} className="block h-auto w-full" sizes="100vw" />
+          )}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -249,7 +266,7 @@ function TextSectionView({ block }: { block: TextBlock }) {
           <p className="text-about-body max-w-xl">{block.body}</p>
         </div>
 
-        <div className={`overflow-hidden rounded-[40px] ${block.reverse ? "lg:order-1" : ""}`}>
+        <div className={`overflow-hidden ${block.reverse ? "lg:order-1" : ""}`}>
           {block.image ? (
             <div className="relative min-h-72 sm:min-h-96 lg:min-h-128">
               <Image
@@ -285,6 +302,8 @@ function renderSection(section: CaseTemplateSection) {
           body={section.body}
           image={section.image}
           imageAlt={section.imageAlt}
+          image2={section.image2}
+          imageAlt2={section.imageAlt2}
         />
       );
     case "heroFeature":
@@ -300,6 +319,8 @@ function renderSection(section: CaseTemplateSection) {
               body={section.body}
               image={section.image}
               imageAlt={section.imageAlt}
+              image2={section.image2}
+              imageAlt2={section.imageAlt2}
             />
           </div>
         </>
@@ -351,12 +372,14 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
     section.type !== "divider";
 
   const navItems = content.sections
-    ? content.sections.flatMap((section) => (isNavigableSection(section) && section.id && section.label ? [{ id: section.id, label: section.label }] : []))
+    ? content.sections.flatMap((section) =>
+        isNavigableSection(section) && section.id && section.label ? [{ id: section.id, label: section.label }] : []
+      )
     : content.contents ?? [];
 
   const sidebarLabel = "CONTENT";
   const formatNavLabel = (label: string) => label.slice(0, 1).toUpperCase() + label.slice(1).toLowerCase();
-  
+
   const [activeId, setActiveId] = useState<string>(navItems[0]?.id ?? "");
 
   useEffect(() => {
@@ -381,108 +404,106 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
 
   return (
     <>
-    <article className="relative pb-16 pt-6 lg:pb-24 lg:pt-32">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[120px_minmax(0,1fr)_140px] lg:gap-10">
-        {/* Back button */}
-        <div className="fixed top-6 left-8 z-40 lg:sticky lg:top-16 lg:self-start lg:pt-2 lg:z-20 lg:left-auto lg:right-auto">
-          <Link
-            href={backHref}
-            className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
-            style={{ background: "var(--nav-item-bg)", color: "var(--color-secondary)" }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-            BACK
-          </Link>
-        </div>
-
-        {/* Main content */}
-        <div className="space-y-0">
-          {/* Header */}
-          <header className=" mt-24 lg:mt-0 space-y-4 text-center">
-            <h1 className="max-w-full wrap-break-word text-heading-small text-(--color-secondary) uppercase">{content.title}</h1>
-            <p className="text-case-subheading text-(--color-grey)">{content.subtitle}</p>
-          </header>
-
-          {(content.sections && content.sections.length > 0) ? (
-            <div className="flex flex-col">
-              {content.sections!.map((section, index) => {
-                const isHero = section.type === "hero";
-                const isInfo = section.type === "info";
-                const nextSection = index < content.sections!.length - 1 ? content.sections![index + 1] : null;
-                const prevSection = index > 0 ? content.sections![index - 1] : null;
-                const nextIsInfo = nextSection?.type === "info";
-                const nextIsGallery = nextSection?.type === "gallery" || nextSection?.type === "galleryGrid";
-                const prevIsHero = prevSection?.type === "hero";
-                const shouldHideDivider = (isHero && nextIsInfo) || (isHero && nextIsGallery);
-                const paddingClass = isInfo && prevIsHero ? "pb-12 sm:pb-16" : "py-12 sm:py-16";
-
-                return (
-                  <div key={`${section.type}-${"id" in section && section.id ? section.id : index}`}>
-                    <div className={paddingClass}>
-                      {renderSection(section)}
-                    </div>
-                    {!shouldHideDivider && index < content.sections!.length - 1 && <hr className="border-white/15" />}
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <>
-              {content.heroImage && <HeroImage src={content.heroImage} alt={content.heroImageAlt ?? content.title} />}
-
-              {content.infoCards && content.infoCards.length > 0 && <InfoCardsSection cards={content.infoCards} />}
-
-              {content.featureHeading && content.featureBody && (
-                <FeatureSectionView
-                  label={content.featureEyebrow ?? content.featureHeading}
-                  subEyebrow={content.featureEyebrow}
-                  heading={content.featureHeading}
-                  body={content.featureBody}
-                  image={content.featureImage}
-                  imageAlt={content.featureImageAlt}
-                />
-              )}
-
-              {content.blocks && content.blocks.length > 0 && (
-                <div className="space-y-14 sm:space-y-18">
-                  {content.blocks.map((block) => (
-                    <TextSectionView key={block.id} block={block} />
-                  ))}
-                </div>
-              )}
-
-              {content.galleryImages && content.galleryImages.length > 0 && <GallerySection images={content.galleryImages} />}
-            </>
-          )}
-        </div>
-
-        {/* Contents nav */}
-        <aside className="hidden lg:block lg:relative lg:z-20 lg:pt-4">
-          <div className="sticky top-16 space-y-4">
-            <p className="text-nav-item text-white/35">{sidebarLabel}</p>
-            <nav className="flex flex-col gap-6">
-              {navItems.map((item) => {
-                const isActive = item.id === activeId;
-                return (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    className="text-contents-link relative z-20 inline-flex cursor-pointer transition-opacity hover:opacity-80"
-                    aria-current={isActive ? "true" : undefined}
-                    style={{ color: isActive ? "white" : "rgba(255,255,255,0.35)" }}
-                  >
-                    {formatNavLabel(item.label)}
-                  </a>
-                );
-              })}
-            </nav>
+      <article className="relative pb-16 pt-6 lg:pb-24 lg:pt-32">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[120px_minmax(0,1fr)_140px] lg:gap-10">
+          {/* Back button */}
+          <div className="fixed top-6 left-8 z-40 lg:sticky lg:top-16 lg:self-start lg:pt-2 lg:z-20 lg:left-auto lg:right-auto">
+            <Link
+              href={backHref}
+              className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
+              style={{ background: "var(--nav-item-bg)", color: "var(--color-secondary)" }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+              BACK
+            </Link>
           </div>
-        </aside>
-      </div>
-    </article>
-    <FooterSection />
+
+          {/* Main content */}
+          <div className="space-y-0">
+            {/* Header */}
+            <header className="mt-24 lg:mt-0 space-y-4 text-center">
+              <h1 className="max-w-full wrap-break-word text-heading-small text-(--color-secondary) uppercase">{content.title}</h1>
+              <p className="text-case-subheading text-(--color-grey)">{content.subtitle}</p>
+            </header>
+
+            {content.sections && content.sections.length > 0 ? (
+              <div className="flex flex-col">
+                {content.sections!.map((section, index) => {
+                  const isHero = section.type === "hero";
+                  const isInfo = section.type === "info";
+                  const nextSection = index < content.sections!.length - 1 ? content.sections![index + 1] : null;
+                  const prevSection = index > 0 ? content.sections![index - 1] : null;
+                  const nextIsInfo = nextSection?.type === "info";
+                  const nextIsGallery = nextSection?.type === "gallery" || nextSection?.type === "galleryGrid";
+                  const prevIsHero = prevSection?.type === "hero";
+                  const shouldHideDivider = (isHero && nextIsInfo) || (isHero && nextIsGallery);
+                  const paddingClass = isInfo && prevIsHero ? "pb-12 sm:pb-16" : "py-12 sm:py-16";
+
+                  return (
+                    <div key={`${section.type}-${"id" in section && section.id ? section.id : index}`}>
+                      <div className={paddingClass}>{renderSection(section)}</div>
+                      {!shouldHideDivider && index < content.sections!.length - 1 && <hr className="border-white/15" />}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <>
+                {content.heroImage && <HeroImage src={content.heroImage} alt={content.heroImageAlt ?? content.title} />}
+
+                {content.infoCards && content.infoCards.length > 0 && <InfoCardsSection cards={content.infoCards} />}
+
+                {content.featureHeading && content.featureBody && (
+                  <FeatureSectionView
+                    label={content.featureEyebrow ?? content.featureHeading}
+                    subEyebrow={content.featureEyebrow}
+                    heading={content.featureHeading}
+                    body={content.featureBody}
+                    image={content.featureImage}
+                    imageAlt={content.featureImageAlt}
+                  />
+                )}
+
+                {content.blocks && content.blocks.length > 0 && (
+                  <div className="space-y-14 sm:space-y-18">
+                    {content.blocks.map((block) => (
+                      <TextSectionView key={block.id} block={block} />
+                    ))}
+                  </div>
+                )}
+
+                {content.galleryImages && content.galleryImages.length > 0 && <GallerySection images={content.galleryImages} />}
+              </>
+            )}
+          </div>
+
+          {/* Contents nav */}
+          <aside className="hidden lg:block lg:relative lg:z-20 lg:pt-4">
+            <div className="sticky top-16 space-y-6">
+              <p className="text-nav-item text-white/35">{sidebarLabel}</p>
+              <nav className="flex flex-col gap-6">
+                {navItems.map((item) => {
+                  const isActive = item.id === activeId;
+                  return (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className="text-contents-link relative z-20 inline-flex cursor-pointer transition-opacity hover:opacity-80"
+                      aria-current={isActive ? "true" : undefined}
+                      style={{ color: isActive ? "white" : "rgba(255,255,255,0.35)" }}
+                    >
+                      {formatNavLabel(item.label)}
+                    </a>
+                  );
+                })}
+              </nav>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <FooterSection />
     </>
   );
 }

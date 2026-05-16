@@ -67,7 +67,7 @@ export function ContactSection() {
               rel="noreferrer"
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
-              <img src="/platforms/linkedin.svg" alt="LinkedIn" className="h-14 w-auto" />
+              <img src="/platforms/linkedin.svg" alt="LinkedIn Logo" className="h-14 w-auto" />
               <p className="text-nav-item inline-flex items-center gap-1 text-white/35">
                 LINKEDIN
                 <ExternalArrow className="shrink-0" />
@@ -80,7 +80,7 @@ export function ContactSection() {
               rel="noreferrer"
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
-              <img src="/platforms/github.svg" alt="GitHub" className="h-14 w-auto" />
+              <img src="/platforms/github.svg" alt="GitHub Logo" className="h-14 w-auto" />
               <p className="text-nav-item inline-flex items-center gap-1 text-white/35">
                 GITHUB
                 <ExternalArrow className="shrink-0" />
