@@ -384,7 +384,7 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
     <article className="relative pb-16 pt-6 lg:pb-24 lg:pt-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[120px_minmax(0,1fr)_140px] lg:gap-10">
         {/* Back button */}
-        <div className="sticky top-16 self-start lg:pt-2 lg:z-20">
+        <div className="fixed top-6 left-8 z-40 lg:sticky lg:top-16 lg:self-start lg:pt-2 lg:z-20 lg:left-auto lg:right-auto">
           <Link
             href={backHref}
             className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
@@ -398,9 +398,9 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
         </div>
 
         {/* Main content */}
-        <div className="space-y-12 sm:space-y-16">
+        <div className="space-y-0">
           {/* Header */}
-          <header className="space-y-4 text-center">
+          <header className=" mt-24 lg:mt-0 space-y-4 text-center">
             <h1 className="text-heading-small text-(--color-secondary) uppercase">{content.title}</h1>
             <p className="text-case-subheading text-(--color-grey)">{content.subtitle}</p>
           </header>

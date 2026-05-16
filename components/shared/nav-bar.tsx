@@ -84,7 +84,7 @@ export function NavBar() {
             href="/"
             className="flex items-center gap-3 px-3 py-2 -mx-3 transition-opacity hover:opacity-80"
           >
-            <img src="/logo.svg" alt="" aria-hidden className="h-6 w-auto" />
+            <img src="/logo.svg" alt="logomark" aria-hidden className="h-6 w-auto" />
           </Link>
         </div>
 
@@ -130,7 +130,7 @@ export function NavBar() {
                     ${!isActive && "hover:opacity-80"}
                   `}
                   style={{
-                    color: isActive ? "var(--color-secondary)" : "var(--color-grey)",
+                    color: isActive ? "var(--color-secondary)" : "var(--color-secondary)",
                   }}
                 >
                   {isActive && (
