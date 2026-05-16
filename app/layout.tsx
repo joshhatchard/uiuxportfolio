@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
-import { SiteChrome } from "@/components/shared/SiteChrome";
+import { ShowNav } from "@/components/shared/ShowNav";
 
 const barlowCondensed = Barlow_Condensed({
 	weight: ["400", "700", "900"],
@@ -30,7 +30,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className}>
 				<main className="mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24">
-					<SiteChrome>{children}</SiteChrome>
+					<ShowNav>{children}</ShowNav>
 				</main>
 				<Analytics />
 			</body>

@@ -163,8 +163,16 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         id: "build",
         label: "Constraint",
         subEyebrow: "Canvas LMS",
-        heading: "Designed and built alongside a supervisor, inside a platform that fights back.",
+        heading: "Designed and built inside a platform that fights back.",
         body: "Canvas routinely reformatted and broke custom code on save, requiring constant workarounds to preserve layout and hierarchy. Regular check-ins with my supervisor helped navigate both the technical and cultural decisions throughout. Alongside the page, I produced a handoff document so the coordinating academics could maintain it long after my involvement ended.",
+        },
+        {
+        type: "feature",
+        id: "handoff",
+        label: "Handoff",
+        subEyebrow: "Code Documentation",
+        heading: "Fill out this heading!",
+        body: "Fill out this body text",
         },
         {
         type: "feature",
