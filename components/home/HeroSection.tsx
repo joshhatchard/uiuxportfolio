@@ -12,7 +12,7 @@ const captions = ["A DESIGNER AND <DEVELOPER>", "A CREATIVE AND <TECHNICAL>"];
 export function HeroSection() {
 
   return (
-    <section className="page-container pt-16 lg:pt-24">
+    <section className="page-container pt-8 md:pt-16 lg:pt-24">
       <div className="space-y-0">
         {/* Caption */}
           <p className={`text-hero-caption ${inter.className}`}>
@@ -26,7 +26,7 @@ export function HeroSection() {
         </h1>
 
         {/* Sub Heading */}
-        <h2 className={`text-hero-sub ${barlowCondensed.className}`}>
+        <h2 className={`pt-4 text-hero-sub ${barlowCondensed.className}`}>
           <span style={{ color: "var(--color-grey)" }}>// I ALSO CODE PRODUCTS FROM END TO END</span>
         </h2>
 
@@ -34,7 +34,7 @@ export function HeroSection() {
         <div className={`flex flex-col-reverse gap-6 pt-20 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-0 ${inter.className}`}>
           <Link
             href="#selected-work"
-            className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
+            className="text-nav-item inline-flex h-12 items-center gap-1 rounded-full px-8 transition-opacity hover:opacity-80"
             style={{ background: "var(--color-secondary)", color: "var(--color-bg-black)" }}
           >
             EXPLORE WORK

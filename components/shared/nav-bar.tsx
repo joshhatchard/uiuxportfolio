@@ -36,7 +36,7 @@ function ExternalLink({ href, label, showArrow = false, onClick }: ExternalLinkP
       rel={isMailto ? undefined : "noreferrer"}
       onClick={onClick}
       className="text-nav-item flex items-center gap-1 px-4 transition-opacity hover:opacity-80"
-      style={{ color: "var(--color-grey)" }}
+      style={{ color: "var(--color-secondary)" }}
     >
       {label}
       {showArrow && <ExternalArrow className="shrink-0" />}
@@ -61,7 +61,7 @@ export function NavBar() {
   }, [isDropdownOpen]);
 
   return (
-    <header className={`site-header ${inter.className}`}>
+    <header className={`sticky top-0 z-50 site-header${inter.className}`}>
       {/*
        * Layout strategy:
        *

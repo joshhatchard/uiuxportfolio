@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import { ShowNav } from "@/components/shared/ShowNav";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const barlowCondensed = Barlow_Condensed({
 	weight: ["400", "700", "900"],
@@ -33,6 +34,7 @@ export default function RootLayout({
 					<ShowNav>{children}</ShowNav>
 				</main>
 				<Analytics />
+				<SpeedInsights />
 			</body>
 		</html>
 	);

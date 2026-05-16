@@ -3,7 +3,7 @@ import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 
 export function FooterSection() {
   return (
-    <footer className="page-container mt-24 border-t border-white/10 pt-12 pb-20">
+    <footer className="page-container mt-16 lg:mt-24 border-t border-white/10 pt-12 pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between sm:justify-start sm:gap-16">
           <div>
@@ -33,8 +33,8 @@ export function FooterSection() {
             </div>
         </div>
         <div className="mt-10">
-          <p className="text-footer-link" style={{ color: "var(--color-secondary)" }}>© 2026 Josh Hatchard. All Rights Reserved.</p>
-          <p className="mt-3 text-nav-item text-(--color-grey)">Made with heart and soul &lt;3</p>
+          <p className="text-footer-link" style={{ color: "var(--color-secondary)", fontWeight: 600 }}>© 2026 Josh Hatchard. All Rights Reserved.</p>
+          <p className="mt-3 text-nav-item text-(--color-grey)" style={{fontWeight: 600 }}>Designed and coded with heart and soul &lt;3</p>
         </div>
       </div>
     </footer>
