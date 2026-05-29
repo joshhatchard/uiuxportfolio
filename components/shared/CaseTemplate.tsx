@@ -2,7 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { GallerySection, type GalleryImage } from "@/components/shared/GallerySection";
+import {
+  GallerySection,
+  type GalleryImage,
+} from "@/components/shared/GallerySection";
 import { GalleryGridSection } from "@/components/shared/GalleryGridSection";
 import { FooterSection } from "@/components/shared/FooterSection";
 
@@ -126,9 +129,18 @@ export type CaseTemplateContent = {
   galleryImages?: GalleryImage[];
 };
 
+export type NextCaseCard = {
+  href: string;
+  imageSrc: string;
+  imageAlt: string;
+  title: string;
+  subtitle: string;
+};
+
 type CaseTemplateProps = {
   content: CaseTemplateContent;
   backHref?: string;
+  nextCard?: NextCaseCard | null;
 };
 
 function renderBodyWithLineBreaks(text: string) {
@@ -171,7 +183,64 @@ function HeroImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-function InfoCardsSection({ cards, id = "overview" }: { cards: InfoCard[]; id?: string }) {
+function NextCaseSection({ card }: { card: NextCaseCard }) {
+  return (
+    <section className="mt-6 w-full sm:mt-8">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
+        <p className="text-nav-item uppercase text-(--color-grey)">
+          NEXT CASE STUDY
+        </p>
+      </div>
+      <Link
+        href={card.href}
+        className="group block transition-all duration-300 hover:-translate-y-1"
+      >
+        <div className="p-0">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="max-w-full wrap-break-word text-case-study-title uppercase text-(--color-secondary)">
+              {card.title}
+            </h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              className="h-10 w-10 shrink-0 text-(--color-secondary) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </div>
+          <p className="mt-2 text-nav-item text-(--color-grey)">
+            {card.subtitle}
+          </p>
+
+          <div className="mt-6 overflow-hidden rounded-xs">
+            <Image
+              src={card.imageSrc}
+              alt={card.imageAlt}
+              width={1600}
+              height={900}
+              className="block h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="100vw"
+            />
+          </div>
+        </div>
+      </Link>
+    </section>
+  );
+}
+
+function InfoCardsSection({
+  cards,
+  id = "overview",
+}: {
+  cards: InfoCard[];
+  id?: string;
+}) {
   return (
     <section id={id} className="scroll-mt-24">
       <div className="grid items-start gap-8 md:grid-cols-2">
@@ -181,8 +250,12 @@ function InfoCardsSection({ cards, id = "overview" }: { cards: InfoCard[]; id?: 
             return (
               card && (
                 <div key={label} className="space-y-1">
-                  <h3 className="text-nav-item text-(--color-secondary)">{card.label}</h3>
-                  <div className="text-about-body">{renderBodyWithLineBreaks(card.body)}</div>
+                  <h3 className="text-nav-item text-(--color-secondary)">
+                    {card.label}
+                  </h3>
+                  <div className="text-about-body">
+                    {renderBodyWithLineBreaks(card.body)}
+                  </div>
                 </div>
               )
             );
@@ -195,8 +268,12 @@ function InfoCardsSection({ cards, id = "overview" }: { cards: InfoCard[]; id?: 
             if (!overview) return null;
             return (
               <div className="space-y-1">
-                <h3 className="text-nav-item text-(--color-secondary)">{overview.label}</h3>
-                <div className="text-about-body max-w-2xl">{renderBodyWithLineBreaks(overview.body)}</div>
+                <h3 className="text-nav-item text-(--color-secondary)">
+                  {overview.label}
+                </h3>
+                <div className="text-about-body max-w-2xl">
+                  {renderBodyWithLineBreaks(overview.body)}
+                </div>
               </div>
             );
           })()}
@@ -233,22 +310,44 @@ function FeatureSectionView({
         {label && (
           <div className="flex items-center gap-2">
             <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
-            <p className="text-nav-item uppercase text-(--color-grey)">{label}</p>
+            <p className="text-nav-item uppercase text-(--color-grey)">
+              {label}
+            </p>
           </div>
         )}
-        <h2 className="w-full max-w-full wrap-break-word text-case-feature-heading text-(--color-secondary)">{heading}</h2>
+        <h2 className="w-full max-w-full wrap-break-word text-case-feature-heading text-(--color-secondary)">
+          {heading}
+        </h2>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 md:items-start">
-        <p className="text-footer-link uppercase text-white/80">{subEyebrow ?? ""}</p>
-        <div className="text-about-body max-w-xl">{renderBodyWithLineBreaks(body)}</div>
+        <p className="text-footer-link uppercase text-white/80">
+          {subEyebrow ?? ""}
+        </p>
+        <div className="text-about-body max-w-xl">
+          {renderBodyWithLineBreaks(body)}
+        </div>
       </div>
 
       {image && (
         <div className="flex flex-col gap-4">
-          <Image src={image} alt={imageAlt ?? heading} width={1600} height={900} className="block h-auto w-full" sizes="100vw" />
+          <Image
+            src={image}
+            alt={imageAlt ?? heading}
+            width={1600}
+            height={900}
+            className="block h-auto w-full"
+            sizes="100vw"
+          />
           {image2 && (
-            <Image src={image2} alt={imageAlt2 ?? heading} width={1600} height={900} className="block h-auto w-full" sizes="100vw" />
+            <Image
+              src={image2}
+              alt={imageAlt2 ?? heading}
+              width={1600}
+              height={900}
+              className="block h-auto w-full"
+              sizes="100vw"
+            />
           )}
         </div>
       )}
@@ -260,9 +359,13 @@ function TextSectionView({ block }: { block: TextBlock }) {
   return (
     <section id={block.id} className="scroll-mt-24">
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
-        <div className={`space-y-4 self-start lg:pt-2 ${block.reverse ? "lg:order-2" : ""}`}>
+        <div
+          className={`space-y-4 self-start lg:pt-2 ${block.reverse ? "lg:order-2" : ""}`}
+        >
           <p className="text-nav-item text-white/25">{block.eyebrow}</p>
-          <h3 className="max-w-full wrap-break-word text-case-study-title text-(--color-secondary)">{block.heading}</h3>
+          <h3 className="max-w-full wrap-break-word text-case-study-title text-(--color-secondary)">
+            {block.heading}
+          </h3>
           <p className="text-about-body max-w-xl">{block.body}</p>
         </div>
 
@@ -358,9 +461,13 @@ function renderSection(section: CaseTemplateSection) {
   }
 }
 
-export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
+export function CaseTemplate({
+  content,
+  backHref = "/",
+  nextCard,
+}: CaseTemplateProps) {
   const isNavigableSection = (
-    section: CaseTemplateSection
+    section: CaseTemplateSection,
   ): section is
     | HeroSection
     | InfoSection
@@ -368,30 +475,39 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
     | HeroFeatureSection
     | TextSection
     | GalleryContentSection
-    | GalleryGridContentSection =>
-    section.type !== "divider";
+    | GalleryGridContentSection => section.type !== "divider";
 
   const navItems = content.sections
     ? content.sections.flatMap((section) =>
-        isNavigableSection(section) && section.id && section.label ? [{ id: section.id, label: section.label }] : []
+        isNavigableSection(section) && section.id && section.label
+          ? [{ id: section.id, label: section.label }]
+          : [],
       )
-    : content.contents ?? [];
+    : (content.contents ?? []);
 
   const sidebarLabel = "CONTENT";
-  const formatNavLabel = (label: string) => label.slice(0, 1).toUpperCase() + label.slice(1).toLowerCase();
+  const formatNavLabel = (label: string) =>
+    label.slice(0, 1).toUpperCase() + label.slice(1).toLowerCase();
 
   const [activeId, setActiveId] = useState<string>(navItems[0]?.id ?? "");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.find((e) => e.isIntersecting);
-        if (visible) setActiveId(visible.target.id);
+        const visibleEntries = entries.filter((e) => e.isIntersecting);
+        if (visibleEntries.length > 0) {
+          const mostVisible = visibleEntries.reduce((a, b) =>
+            a.intersectionRatio > b.intersectionRatio ? a : b,
+          );
+          setActiveId(mostVisible.target.id);
+        } else {
+          setActiveId("");
+        }
       },
       {
         rootMargin: "-20% 0px -70% 0px",
         threshold: 0,
-      }
+      },
     );
 
     navItems.forEach(({ id }) => {
@@ -404,16 +520,26 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
 
   return (
     <>
-      <article className="relative pb-16 pt-6 lg:pb-24 lg:pt-32">
+      <article className="relative pt-6 lg:pt-32">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[120px_minmax(0,1fr)_140px] lg:gap-10">
           {/* Back button */}
           <div className="fixed top-6 left-8 z-40 lg:sticky lg:top-16 lg:self-start lg:pt-2 lg:z-20 lg:left-auto lg:right-auto">
             <Link
               href={backHref}
               className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
-              style={{ background: "var(--nav-item-bg)", color: "var(--color-secondary)" }}
+              style={{
+                background: "var(--nav-item-bg)",
+                color: "var(--color-secondary)",
+              }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+              >
                 <path d="M15 18l-6-6 6-6" />
               </svg>
               BACK
@@ -424,8 +550,12 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
           <div className="space-y-0">
             {/* Header */}
             <header className="mt-24 lg:mt-0 space-y-4 text-center">
-              <h1 className="max-w-full wrap-break-word text-heading-small text-(--color-secondary) uppercase">{content.title}</h1>
-              <p className="text-case-subheading text-(--color-grey)">{content.subtitle}</p>
+              <h1 className="max-w-full wrap-break-word text-heading-small text-(--color-secondary) uppercase">
+                {content.title}
+              </h1>
+              <p className="text-case-subheading text-(--color-grey)">
+                {content.subtitle}
+              </p>
             </header>
 
             {content.sections && content.sections.length > 0 ? (
@@ -433,27 +563,49 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
                 {content.sections!.map((section, index) => {
                   const isHero = section.type === "hero";
                   const isInfo = section.type === "info";
-                  const nextSection = index < content.sections!.length - 1 ? content.sections![index + 1] : null;
-                  const prevSection = index > 0 ? content.sections![index - 1] : null;
+                  const nextSection =
+                    index < content.sections!.length - 1
+                      ? content.sections![index + 1]
+                      : null;
+                  const prevSection =
+                    index > 0 ? content.sections![index - 1] : null;
                   const nextIsInfo = nextSection?.type === "info";
-                  const nextIsGallery = nextSection?.type === "gallery" || nextSection?.type === "galleryGrid";
+                  const nextIsGallery =
+                    nextSection?.type === "gallery" ||
+                    nextSection?.type === "galleryGrid";
                   const prevIsHero = prevSection?.type === "hero";
-                  const shouldHideDivider = (isHero && nextIsInfo) || (isHero && nextIsGallery);
-                  const paddingClass = isInfo && prevIsHero ? "pb-12 sm:pb-16" : "py-12 sm:py-16";
+                  const shouldHideDivider =
+                    (isHero && nextIsInfo) || (isHero && nextIsGallery);
+                  const paddingClass =
+                    isInfo && prevIsHero ? "pb-12 sm:pb-16" : "py-12 sm:py-16";
 
                   return (
-                    <div key={`${section.type}-${"id" in section && section.id ? section.id : index}`}>
-                      <div className={paddingClass}>{renderSection(section)}</div>
-                      {!shouldHideDivider && index < content.sections!.length - 1 && <hr className="border-white/15" />}
+                    <div
+                      key={`${section.type}-${"id" in section && section.id ? section.id : index}`}
+                    >
+                      <div className={paddingClass}>
+                        {renderSection(section)}
+                      </div>
+                      {!shouldHideDivider &&
+                        index < content.sections!.length - 1 && (
+                          <hr className="border-white/15" />
+                        )}
                     </div>
                   );
                 })}
               </div>
             ) : (
               <>
-                {content.heroImage && <HeroImage src={content.heroImage} alt={content.heroImageAlt ?? content.title} />}
+                {content.heroImage && (
+                  <HeroImage
+                    src={content.heroImage}
+                    alt={content.heroImageAlt ?? content.title}
+                  />
+                )}
 
-                {content.infoCards && content.infoCards.length > 0 && <InfoCardsSection cards={content.infoCards} />}
+                {content.infoCards && content.infoCards.length > 0 && (
+                  <InfoCardsSection cards={content.infoCards} />
+                )}
 
                 {content.featureHeading && content.featureBody && (
                   <FeatureSectionView
@@ -474,9 +626,19 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
                   </div>
                 )}
 
-                {content.galleryImages && content.galleryImages.length > 0 && <GallerySection images={content.galleryImages} />}
+                {content.galleryImages && content.galleryImages.length > 0 && (
+                  <GallerySection images={content.galleryImages} />
+                )}
               </>
             )}
+
+            {nextCard && (
+              <div className="py-6 sm:py-8">
+                <hr className="border-white/15" />
+              </div>
+            )}
+
+            {nextCard && <NextCaseSection card={nextCard} />}
           </div>
 
           {/* Contents nav */}
@@ -492,7 +654,9 @@ export function CaseTemplate({ content, backHref = "/" }: CaseTemplateProps) {
                       href={`#${item.id}`}
                       className="text-contents-link relative z-20 inline-flex cursor-pointer transition-opacity hover:opacity-80"
                       aria-current={isActive ? "true" : undefined}
-                      style={{ color: isActive ? "white" : "rgba(255,255,255,0.35)" }}
+                      style={{
+                        color: isActive ? "white" : "rgba(255,255,255,0.35)",
+                      }}
                     >
                       {formatNavLabel(item.label)}
                     </a>

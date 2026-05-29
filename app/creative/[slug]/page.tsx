@@ -1,5 +1,10 @@
 import { notFound } from "next/navigation";
-import { creativeWorks, getCreativeWork } from "../../../lib/project-cards";
+import {
+  creativeWorks,
+  getCreativeWork,
+  getNextProjectCard,
+  creativeCards,
+} from "../../../lib/project-cards";
 import { CaseTemplate } from "../../../components/shared/CaseTemplate";
 import { getCreativeContent } from "../../../lib/creative-content";
 
@@ -11,7 +16,9 @@ export function generateStaticParams() {
   return creativeWorks.map((item) => ({ slug: item.slug }));
 }
 
-export default async function CreativeDetailPage({ params }: CreativePageProps) {
+export default async function CreativeDetailPage({
+  params,
+}: CreativePageProps) {
   const { slug } = await params;
   const work = getCreativeWork(slug);
   const content = getCreativeContent(slug);
@@ -20,5 +27,11 @@ export default async function CreativeDetailPage({ params }: CreativePageProps) 
     notFound();
   }
 
-  return <CaseTemplate content={content} backHref="/creative" />;
+  return (
+    <CaseTemplate
+      content={content}
+      backHref="/creative"
+      nextCard={getNextProjectCard(creativeCards, `/creative/${slug}`)}
+    />
+  );
 }

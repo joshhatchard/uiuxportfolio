@@ -1,41 +1,42 @@
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import { ShowNav } from "@/components/shared/ShowNav";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const barlowCondensed = Barlow_Condensed({
-	weight: ["400", "700", "900"],
-	subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  subsets: ["latin"],
 });
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Josh Hatchard - UI/UX Designer",
-	description: "Portfolio of Josh Hatchard - designing and coding clean, user-centred digital products from end to end.",
-	icons: {
-		icon: "/faviconv2.svg",
-		shortcut: "/faviconv2.svg",
-		apple: "/faviconv2.svg",
-	},
+  title: "Josh Hatchard - UI/UX Designer",
+  description:
+    "Portfolio of Josh Hatchard - designing and coding clean, user-centred digital products from end to end.",
+  icons: {
+    icon: "/faviconv2.svg",
+    shortcut: "/faviconv2.svg",
+    apple: "/faviconv2.svg",
+  },
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<body className={inter.className}>
-				<main className="mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24">
-					<ShowNav>{children}</ShowNav>
-				</main>
-				<Analytics />
-				<SpeedInsights />
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <main className="mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24">
+          <ShowNav>{children}</ShowNav>
+        </main>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  );
 }

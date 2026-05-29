@@ -1,5 +1,10 @@
 import { notFound } from "next/navigation";
-import { caseStudies, getCaseStudy } from "@/lib/project-cards";
+import {
+  caseStudies,
+  getCaseStudy,
+  getNextProjectCard,
+  workCards,
+} from "@/lib/project-cards";
 import { getCaseStudyContent } from "@/lib/case-study-content";
 import { CaseTemplate } from "@/components/shared/CaseTemplate";
 
@@ -20,5 +25,11 @@ export default async function WorkDetailPage({ params }: WorkPageProps) {
     notFound();
   }
 
-  return <CaseTemplate content={content} backHref="/" />;
+  return (
+    <CaseTemplate
+      content={content}
+      backHref="/"
+      nextCard={getNextProjectCard(workCards, `/work/${slug}`)}
+    />
+  );
 }

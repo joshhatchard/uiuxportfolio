@@ -39,7 +39,8 @@ export const creativeWorks: PortfolioItem[] = [
     slug: "sudata-logo-redesign",
     title: "SUDATA LOGO REDESIGN",
     subtitle: "BRANDING | MARKETING",
-    summary: "A low-fidelity placeholder for another creative exploration page.",
+    summary:
+      "A low-fidelity placeholder for another creative exploration page.",
   },
 ];
 
@@ -49,6 +50,18 @@ export function getCaseStudy(slug: string) {
 
 export function getCreativeWork(slug: string) {
   return creativeWorks.find((item) => item.slug === slug);
+}
+
+export function getNextProjectCard(
+  cards: ProjectCardData[],
+  currentHref: string,
+) {
+  if (cards.length === 0) return null;
+
+  const currentIndex = cards.findIndex((card) => card.href === currentHref);
+  if (currentIndex === -1) return cards[0];
+
+  return cards[(currentIndex + 1) % cards.length];
 }
 
 export const workCards: ProjectCardData[] = [

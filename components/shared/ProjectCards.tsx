@@ -22,9 +22,16 @@ function ProjectCardView({
   subtitle,
 }: ProjectCard) {
   return (
-    <Link href={href} className="group block transition-opacity hover:opacity-90">
-      <div className="aspect-square overflow-hidden">
-        <img src={imageSrc} alt={imageAlt} className="block h-full w-full object-cover object-center" />
+    <Link
+      href={href}
+      className="group block transition-all duration-300 hover:-translate-y-1 hover:opacity-100"
+    >
+      <div className="aspect-square overflow-hidden rounded-xs">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="block h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+        />
       </div>
 
       <div className="mt-6 space-y-2">
@@ -36,7 +43,7 @@ function ProjectCardView({
             fill="none"
             stroke="currentColor"
             strokeWidth={2}
-            className="ml-4 h-10 w-10"
+            className="ml-4 h-10 w-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
             style={{ color: "var(--color-secondary)" }}
             aria-hidden="true"
           >
@@ -50,7 +57,11 @@ function ProjectCardView({
   );
 }
 
-export function ProjectCards({ cards, sectionId, spacing = "mt-12 scroll-mt-8 lg:mt-16" }: ProjectCardsProps) {
+export function ProjectCards({
+  cards,
+  sectionId,
+  spacing = "mt-12 scroll-mt-8 lg:mt-16",
+}: ProjectCardsProps) {
   return (
     <section id={sectionId} className={`page-container ${spacing}`}>
       <div className="grid gap-8 md:grid-cols-2 md:gap-10">
