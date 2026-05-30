@@ -82,17 +82,9 @@ export function NavBar() {
 
   return (
     <header className={`sticky top-0 z-50 site-header${inter.className}`}>
-      {/*
-       * Layout strategy:
-       *
-       * <420px   flex-col — @ button (self-end) on top, full-width pill below
-       * 420–480  flex-row — pill shrinks naturally, @ button on right
-       * 480–lg   flex-row — logo visible, pill absolutely centred
-       * lg+      flex-row — logo left, pill centred, text links right
-       */}
       <div
         className="
-        flex flex-col gap-3
+        flex flex-col gap-10 overflow-visible
         min-[420px]:flex-row min-[420px]:gap-0
         min-[420px]:items-center min-[420px]:h-12
         py-6 min-[420px]:py-16 relative
@@ -116,18 +108,10 @@ export function NavBar() {
           </Link>
         </div>
 
-        {/*
-         * Nav pill
-         *
-         * <420px        order-2 → appears BELOW the @ button
-         *               full-width, items use flex-1 to fill evenly
-         * 420–480px     order-none, static, shrinks to fit
-         * 480px+        absolute centre
-         */}
         <nav
           aria-label="Primary"
           className="
-            order-1 min-[420px]:order-none
+            order-1 min-[420px]:order-0
             flex justify-center
             min-[420px]:flex-none min-[420px]:static
             min-[480px]:absolute min-[480px]:left-1/2 min-[480px]:-translate-x-1/2
@@ -185,18 +169,11 @@ export function NavBar() {
           </div>
         </nav>
 
-        {/*
-         * Right side — desktop links / @ dropdown
-         *
-         * <420px   order-1 → appears ABOVE the pill (top of column)
-         *          self-end → pushes button to the right edge
-         * 420px+   order-none, ml-auto takes over
-         */}
         <div
           className="
-          flex h-12 items-center justify-end shrink-0 order-2 self-end
-          min-[420px]:order-none min-[420px]:self-auto
-          min-[420px]:ml-3 min-[420px]:ml-auto
+          flex h-0 items-center justify-end shrink-0 order-2 self-end
+          min-[420px]:order-0 min-[420px]:self-auto min-[420px]:h-12
+          min-[420px]:ml-auto
           lg:-mr-4
         "
         >

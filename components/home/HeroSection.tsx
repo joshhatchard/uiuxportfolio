@@ -11,7 +11,7 @@ const anybody = Anybody({
 
 export function HeroSection() {
   return (
-    <section className="page-container relative overflow-hidden pt-8 md:pt-16 lg:pt-20 min-h-88 md:min-h-96 lg:min-h-110 pb-0 md:pb-4 lg:pb-6">
+    <section className="page-container relative overflow-hidden mt-12 min-[420px]:mt-12 pt-8 md:pt-16 lg:pt-20 pb-0 min-[420px]:pb-8 md:pb-4 lg:pb-6">
       <div className="relative z-10 space-y-0">
         {/** Caption */}
         <p className={`text-hero-caption ${anybody.className}`}>

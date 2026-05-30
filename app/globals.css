@@ -64,7 +64,7 @@ body {
 
   font-size: 1em; /* 12px — mobile */
 
-  @media (min-width: 400px) {
+  @media (min-width: 350px) {
     font-size: 1.5em; /* 16px — tablet */
   }
 
@@ -85,8 +85,8 @@ body {
 
   font-size: 3em; /* 64px — mobile */
 
-  @media (min-width: 400px) {
-    font-size: 3.4rem; /* 96px — tablet */
+  @media (min-width: 350px) {
+    font-size: 3.2rem; /* 96px — tablet */
   }
 
   @media (min-width: 480px) {
@@ -108,7 +108,11 @@ body {
   letter-spacing: -0em;
   line-height: 1;
 
-  font-size: 3rem;
+  font-size: 2rem;
+
+  @media (min-width: 480px) {
+    font-size: 3rem;
+  }
 
   @media (min-width: 768px) {
     font-size: 3.5rem;
@@ -238,7 +242,6 @@ body {
 
 /* ── Misc ──────────────────────────────────── */
 .site-header {
-  background: var(--background) !important;
   position: relative;
   z-index: 40;
 }

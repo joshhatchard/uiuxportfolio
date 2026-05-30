@@ -8,7 +8,7 @@ import { FooterSection } from "@/components/shared/FooterSection";
 export default function HomePage() {
   return (
     <>
-      <div className="relative overflow-hidden pb-0">
+      <div className="relative overflow-hidden min-h-88 md:min-h-96 lg:min-h-110 pb-4 lg:pb-6 -top-8 min-[420px]:top-0">
         <div
           className="pointer-events-none absolute inset-0 z-0"
           style={{
