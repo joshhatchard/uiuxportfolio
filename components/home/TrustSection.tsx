@@ -42,7 +42,7 @@ export function TrustSection() {
   }, []);
 
   return (
-    <section className="page-container border-y border-white/10 lg:px-6 py-6 md:py-8 mt-2 md:mt-8">
+    <section className="page-container border-y border-white/10 lg:px-6 py-6 md:py-8 mt-0 md:mt-8">
       <div className="h-5 md:h-8 w-full">
         <LogoLoop
           logos={trustLogos}

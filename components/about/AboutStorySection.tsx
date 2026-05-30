@@ -20,7 +20,7 @@ const storyTiles: StoryTile[] = [
     image: "/about/rocks.jpg",
     alt: "Josh Hatchard balancing on rocks by the ocean",
     heading: "A bit about me",
-    body: "I'm Josh Hatchard. A creative who lives and breathes tech and genuienly can't sit still. If it involves building something, whether a product, an interface or an idea. I'm in.",
+    body: "I'm Josh Hatchard. A creative who lives and breathes tech and genuinely can't sit still. If it involves building something, whether a product, an interface or an idea. I'm in.",
     textAbove: true,
   },
   {

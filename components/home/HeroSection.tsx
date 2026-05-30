@@ -11,7 +11,7 @@ const anybody = Anybody({
 
 export function HeroSection() {
   return (
-    <section className="page-container relative overflow-hidden mt-12 min-[420px]:mt-12 pt-8 md:pt-16 lg:pt-20 pb-0 min-[420px]:pb-8 md:pb-4 lg:pb-6">
+    <section className="page-container relative overflow-hidden mt-20 min-[420px]:mt-20 md:mt-0 pt-8 md:pt-16 lg:pt-20 pb-0 min-[420px]:pb-8 md:pb-4 lg:pb-6">
       <div className="relative z-10 space-y-0">
         {/** Caption */}
         <p className={`text-hero-caption ${anybody.className}`}>
@@ -29,7 +29,7 @@ export function HeroSection() {
 
         {/** CTA and Location */}
         <div
-          className={`flex flex-col-reverse gap-6 pt-12 min-[480px]:pt-20 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-0 ${inter.className}`}
+          className={`flex flex-col-reverse gap-6 pt-28 min-[480px]:pt-28 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-0 ${inter.className}`}
         >
           <Link
             href="#selected-work"

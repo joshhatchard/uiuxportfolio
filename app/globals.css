@@ -62,7 +62,7 @@ body {
   letter-spacing: 0;
   line-height: 1.2;
 
-  font-size: 1em; /* 12px — mobile */
+  font-size: 1.25em; /* 12px — mobile */
 
   @media (min-width: 350px) {
     font-size: 1.5em; /* 16px — tablet */
