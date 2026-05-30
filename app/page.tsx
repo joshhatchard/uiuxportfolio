@@ -8,8 +8,18 @@ import { FooterSection } from "@/components/shared/FooterSection";
 export default function HomePage() {
   return (
     <>
-      <div className="relative overflow-hidden pb-8 md:pb-12 lg:pb-16">
-        <div className="absolute inset-x-0 top-0 bottom-8 z-0 pointer-events-none md:bottom-12 lg:bottom-16">
+      <div className="relative overflow-hidden pb-0">
+        <div
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%), linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
+            WebkitMaskComposite: "source-in",
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%), linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
+            maskComposite: "intersect",
+          }}
+        >
           <PixelBlast
             className="opacity-30"
             variant="square"

@@ -523,7 +523,7 @@ const PixelBlast = ({
       });
 
       renderer.domElement.style.width = "100%";
-      renderer.domElement.style.height = "100%";
+      renderer.domElement.style.height = "100x%";
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       container.appendChild(renderer.domElement);
 
@@ -572,12 +572,21 @@ const PixelBlast = ({
       const quad = new THREE.Mesh(quadGeom, material);
       scene.add(quad);
 
-      const clock = new THREE.Clock();
+      const timer = new THREE.Timer();
 
       const setSize = () => {
         const width = container.clientWidth || 1;
         const height = container.clientHeight || 1;
-        renderer.setSize(width, height, false);
+        const snappedWidth = Math.max(
+          pixelSize,
+          Math.floor(width / pixelSize) * pixelSize,
+        );
+        const snappedHeight = Math.max(
+          pixelSize,
+          Math.floor(height / pixelSize) * pixelSize,
+        );
+
+        renderer.setSize(snappedWidth, snappedHeight, false);
         uniforms.uResolution.value.set(
           renderer.domElement.width,
           renderer.domElement.height,
@@ -709,8 +718,9 @@ const PixelBlast = ({
           return;
         }
 
+        timer.update();
         uniforms.uTime.value =
-          timeOffset + clock.getElapsedTime() * speedRef.current;
+          timeOffset + timer.getElapsed() * speedRef.current;
 
         if (liquidEffect) {
           const uTime = liquidEffect.uniforms.get("uTime") as

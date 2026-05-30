@@ -31,8 +31,8 @@ export default function RootLayout({
           sparkColor="var(--color-primary)"
           sparkSize={14}
           sparkRadius={28}
-          sparkCount={6}
-          duration={520}
+          sparkCount={4}
+          duration={300}
           easing="ease-out"
           extraScale={1.1}
         >

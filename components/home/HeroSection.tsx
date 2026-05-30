@@ -11,7 +11,7 @@ const anybody = Anybody({
 
 export function HeroSection() {
   return (
-    <section className="page-container relative overflow-hidden pt-8 md:pt-16 lg:pt-20 min-h-[70vh]">
+    <section className="page-container relative overflow-hidden pt-8 md:pt-16 lg:pt-20 min-h-88 md:min-h-96 lg:min-h-110 pb-0 md:pb-4 lg:pb-6">
       <div className="relative z-10 space-y-0">
         {/** Caption */}
         <p className={`text-hero-caption ${anybody.className}`}>
@@ -29,11 +29,11 @@ export function HeroSection() {
 
         {/** CTA and Location */}
         <div
-          className={`flex flex-col-reverse gap-6 pt-20 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-0 ${inter.className}`}
+          className={`flex flex-col-reverse gap-6 pt-12 min-[480px]:pt-20 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-0 ${inter.className}`}
         >
           <Link
             href="#selected-work"
-            className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
+            className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-[background-color,border-color,color,opacity] duration-75 ease-out hover:opacity-80"
             style={{
               background: "var(--color-bg-black)",
               color: "var(--color-secondary)",
