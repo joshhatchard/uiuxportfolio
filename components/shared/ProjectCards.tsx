@@ -22,17 +22,16 @@ function ProjectCardView({
   subtitle,
 }: ProjectCard) {
   return (
-    <Link
-      href={href}
-      className="group block transition-all duration-300 hover:-translate-y-1 hover:opacity-100"
-    >
-      <div className="aspect-square overflow-hidden rounded-xs">
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          className="block h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
+    <article className="group transition-all duration-300 hover:-translate-y-1 hover:opacity-100">
+      <Link href={href} className="block">
+        <figure className="aspect-square overflow-hidden rounded-xs m-0">
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className="block h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          />
+        </figure>
+      </Link>
 
       <div className="mt-6 space-y-2">
         <div className="flex items-center justify-between">
@@ -53,7 +52,7 @@ function ProjectCardView({
         </div>
         <p className="text-nav-item text-(--color-slate)">{subtitle}</p>
       </div>
-    </Link>
+    </article>
   );
 }
 

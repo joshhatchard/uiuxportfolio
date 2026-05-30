@@ -203,11 +203,11 @@ const ClickSpark = ({
   };
 
   return (
-    <div 
-      className="click-spark" 
+    <div
+      className="click-spark"
       onClick={handleClick}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === "Enter" || e.key === " ") {
           handleClick(e as any);
         }
       }}

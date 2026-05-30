@@ -36,7 +36,10 @@ export default function RootLayout({
           easing="ease-out"
           extraScale={1.1}
         >
-          <main className="relative z-10 mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24">
+          <main
+            id="main-content"
+            className="relative z-10 mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24"
+          >
             <ShowNav>{children}</ShowNav>
           </main>
         </ClickSpark>

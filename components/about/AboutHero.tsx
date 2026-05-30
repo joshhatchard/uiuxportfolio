@@ -25,8 +25,6 @@ export function AboutHero() {
             THAT TELL A STORY
           </span>
         </h1>
-
-        {/* Subheading removed */}
       </div>
     </section>
   );

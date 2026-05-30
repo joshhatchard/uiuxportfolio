@@ -20,7 +20,10 @@ export function ContactSection() {
   }, []);
 
   return (
-    <section className="page-container mt-8 md:mt-12 lg:mt-16 border-t border-white/10 pt-14 lg:pt-24">
+    <section
+      id="contact"
+      className="page-container mt-8 md:mt-12 lg:mt-16 border-t border-white/10 pt-14 lg:pt-24"
+    >
       <div className="mx-auto max-w-4xl text-center">
         <h2 className={`text-hero-small ${anybody.className}`}>
           <span style={{ color: "var(--color-secondary)" }}>
@@ -30,16 +33,16 @@ export function ContactSection() {
             TOGETHER!
           </span>
         </h2>
-        <p
-          className={`mt-16 max-w-full break-all text-email ${anybody.className}`}
+        <address
+          className={`mt-16 max-w-full break-all text-email ${anybody.className} not-italic`}
         >
           {emailAddress}
-        </p>
+        </address>
         <div className="mt-8 flex justify-center">
           <button
             type="button"
             onClick={handleCopyEmail}
-            className={`text-nav-item inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 min-w-45 transition-all ${!copied && "hover:opacity-80"}`}
+            className={`text-nav-item inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 min-w-45 transition-all cursor-pointer ${!copied && "hover:opacity-80"}`}
             style={{
               background: copied
                 ? "var(--color-primary)"

@@ -61,7 +61,7 @@ export function HeroSection() {
               aria-hidden="true"
               style={{ backgroundColor: "var(--color-accent)" }}
             ></span>
-            <span>Available • Based in Sydney</span>
+            <span>DESIGNER BASED IN SYDNEY</span>
           </p>
         </div>
       </div>

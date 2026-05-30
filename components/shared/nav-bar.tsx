@@ -81,7 +81,10 @@ export function NavBar() {
   }, [isDropdownOpen]);
 
   return (
-    <header className={`sticky top-0 z-50 site-header${inter.className}`}>
+    <header
+      id="main-nav"
+      className={`sticky top-0 z-50 site-header${inter.className}`}
+    >
       <div
         className="
         flex flex-col gap-10 overflow-visible
@@ -190,7 +193,7 @@ export function NavBar() {
               onClick={() => setIsDropdownOpen((prev) => !prev)}
               aria-label="Contact links"
               aria-expanded={isDropdownOpen}
-              className="flex h-12 w-12 items-center justify-center rounded-full text-[20px] font-bold transition-opacity hover:opacity-80"
+              className="flex h-12 w-12 items-center justify-center rounded-full text-[20px] font-bold transition-opacity hover:opacity-80 cursor-pointer"
               style={{
                 background: "var(--color-bg-black)",
                 border: "1px solid var(--color-cool-border)",

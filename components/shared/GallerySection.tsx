@@ -10,7 +10,9 @@ type GallerySectionProps = {
 
 function GalleryFrame({ src, alt }: { src: string; alt: string }) {
   return (
-    <img src={src} alt={alt} className="w-full h-auto" />
+    <figure className="m-0">
+      <img src={src} alt={alt} className="w-full h-auto" />
+    </figure>
   );
 }
 
@@ -18,9 +20,9 @@ export function GallerySection({ images }: GallerySectionProps) {
   return (
     <div className="space-y-14 sm:space-y-18">
       {images.map((image) => (
-        <section key={image.id} id={image.id} className="scroll-mt-24">
+        <article key={image.id} id={image.id} className="scroll-mt-24">
           <GalleryFrame src={image.image} alt={image.alt} />
-        </section>
+        </article>
       ))}
     </div>
   );
