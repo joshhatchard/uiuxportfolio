@@ -1,14 +1,10 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Barlow_Condensed, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ShowNav } from "@/components/shared/ShowNav";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const barlowCondensed = Barlow_Condensed({
-  weight: ["400", "700", "900"],
-  subsets: ["latin"],
-});
+import ClickSpark from "@/components/shared/ClickSpark";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,9 +27,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24">
-          <ShowNav>{children}</ShowNav>
-        </main>
+        <ClickSpark
+          sparkColor="var(--color-primary)"
+          sparkSize={14}
+          sparkRadius={28}
+          sparkCount={6}
+          duration={520}
+          easing="ease-out"
+          extraScale={1.1}
+        >
+          <main className="relative z-10 mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24">
+            <ShowNav>{children}</ShowNav>
+          </main>
+        </ClickSpark>
         <Analytics />
         <SpeedInsights />
       </body>

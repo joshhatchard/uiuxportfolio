@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Inter } from "next/font/google";
-import { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import { motion } from "framer-motion";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 
@@ -27,7 +32,12 @@ interface ExternalLinkProps {
   onClick?: () => void;
 }
 
-function ExternalLink({ href, label, showArrow = false, onClick }: ExternalLinkProps) {
+function ExternalLink({
+  href,
+  label,
+  showArrow = false,
+  onClick,
+}: ExternalLinkProps) {
   const isMailto = href.startsWith("mailto:");
   return (
     <a
@@ -49,10 +59,20 @@ export function NavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const handleLogoClick = (event: ReactMouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== "/") return;
+
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   useEffect(() => {
     if (!isDropdownOpen) return;
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -70,22 +90,29 @@ export function NavBar() {
        * 480–lg   flex-row — logo visible, pill absolutely centred
        * lg+      flex-row — logo left, pill centred, text links right
        */}
-        <div className="
+      <div
+        className="
         flex flex-col gap-3
         min-[420px]:flex-row min-[420px]:gap-0
         min-[420px]:items-center min-[420px]:h-12
         py-6 min-[420px]:py-16 relative
         min-[420px]:justify-end min-[480px]:justify-start
-        ">
-
+        "
+      >
         {/* Logo — hidden below 480px */}
         <div className="hidden min-[480px]:flex items-center">
           <Link
             href="/"
+            onClick={handleLogoClick}
             className="flex items-center gap-3 px-3 py-2 -mx-3 transition-opacity hover:opacity-80"
             aria-label="Home"
           >
-            <img src="/logo.svg" alt="logomark" aria-hidden className="h-6 w-auto" />
+            <img
+              src="/logo.svg"
+              alt="logomark"
+              aria-hidden
+              className="h-6 w-auto"
+            />
           </Link>
         </div>
 
@@ -111,7 +138,10 @@ export function NavBar() {
               inline-flex items-center rounded-full px-1 py-1
               w-full min-[420px]:w-auto
             "
-            style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
+            style={{
+              background: "var(--color-bg-black)",
+              border: "1px solid var(--color-cool-border)",
+            }}
           >
             {navItems.map(({ href, label }) => {
               const isActive =
@@ -131,15 +161,21 @@ export function NavBar() {
                     ${!isActive && "hover:opacity-80"}
                   `}
                   style={{
-                    color: isActive ? "var(--color-secondary)" : "var(--color-secondary)",
+                    color: isActive
+                      ? "var(--color-secondary)"
+                      : "var(--color-slate)",
                   }}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="active-pill"
                       className="absolute inset-0 rounded-full"
-                      style={{ background: "var(--nav-highlight-bg)" }}
-                      transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                      style={{ background: "var(--color-surface)" }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 35,
+                      }}
                     />
                   )}
                   <span className="relative z-10">{label}</span>
@@ -156,13 +192,14 @@ export function NavBar() {
          *          self-end → pushes button to the right edge
          * 420px+   order-none, ml-auto takes over
          */}
-        <div className="
+        <div
+          className="
           flex h-12 items-center justify-end shrink-0 order-2 self-end
           min-[420px]:order-none min-[420px]:self-auto
           min-[420px]:ml-3 min-[420px]:ml-auto
           lg:-mr-4
-        ">
-
+        "
+        >
           {/* lg+: plain text links */}
           <div className="hidden lg:flex items-center h-full">
             {externalLinks.map((link) => (
@@ -179,8 +216,8 @@ export function NavBar() {
               aria-expanded={isDropdownOpen}
               className="flex h-12 w-12 items-center justify-center rounded-full text-[20px] font-bold transition-opacity hover:opacity-80"
               style={{
-                background: "var(--nav-item-bg)",
-                border: "1px solid #303030",
+                background: "var(--color-bg-black)",
+                border: "1px solid var(--color-cool-border)",
                 color: "var(--color-secondary)",
               }}
             >
@@ -190,7 +227,10 @@ export function NavBar() {
             {isDropdownOpen && (
               <div
                 className="absolute right-0 top-full mt-4 px-2 py-4 min-w-max overflow-hidden rounded-2xl flex flex-col gap-4"
-                style={{ background: "var(--nav-item-bg)", border: "1px solid #303030" }}
+                style={{
+                  background: "var(--color-bg-black)",
+                  border: "1px solid var(--color-cool-border)",
+                }}
               >
                 {externalLinks.map((link) => (
                   <ExternalLink
@@ -204,7 +244,6 @@ export function NavBar() {
             )}
           </div>
         </div>
-
       </div>
     </header>
   );

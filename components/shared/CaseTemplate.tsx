@@ -163,7 +163,10 @@ function renderBodyWithLineBreaks(text: string) {
 
 function ImageSlot({ alt }: { alt?: string }) {
   return (
-    <div className="flex min-h-72 items-center justify-center bg-[#2b2b2b] p-8 text-center text-nav-item text-white/20 sm:min-h-96 lg:min-h-128">
+    <div
+      className="flex min-h-72 items-center justify-center p-8 text-center text-nav-item text-white/20 sm:min-h-96 lg:min-h-128"
+      style={{ background: "var(--color-surface)" }}
+    >
       {alt ?? "Image slot"}
     </div>
   );
@@ -188,7 +191,7 @@ function NextCaseSection({ card }: { card: NextCaseCard }) {
     <section className="mt-6 w-full sm:mt-8">
       <div className="flex items-center gap-2 mb-4">
         <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
-        <p className="text-nav-item uppercase text-(--color-grey)">
+        <p className="text-nav-item uppercase text-(--color-slate)">
           NEXT CASE STUDY
         </p>
       </div>
@@ -214,7 +217,7 @@ function NextCaseSection({ card }: { card: NextCaseCard }) {
               <path d="M12 5l7 7-7 7" />
             </svg>
           </div>
-          <p className="mt-2 text-nav-item text-(--color-grey)">
+          <p className="mt-2 text-nav-item text-(--color-slate)">
             {card.subtitle}
           </p>
 
@@ -310,7 +313,7 @@ function FeatureSectionView({
         {label && (
           <div className="flex items-center gap-2">
             <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
-            <p className="text-nav-item uppercase text-(--color-grey)">
+            <p className="text-nav-item uppercase text-(--color-slate)">
               {label}
             </p>
           </div>
@@ -528,8 +531,9 @@ export function CaseTemplate({
               href={backHref}
               className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
               style={{
-                background: "var(--nav-item-bg)",
+                background: "var(--color-bg-black)",
                 color: "var(--color-secondary)",
+                border: "1px solid var(--color-cool-border)",
               }}
             >
               <svg
@@ -550,10 +554,10 @@ export function CaseTemplate({
           <div className="space-y-0">
             {/* Header */}
             <header className="mt-24 lg:mt-0 space-y-4 text-center">
-              <h1 className="max-w-full wrap-break-word text-heading-small text-(--color-secondary) uppercase">
+              <h1 className="max-w-full wrap-break-word text-hero-small text-(--color-secondary) uppercase">
                 {content.title}
               </h1>
-              <p className="text-case-subheading text-(--color-grey)">
+              <p className="text-case-subheading text-(--color-slate)">
                 {content.subtitle}
               </p>
             </header>
@@ -578,17 +582,17 @@ export function CaseTemplate({
                     (isHero && nextIsInfo) || (isHero && nextIsGallery);
                   const paddingClass =
                     isInfo && prevIsHero ? "pb-12 sm:pb-16" : "py-12 sm:py-16";
-
                   return (
                     <div
-                      key={`${section.type}-${"id" in section && section.id ? section.id : index}`}
+                      key={section.type + "-" + index}
+                      className={paddingClass}
                     >
-                      <div className={paddingClass}>
-                        {renderSection(section)}
-                      </div>
+                      {renderSection(section)}
                       {!shouldHideDivider &&
                         index < content.sections!.length - 1 && (
-                          <hr className="border-white/15" />
+                          <div className="py-6 sm:py-8">
+                            <hr className="border-white/15" />
+                          </div>
                         )}
                     </div>
                   );
@@ -655,7 +659,7 @@ export function CaseTemplate({
                       className="text-contents-link relative z-20 inline-flex cursor-pointer transition-opacity hover:opacity-80"
                       aria-current={isActive ? "true" : undefined}
                       style={{
-                        color: isActive ? "white" : "rgba(255,255,255,0.35)",
+                        color: isActive ? "white" : "var(--foreground-dim)",
                       }}
                     >
                       {formatNavLabel(item.label)}

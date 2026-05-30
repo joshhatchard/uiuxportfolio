@@ -51,7 +51,7 @@ function ProjectCardView({
             <path d="M12 5l7 7-7 7" />
           </svg>
         </div>
-        <p className="text-nav-item text-(--color-grey)">{subtitle}</p>
+        <p className="text-nav-item text-(--color-slate)">{subtitle}</p>
       </div>
     </Link>
   );

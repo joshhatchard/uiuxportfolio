@@ -1,13 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #6B46FF;
-  --color-secondary: #EDE3C8;
-  --color-grey: #777777;
-  --color-bg-black: #0D0D0D;
+  --color-primary: #6b3ff5;
+
+  --color-secondary: #f5ebda;
+  --color-muted-secondary: #c8c2b8;
+
+  --color-warm-white: #e8e2d9;
+  --color-slate: #8a8a96;
+  --color-cool-border: #4a4a52;
+  --color-warm-border: #36363f;
+
+  --color-surface: #1e1e24;
+  --color-bg-black: #0d0d0d;
+  --color-accent: #00852c;
   --nav-item-text: #252525;
-  --nav-item-bg: #1C1C1C;
+  --nav-item-bg: #1c1c1c;
   --nav-highlight-bg: rgba(255, 255, 255, 0.06);
+  --foreground-dim: rgba(255, 255, 255, 0.35);
   --background: var(--color-bg-black);
   --foreground: var(--color-secondary);
 }
@@ -25,14 +35,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   transition: opacity 260ms linear;
-  font-size: 0.875rem;       /* 14px — mobile */
+  font-size: 0.875rem; /* 14px — mobile */
 
   @media (min-width: 768px) {
-    font-size: 1rem;         /* 16px — tablet */
+    font-size: 1rem; /* 16px — tablet */
   }
 
   @media (min-width: 1280px) {
-    font-size: 1.125rem;     /* 18px — desktop */
+    font-size: 1.125rem; /* 18px — desktop */
   }
 }
 /* ── Nav (untouched) ───────────────────────── */
@@ -40,7 +50,7 @@ body {
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 
 /* Heading hover: big inverted dot */
@@ -48,18 +58,22 @@ body {
 /* ── Hero ──────────────────────────────────── */
 .text-hero-caption {
   font-family: inherit;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  letter-spacing: 0;
   line-height: 1.2;
 
-  font-size: 1rem;        /* 12px — mobile */
+  font-size: 1em; /* 12px — mobile */
+
+  @media (min-width: 400px) {
+    font-size: 1.5em; /* 16px — tablet */
+  }
 
   @media (min-width: 768px) {
-    font-size: 1.25em;         /* 16px — tablet */
+    font-size: 1.75em; /* 16px — tablet */
   }
 
   @media (min-width: 1280px) {
-    font-size: 1.5rem;       /* 24px — desktop */
+    font-size: 2rem; /* 24px — desktop */
   }
 }
 
@@ -67,34 +81,41 @@ body {
   font-family: inherit;
   font-weight: 900;
   letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 0.8;
 
-  font-size: 4.5rem;           /* 64px — mobile */
+  font-size: 3em; /* 64px — mobile */
+
+  @media (min-width: 400px) {
+    font-size: 3.4rem; /* 96px — tablet */
+  }
+
+  @media (min-width: 480px) {
+    font-size: 4.25rem; /* 96px — tablet */
+  }
 
   @media (min-width: 768px) {
-    font-size: 6rem;         /* 96px — tablet */
+    font-size: 6.5rem; /* 96px — tablet */
   }
 
   @media (min-width: 1280px) {
-    font-size: 8rem;         /* 128px — desktop */
+    font-size: 8rem; /* 128px — desktop */
   }
 }
 
-.text-hero-sub {
+.text-hero-small {
   font-family: inherit;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  color: var(--color-grey);
+  font-weight: 900;
+  letter-spacing: -0em;
+  line-height: 1;
 
-  font-size: 2rem;           /* 32px — mobile */
+  font-size: 3rem;
 
   @media (min-width: 768px) {
-    font-size: 3rem;         /* 48px — tablet */
+    font-size: 3.5rem;
   }
 
   @media (min-width: 1280px) {
-    font-size: 3.5rem;         /* 64px — desktop */
+    font-size: 4rem;
   }
 }
 
@@ -103,16 +124,16 @@ body {
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1.2;
-  color: var(--color-grey);
+  color: var(--color-slate);
 
-  font-size: 2rem;           /* 32px — mobile */
+  font-size: 2rem; /* 32px — mobile */
 
   @media (min-width: 768px) {
-    font-size: 3rem;         /* 48px — tablet */
+    font-size: 3rem; /* 48px — tablet */
   }
 
   @media (min-width: 1280px) {
-    font-size: 3.5rem;         /* 64px — desktop */
+    font-size: 3.5rem; /* 64px — desktop */
   }
 }
 
@@ -140,7 +161,7 @@ body {
   font-weight: 700;
   letter-spacing: -0.06em;
   line-height: 1.2;
-  color: var(--color-grey);
+  color: var(--color-slate);
   font-size: 1rem; /* 16px */
 }
 
@@ -150,7 +171,7 @@ body {
   font-weight: 600; /* Inter Semibold */
   letter-spacing: -0.06em; /* approx -6% */
   line-height: 1.2;
-  color: var(--color-grey);
+  color: var(--color-slate);
   font-size: 1rem; /* 16px */
 }
 
@@ -162,14 +183,13 @@ body {
   font-size: 1.25rem; /* 20px */
 }
 
-
 .text-about-body {
   font-family: inherit;
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.8;
   font-size: 1rem; /* 18px */
-  color: #999999;
+  color: var(--color-slate);
 }
 
 /* Case study subtitle (under main heading) */
@@ -178,33 +198,16 @@ body {
   font-weight: 700;
   letter-spacing: -0.06em;
   line-height: 1.2;
-  color: var(--color-grey);
+  color: var(--color-slate);
   font-size: 1.5rem; /* 24px */
-}
-
-.text-heading-small {
-  font-family: inherit;
-  font-weight: 900;
-  letter-spacing: -0.00em;
-  line-height: 1;
-
-  font-size: 3rem;
-
-  @media (min-width: 768px) {
-    font-size: 3.5rem;
-  }
-
-  @media (min-width: 1280px) {
-    font-size: 4rem;
-  }
 }
 
 .text-email {
   font-family: inherit;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: 0em;
   line-height: 1.2;
-  color: var(--color-grey);
+  color: var(--color-slate);
   font-size: 1.25rem; /* 24px */
 
   @media (min-width: 768px) {
