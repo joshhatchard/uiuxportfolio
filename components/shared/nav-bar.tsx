@@ -101,8 +101,7 @@ export function NavBar() {
           >
             <img
               src="/logo.svg"
-              alt="logomark"
-              aria-hidden
+              alt="Josh Hatchard Portfolio"
               className="h-6 w-auto"
             />
           </Link>

@@ -58,9 +58,10 @@ export function HeroSection() {
           >
             <span
               className="inline-block h-3 w-3 rounded-full"
+              aria-hidden="true"
               style={{ backgroundColor: "var(--color-accent)" }}
             ></span>
-            DESIGNER BASED IN SYDNEY
+            <span>Available • Based in Sydney</span>
           </p>
         </div>
       </div>

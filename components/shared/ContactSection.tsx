@@ -97,11 +97,12 @@ export function ContactSection() {
               href="https://www.linkedin.com/in/joshhatchard"
               target="_blank"
               rel="noreferrer"
+              aria-label="Connect on LinkedIn (opens in new window)"
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
               <img
                 src="/platforms/linkedin.svg"
-                alt="LinkedIn Logo"
+                alt="LinkedIn"
                 className="h-14 w-auto"
               />
               <p
@@ -117,11 +118,12 @@ export function ContactSection() {
               href="https://github.com/joshhatchard"
               target="_blank"
               rel="noreferrer"
+              aria-label="View on GitHub (opens in new window)"
               className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
             >
               <img
                 src="/platforms/github.svg"
-                alt="GitHub Logo"
+                alt="GitHub"
                 className="h-14 w-auto"
               />
               <p

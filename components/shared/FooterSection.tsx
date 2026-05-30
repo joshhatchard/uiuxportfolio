@@ -39,6 +39,7 @@ export function FooterSection() {
             <nav className="mt-6 flex flex-col items-end sm:items-start gap-4">
               <a
                 href="mailto:joshualhatchard@gmail.com"
+                aria-label="Send email"
                 className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 hover:opacity-80"
                 style={{ color: "var(--color-secondary)" }}
               >
@@ -49,6 +50,7 @@ export function FooterSection() {
                 href="https://www.linkedin.com/in/joshhatchard"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Connect on LinkedIn (opens in new window)"
                 className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 hover:opacity-80"
                 style={{ color: "var(--color-secondary)" }}
               >
@@ -59,6 +61,7 @@ export function FooterSection() {
                 href="https://github.com/joshhatchard"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="View GitHub (opens in new window)"
                 className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 hover:opacity-80"
                 style={{ color: "var(--color-secondary)" }}
               >

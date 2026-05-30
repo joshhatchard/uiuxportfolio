@@ -203,7 +203,18 @@ const ClickSpark = ({
   };
 
   return (
-    <div className="click-spark" onClick={handleClick}>
+    <div 
+      className="click-spark" 
+      onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleClick(e as any);
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label="Interactive canvas"
+    >
       <canvas ref={canvasRef} className="click-spark__canvas" />
       {children}
     </div>
