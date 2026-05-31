@@ -378,6 +378,8 @@ const MAX_CLICKS = 10;
 
 type ThreeState = {
   renderer: THREE.WebGLRenderer;
+  scene: THREE.Scene;
+  camera: THREE.OrthographicCamera;
   material: THREE.ShaderMaterial;
   uniforms: {
     uResolution: { value: THREE.Vector2 };
@@ -523,7 +525,7 @@ const PixelBlast = ({
       });
 
       renderer.domElement.style.width = "100%";
-      renderer.domElement.style.height = "100x%";
+      renderer.domElement.style.height = "100%";
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       container.appendChild(renderer.domElement);
 
@@ -558,9 +560,7 @@ const PixelBlast = ({
 
       const scene = new THREE.Scene();
       const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-      // Detect WebGL2 availability — if it's not available, adjust the
-      // fragment shader to GLSL1 (use `gl_FragColor`) and avoid setting
-      // `glslVersion` which would force GLSL3 compilation and fail.
+
       const gl = renderer.getContext();
       const isWebGL2 =
         typeof WebGL2RenderingContext !== "undefined" &&
@@ -728,8 +728,11 @@ const PixelBlast = ({
 
       let raf = 0;
       const animate = () => {
+        const state = threeRef.current;
+
         if (autoPauseOffscreen && !visibilityRef.current.visible) {
-          raf = requestAnimationFrame(animate);
+          if (state) state.raf = requestAnimationFrame(animate);
+          else raf = requestAnimationFrame(animate);
           return;
         }
 
@@ -746,9 +749,9 @@ const PixelBlast = ({
           }
         }
 
-        if (composer) {
-          if (touch) {
-            touch.update();
+        if (state?.composer) {
+          if (state.touch) {
+            state.touch.update();
           }
 
           if (noiseEffect) {
@@ -760,18 +763,26 @@ const PixelBlast = ({
             }
           }
 
-          composer.render();
+          state.composer.render();
         } else {
+          // Use the locally captured scene and camera — guaranteed in scope here
+          // since animate is defined inside the mustReinit block.
           renderer.render(scene, camera);
         }
 
-        raf = requestAnimationFrame(animate);
+        if (state) {
+          state.raf = requestAnimationFrame(animate);
+        } else {
+          raf = requestAnimationFrame(animate);
+        }
       };
 
       raf = requestAnimationFrame(animate);
 
       threeRef.current = {
         renderer,
+        scene,
+        camera,
         material,
         uniforms,
         resizeObserver: ro,
