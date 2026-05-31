@@ -23,7 +23,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="page-container mt-8 md:mt-12 lg:mt-16 border-t border-white/10 pt-14 lg:pt-24"
+      className="page-container mt-8 md:mt-12 lg:mt-16 border-t border-white/10 pt-24 lg:pt-28"
     >
       <div className="mx-auto max-w-4xl text-center">
         <h2 className={`text-hero-small ${anybody.className}`}>

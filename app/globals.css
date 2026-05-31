@@ -163,8 +163,8 @@ body {
 .text-footer-link {
   font-family: inherit;
   font-weight: 700;
-  letter-spacing: -0.06em;
-  line-height: 1.2;
+  letter-spacing: -0.05em;
+  line-height: 1.8;
   color: var(--color-slate);
   font-size: 1rem; /* 16px */
 }
@@ -200,7 +200,7 @@ body {
 .text-case-subheading {
   font-family: inherit;
   font-weight: 700;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--color-slate);
   font-size: 1.5rem; /* 24px */

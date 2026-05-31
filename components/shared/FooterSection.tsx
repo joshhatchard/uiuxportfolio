@@ -5,7 +5,7 @@ export function FooterSection() {
   return (
     <footer
       id="footer"
-      className="page-container mt-16 lg:mt-24 border-t border-white/10 pt-12 pb-20"
+      className="page-container mt-24 lg:mt-28 border-t border-white/10 pt-12 pb-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between sm:justify-start sm:gap-16">

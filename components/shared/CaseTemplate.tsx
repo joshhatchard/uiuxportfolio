@@ -323,7 +323,7 @@ function FeatureSectionView({
         </h2>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 md:items-start">
+      <div className="grid gap-6 md:grid-cols-[1fr_2fr] md:items-start">
         <p className="text-footer-link uppercase text-white/80">
           {subEyebrow ?? ""}
         </p>
@@ -395,7 +395,11 @@ function TextSectionView({ block }: { block: TextBlock }) {
 function renderSection(section: CaseTemplateSection) {
   switch (section.type) {
     case "hero":
-      return <HeroImage src={section.src} alt={section.alt ?? "Hero image"} />;
+      return (
+        <div className="py-8 sm:pt-12 sm:pb-4">
+          <HeroImage src={section.src} alt={section.alt ?? "Hero image"} />
+        </div>
+      );
     case "info":
       return <InfoCardsSection id={section.id} cards={section.cards} />;
     case "feature":
@@ -415,8 +419,10 @@ function renderSection(section: CaseTemplateSection) {
     case "heroFeature":
       return (
         <>
-          <HeroImage src={section.src} alt={section.alt ?? "Hero image"} />
-          <div className="pt-12 sm:pt-16">
+          <div className="py-8 sm:pt-12 sm:pb-4">
+            <HeroImage src={section.src} alt={section.alt ?? "Hero image"} />
+          </div>
+          <div className="py-4 sm:py-8">
             <FeatureSectionView
               id={section.id}
               label={section.label}
@@ -581,7 +587,7 @@ export function CaseTemplate({
                   const shouldHideDivider =
                     (isHero && nextIsInfo) || (isHero && nextIsGallery);
                   const paddingClass =
-                    isInfo && prevIsHero ? "pb-12 sm:pb-16" : "py-12 sm:py-16";
+                    isInfo && prevIsHero ? "pb-4 sm:pb-4" : "py-4 sm:py-4";
                   return (
                     <div
                       key={section.type + "-" + index}
@@ -601,10 +607,12 @@ export function CaseTemplate({
             ) : (
               <>
                 {content.heroImage && (
-                  <HeroImage
-                    src={content.heroImage}
-                    alt={content.heroImageAlt ?? content.title}
-                  />
+                  <div className="py-12 sm:py-16">
+                    <HeroImage
+                      src={content.heroImage}
+                      alt={content.heroImageAlt ?? content.title}
+                    />
+                  </div>
                 )}
 
                 {content.infoCards && content.infoCards.length > 0 && (
@@ -648,7 +656,9 @@ export function CaseTemplate({
           {/* Contents nav */}
           <aside className="hidden lg:block lg:relative lg:z-20 lg:pt-4">
             <div className="sticky top-16 space-y-6">
-              <p className="text-nav-item text-white/35">{sidebarLabel}</p>
+              <p className="text-nav-item text-(--color-secondary)">
+                {sidebarLabel}
+              </p>
               <nav className="flex flex-col gap-6">
                 {navItems.map((item) => {
                   const isActive = item.id === activeId;
@@ -659,7 +669,9 @@ export function CaseTemplate({
                       className="text-contents-link relative z-20 inline-flex cursor-pointer transition-opacity hover:opacity-80"
                       aria-current={isActive ? "true" : undefined}
                       style={{
-                        color: isActive ? "white" : "var(--foreground-dim)",
+                        color: isActive
+                          ? "var(--color-secondary)"
+                          : "var(--color-slate)",
                       }}
                     >
                       {formatNavLabel(item.label)}
