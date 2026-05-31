@@ -55,7 +55,7 @@ function StoryText({ heading, body }: Pick<StoryTile, "heading" | "body">) {
 
 export function AboutStorySection() {
   return (
-    <section className="page-container mb-16 mt-16 lg:mb-24 lg:mt-24">
+    <section className="page-container mb-16 mt-4 lg:mb-16 lg:mt-16">
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">
         {storyTiles.map((tile, index) => (
           <div

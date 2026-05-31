@@ -26,7 +26,7 @@ export function ContactSection() {
       className="page-container mt-8 md:mt-12 lg:mt-16 border-t border-white/10 pt-24 lg:pt-28"
     >
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className={`text-hero-small ${anybody.className}`}>
+        <h2 className={`text-cta-heading ${anybody.className}`}>
           <span style={{ color: "var(--color-secondary)" }}>
             LET&apos;S WORK{" "}
           </span>
