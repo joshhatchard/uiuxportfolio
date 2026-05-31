@@ -18,7 +18,9 @@ export function generateStaticParams() {
   return creativeWorks.map((item) => ({ slug: item.slug }));
 }
 
-export async function generateMetadata({ params }: CreativePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CreativePageProps): Promise<Metadata> {
   const { slug } = await params;
   const work = getCreativeWork(slug);
 

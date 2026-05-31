@@ -18,7 +18,9 @@ export function generateStaticParams() {
   return caseStudies.map((item) => ({ slug: item.slug }));
 }
 
-export async function generateMetadata({ params }: WorkPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: WorkPageProps): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudy(slug);
 

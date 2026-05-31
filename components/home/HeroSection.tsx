@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import { Anybody } from "next/font/google";
+import { TiltText } from "@/components/animations/TiltText";
 
 const inter = Inter({ subsets: ["latin"] });
 const anybody = Anybody({
@@ -14,18 +15,20 @@ export function HeroSection() {
     <section className="page-container relative overflow-hidden mt-20 min-[420px]:mt-20 md:mt-0 pt-8 md:pt-16 lg:pt-20 pb-0 min-[420px]:pb-8 md:pb-4 lg:pb-6">
       <div className="relative z-10 space-y-0">
         {/** Caption */}
-        <p className={`text-hero-caption ${anybody.className}`}>
+        <p className={`text-hero-caption text-center ${anybody.className}`}>
           <span style={{ color: "var(--color-slate)" }}>
             HI, I&apos;M JOSH HATCHARD
           </span>
         </p>
 
         {/** Main Heading */}
-        <h1 className={`text-hero-main mt-4 md:mt-8 ${anybody.className}`}>
+        <TiltText
+          className={`text-hero-main text-center mt-4 md:mt-8 ${anybody.className}`}
+        >
           <span style={{ color: "var(--color-secondary)" }}>I&apos;M A </span>
           <span style={{ color: "var(--color-primary)" }}>UI/UX</span>
           <span style={{ color: "var(--color-secondary)" }}> DESIGNER</span>
-        </h1>
+        </TiltText>
 
         {/** CTA and Location */}
         <div

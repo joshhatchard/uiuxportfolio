@@ -62,7 +62,7 @@ export default function HomePage() {
           }}
         >
           <PixelBlast
-            className="opacity-30"
+            className="opacity-40"
             variant="square"
             pixelSize={8}
             color="#1e1e24"

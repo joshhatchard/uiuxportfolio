@@ -13,7 +13,14 @@ export const metadata: Metadata = {
   title: "Josh Hatchard - UI/UX Designer & Developer",
   description:
     "Portfolio of Josh Hatchard - designing and coding clean, user-centred digital products from end to end. UX case studies and creative design work.",
-  keywords: ["UI designer", "UX designer", "product designer", "web designer", "Sydney designer", "design portfolio"],
+  keywords: [
+    "UI designer",
+    "UX designer",
+    "product designer",
+    "web designer",
+    "Sydney designer",
+    "design portfolio",
+  ],
   authors: [
     {
       name: "Josh Hatchard",
@@ -61,9 +68,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "YOUR_GOOGLE_VERIFICATION_CODE",
   },
 };
 

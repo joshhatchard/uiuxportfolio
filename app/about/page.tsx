@@ -26,12 +26,12 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-	return (
-		<>
-			<AboutHero />
-			<AboutStorySection />
-			<ContactSection />
-			<FooterSection />
-		</>
-	);
+  return (
+    <>
+      <AboutHero />
+      <AboutStorySection />
+      <ContactSection />
+      <FooterSection />
+    </>
+  );
 }

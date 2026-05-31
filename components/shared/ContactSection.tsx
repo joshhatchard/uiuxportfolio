@@ -2,6 +2,7 @@
 import { useCallback, useState } from "react";
 import { Anybody } from "next/font/google";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
+import ShinyText from "./ShinyText";
 
 const anybody = Anybody({
   weight: ["400", "700", "900"],
@@ -36,7 +37,14 @@ export function ContactSection() {
         <address
           className={`mt-16 max-w-full break-all text-email ${anybody.className} not-italic`}
         >
-          {emailAddress}
+          <ShinyText
+            text={emailAddress}
+            speed={2.5}
+            color="#8a8a96"
+            shineColor="#f5e8da"
+            spread={120}
+            direction="left"
+          />
         </address>
         <div className="mt-8 flex justify-center">
           <button
