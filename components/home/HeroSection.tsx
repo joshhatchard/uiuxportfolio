@@ -11,6 +11,16 @@ const anybody = Anybody({
 });
 
 export function HeroSection() {
+  const handleExploreWorkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    event.preventDefault();
+    const target = document.getElementById("selected-work");
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section className="page-container relative overflow-hidden mt-20 min-[420px]:mt-20 md:mt-0 pt-8 md:pt-16 lg:pt-20 pb-0 min-[420px]:pb-8 md:pb-4 lg:pb-6">
       <div className="relative z-10 space-y-0">
@@ -36,6 +46,7 @@ export function HeroSection() {
         >
           <Link
             href="#selected-work"
+            onClick={handleExploreWorkClick}
             className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-[background-color,border-color,color,opacity] duration-75 ease-out hover:opacity-80"
             style={{
               background: "var(--color-bg-black)",

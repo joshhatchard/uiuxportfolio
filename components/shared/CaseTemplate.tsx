@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Anybody } from "next/font/google";
+import PixelTransition from "@/components/animations/PixelTransition";
 
 const anybody = Anybody({
   weight: ["400", "700", "900"],
@@ -193,51 +194,103 @@ function HeroImage({ src, alt }: { src: string; alt: string }) {
 }
 
 function NextCaseSection({ card }: { card: NextCaseCard }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const overlayBackgroundColor = "rgba(20, 20, 24, 0.8)";
+  const pixelHoverColor = "rgba(20, 20, 24, 0.8)";
+
   return (
     <section className="mt-6 w-full sm:mt-8">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
-        <p className="text-nav-item uppercase text-(--color-slate)">
-          NEXT CASE STUDY
-        </p>
-      </div>
       <Link
         href={card.href}
-        className="group block transition-all duration-300 hover:-translate-y-1"
+        className="group block border border-(--color-surface) transition-all duration-300 hover:-translate-y-1"
       >
-        <div className="p-0">
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="max-w-full wrap-break-word text-case-study-title uppercase text-(--color-secondary)">
-              {card.title}
-            </h2>
+        <article
+          className="relative p-0 md:grid md:grid-cols-2 md:items-center md:gap-10"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="mt-6 px-8 py-4 md:order-2 md:mt-0 md:flex md:h-full md:flex-col md:px-0 md:py-8 md:pr-8">
+            <div className="flex items-center gap-2 md:shrink-0">
+              <span className="inline-block h-3 w-3 rounded-full bg-(--color-primary)" />
+              <p className="text-nav-item uppercase text-(--color-slate)">
+                NEXT CASE STUDY
+              </p>
+            </div>
+
+            <div className="mt-4 flex items-start justify-between gap-4 md:mt-0 md:flex-1 md:items-center">
+              <div className="space-y-2 md:flex md:flex-col md:justify-center">
+                <h2 className="max-w-full wrap-break-word text-case-study-title uppercase text-(--color-secondary)">
+                  {card.title}
+                </h2>
+                <p className="text-nav-item text-(--color-slate)">
+                  {card.subtitle}
+                </p>
+              </div>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="h-10 w-10 shrink-0 text-(--color-secondary) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 md:hidden"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="M12 5l7 7-7 7" />
+              </svg>
+            </div>
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth={2.5}
-              className="h-10 w-10 shrink-0 text-(--color-secondary) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              strokeWidth={2}
+              className="hidden h-10 w-10 shrink-0 text-(--color-secondary) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 md:block"
               aria-hidden="true"
             >
               <path d="M5 12h14" />
               <path d="M12 5l7 7-7 7" />
             </svg>
           </div>
-          <p className="mt-2 text-nav-item text-(--color-slate)">
-            {card.subtitle}
-          </p>
 
-          <div className="mt-6 overflow-hidden rounded-xs">
-            <Image
-              src={card.imageSrc}
-              alt={card.imageAlt}
-              width={1600}
-              height={900}
-              className="block h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="100vw"
+          <figure className="mt-8 aspect-square w-full overflow-hidden rounded-xs m-0 md:order-1 md:mt-0">
+            <PixelTransition
+              className="h-full w-full"
+              isHovered={isHovered}
+              firstContent={
+                <Image
+                  src={card.imageSrc}
+                  alt={card.imageAlt}
+                  width={1600}
+                  height={900}
+                  className="block h-full w-full object-cover object-center"
+                  sizes="100vw"
+                />
+              }
+              secondContent={
+                <div
+                  className="h-full w-full flex items-end justify-start p-4 md:p-5"
+                  style={{ backgroundColor: overlayBackgroundColor }}
+                >
+                  <p
+                    data-pixel-transition-text="true"
+                    className="text-[0.95rem] md:text-[1.05rem] font-extrabold tracking-[-0.03em]"
+                    style={{ color: "var(--color-secondary)" }}
+                  >
+                    VIEW PROJECT
+                  </p>
+                </div>
+              }
+              gridSize={8}
+              pixelColor={pixelHoverColor}
+              animationStepDuration={0.3}
+              aspectRatio="100%"
+              once={false}
             />
-          </div>
-        </div>
+          </figure>
+        </article>
       </Link>
     </section>
   );
@@ -536,7 +589,7 @@ export function CaseTemplate({
   return (
     <>
       <article className="relative pt-6 lg:pt-32">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[120px_minmax(0,1fr)_140px] lg:gap-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[120px_minmax(0,1fr)_120px] lg:gap-10">
           {/* Back button */}
           <div className="fixed top-6 left-8 z-40 lg:sticky lg:top-16 lg:self-start lg:pt-2 lg:z-20 lg:left-auto lg:right-auto">
             <Link

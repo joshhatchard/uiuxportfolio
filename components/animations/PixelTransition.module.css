@@ -1,0 +1,31 @@
+.pixelTransition {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.default,
+.active,
+.pixels {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.active {
+  z-index: 2;
+  display: none;
+}
+
+.pixels {
+  pointer-events: none;
+  z-index: 3;
+}
+
+.pixel {
+  display: none;
+  position: absolute;
+}
