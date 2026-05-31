@@ -24,17 +24,24 @@ export type CaseStudyContent = CaseTemplateContent;
 
 export const caseStudyContent: Record<string, CaseStudyContent> = {
   granic: {
-    title: "Deadline Tracker",
+    title: "Deadline Tracker Waitlist",
     subtitle: "Granic - DEC 2025",
     sections: [
-      { type: "hero", src: "/works/granic/hero.png", alt: "Granic deadline tracker hero image" },
+      {
+        type: "hero",
+        src: "/works/granic/hero.png",
+        alt: "Granic deadline tracker hero image",
+      },
       {
         type: "info",
         id: "overview",
         label: "Overview",
         cards: [
           { label: "Role", body: "Design + Frontend" },
-          { label: "Team", body: "Joshua Hatchard (Co-Founder) | Nathan Townsend (Co-Founder)" },
+          {
+            label: "Team",
+            body: "Joshua Hatchard (Co-Founder) | Nathan Townsend (Co-Founder)",
+          },
           { label: "Timeline", body: "Early Validation Phase" },
           {
             label: "Overview",
@@ -48,7 +55,7 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         label: "Problem",
         subEyebrow: "Fragmented workflows",
         heading: "Students lack a single source of truth for deadlines",
-        body: "Students track deadlines across LMS, emails, and calendars, making it easy to lose visibility.",
+        body: "Students are constantly switching between Canvas, their email inbox and personal calendars just to piece together what's due and when. The mental overhead of managing all of this is a real cost and it's one students shouldn't have to carry.",
         image: "/works/granic/problem.png",
         imageAlt: "Fragmented deadline tracking across platforms",
       },
@@ -58,7 +65,7 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         label: "Validation",
         subEyebrow: "What we wanted to learn",
         heading: "Testing if the idea had demand",
-        body: "Would students understand the idea and care enough to sign up?",
+        body: "Before writing a single line of product code we wanted to know whether students felt this problem enough to act on it. Would they trust an early-stage product enough to hand over their email?",
         image: "/works/granic/validation.png",
         imageAlt: "Validation approach and findings",
       },
@@ -68,17 +75,17 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         label: "Approach",
         subEyebrow: "Core principle",
         heading: "Product first, conversion focused",
-        body: "The landing page was designed for instant clarity and fast conversion to waitlist signups.",
-        image: "/works/granic/approach.png",
+        body: "The landing page had one job, get a student who lands on it to sign up before they leave. That meant leading with the problem statement front and centre and removing anything that introduced friction or distraction. The structure moved from problem to solution to signup with no detours.",
+        image: "/works/granic/approachv3.png",
         imageAlt: "Landing page approach and structure",
       },
       {
         type: "feature",
         id: "feature-4",
-        label: "Design Decisons",
+        label: "Design Decisions",
         subEyebrow: "Visual Direction",
         heading: "Minimal and distraction free",
-        body: "A black-and-white system kept attention on the idea rather than the interface.",
+        body: "A strict black-and-white system was a deliberate choice. Colour draws attention and at this stage we didn't want attention on the interface, we wanted it on the idea. The typography does the heavy lifting with clear hierarchy guiding the eye from headline to supporting copy to CTA.",
         image: "/works/granic/decisions.png",
         imageAlt: "Design decisions and visual direction",
       },
@@ -86,9 +93,9 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         type: "feature",
         id: "feature-5",
         label: "Execution",
-        subEyebrow: "Visual Direction",
+        subEyebrow: "Built end to end",
         heading: "Designed and built end to end",
-        body: "I designed and developed the landing page and connected the waitlist to a database for validation.",
+        body: "I designed and developed the landing page end to end using Next.js and Tailwind for the frontend, with Prisma and Postgres handling the waitlist database. The stack was chosen to move fast without cutting corners, scalable and straightforward to maintain.",
         image: "/works/granic/execution.png",
         imageAlt: "Final built landing page",
       },
@@ -98,10 +105,10 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         label: "Outcome",
         subEyebrow: "What we measured",
         heading: "Early validation in progress",
-        body: "Waitlist signups as an early signal of interest in the product.",
-        image: "/works/granic/outcome1.png",
+        body: "We're currently in the early stages of collecting signups. Each submission is the data point of a student who landed on the page, understood the problem and decided Granic was worth following. The results so far are informing how we refine and structure the MVP.",
+        image: "/works/granic/outcome1v2.png",
         imageAlt: "Outcome result one",
-        image2: "/works/granic/outcome2.png",
+        image2: "/works/granic/outcome2v2.png",
         imageAlt2: "Outcome result two",
       },
       {
@@ -110,22 +117,29 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         label: "Reflection",
         subEyebrow: "Key takeaway",
         heading: "What I learnt",
-        body: "The landing page helped confirm early interest and shaped how we approach the MVP and positioning.",
+        body: "Building the landing page before the product forced us to articulate the idea clearly and concisely, which turned out to be harder than expected. The process sharpened our positioning and gave us an early read on whether the framing resonated. It also reinforced the value of shipping something real as early as possible as a live page tells you more than any internal discussion ever could.",
       },
     ],
   },
   canvas: {
-    title: "First Nations Support",
+    title: "First Nations Support Page",
     subtitle: "University of Sydney - NOV 2025",
     sections: [
-      { type: "hero", src: "/works/canvas/hero.png", alt: "University of Sydney first nations support hero image" },
+      {
+        type: "hero",
+        src: "/works/canvas/hero.png",
+        alt: "University of Sydney first nations support hero image",
+      },
       {
         type: "info",
         id: "overview",
         label: "Overview",
         cards: [
           { label: "Role", body: "UI/UX Designer & Developer" },
-          { label: "Team", body: "Solo designer, working closely with a supervising project lead" },
+          {
+            label: "Team",
+            body: "Solo designer, working closely with a supervising project lead",
+          },
           { label: "Timeline", body: "3 Weeks - Nov 2025" },
           {
             label: "Overview",
@@ -138,7 +152,8 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         id: "context",
         label: "Context",
         subEyebrow: "One Sydney, Many People",
-        heading: "A resource hub built from the ground up, for students who deserved better.",
+        heading:
+          "A resource hub built from the ground up, for students who deserved better.",
         body: "First Nations students in the Faculty of Medicine and Health had face-to-face support through Gadigal and faculty liaisons, but no central digital space for the resources they needed day to day. This project set out to build one.",
         image: "/works/canvas/contextv2.png",
         imageAlt: "Project context and background",
@@ -198,7 +213,8 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
         id: "outcome",
         label: "Outcome",
         subEyebrow: "Faculty of Medicine and Health",
-        heading: "A single, trusted place for First Nations allied health students to find what they need.",
+        heading:
+          "A single, trusted place for First Nations allied health students to find what they need.",
         body: "The completed page consolidated everything students asked for, from academic calendars, wellbeing resources, placement support to culturally specific contacts. All merged into one accessible, considered space.",
         image: "/works/canvas/outcome1.png",
         imageAlt: "Outcome result one",

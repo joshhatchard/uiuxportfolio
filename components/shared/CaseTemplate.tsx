@@ -2,6 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Anybody } from "next/font/google";
+
+const anybody = Anybody({
+  weight: ["400", "700", "900"],
+  subsets: ["latin"],
+});
 import {
   GallerySection,
   type GalleryImage,
@@ -560,7 +566,9 @@ export function CaseTemplate({
           <div className="space-y-0">
             {/* Header */}
             <header className="mt-24 lg:mt-0 space-y-4 text-center">
-              <h1 className="max-w-full wrap-break-word text-hero-small text-(--color-secondary) uppercase">
+              <h1
+                className={`max-w-full wrap-break-word text-hero-small text-(--color-secondary) uppercase ${anybody.className}`}
+              >
                 {content.title}
               </h1>
               <p className="text-case-subheading text-(--color-slate)">

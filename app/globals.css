@@ -131,21 +131,21 @@ body {
   letter-spacing: -0em;
   line-height: 1;
 
-  font-size: 2.5rem;
+  font-size: 2rem;
 
   @media (min-width: 350px) {
-    font-size: 3rem; /* 96px — tablet */
+    font-size: 2.5rem; /* 96px — tablet */
   }
   @media (min-width: 480px) {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
 
   @media (min-width: 768px) {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 
   @media (min-width: 1280px) {
-    font-size: 5.5rem;
+    font-size: 4.5rem;
   }
 }
 

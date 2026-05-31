@@ -22,7 +22,7 @@ export function CreativeHero() {
         }}
       >
         <PixelBlast
-          className="opacity-100"
+          className="opacity-50"
           variant="square"
           pixelSize={8}
           color="#36363f"
