@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ShowNav } from "@/components/shared/ShowNav";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import ClickSpark from "@/components/shared/ClickSpark";
+import ClickSpark from "@/components/animations/ClickSpark";
 
 const inter = Inter({ subsets: ["latin"] });
 

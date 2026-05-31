@@ -1,6 +1,6 @@
 "use client";
 
-import LogoLoop from "@/components/shared/LogoLoop";
+import LogoLoop from "@/components/animations/LogoLoop";
 import { useEffect, useState } from "react";
 
 const trustLogos = [

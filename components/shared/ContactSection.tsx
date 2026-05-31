@@ -2,7 +2,7 @@
 import { useCallback, useState } from "react";
 import { Anybody } from "next/font/google";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
-import ShinyText from "./ShinyText";
+import ShinyText from "@/components/animations/ShinyText";
 
 const anybody = Anybody({
   weight: ["400", "700", "900"],

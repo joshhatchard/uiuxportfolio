@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PixelBlast from "@/components/shared/PixelBlast";
+import PixelBlast from "@/components/animations/PixelBlast";
 import { HeroSection } from "@/components/home/HeroSection";
 import { TrustSection } from "@/components/home/TrustSection";
 import { SelectedWorkSection } from "@/components/home/SelectedWorkSection";
