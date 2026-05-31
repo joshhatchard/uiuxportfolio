@@ -11,6 +11,31 @@ const anybody = Anybody({
 
 const emailAddress = "joshualhatchard@gmail.com";
 
+function renderHoverLetters(text: string, keyPrefix: string) {
+  return Array.from(text).map((letter, index) =>
+    letter === " " ? (
+      <span
+        key={`${keyPrefix}-space-${index}`}
+        className="inline-block w-[0.35em]"
+      >
+        &nbsp;
+      </span>
+    ) : (
+      <span
+        key={`${keyPrefix}-${letter}-${index}`}
+        className="group/letter inline-block align-baseline"
+      >
+        <span
+          className="inline-block transform-gpu transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover/letter:-translate-y-1.5 group-hover/letter:scale-110"
+          aria-hidden="true"
+        >
+          {letter}
+        </span>
+      </span>
+    ),
+  );
+}
+
 export function ContactSection() {
   const [copied, setCopied] = useState(false);
 
@@ -27,11 +52,15 @@ export function ContactSection() {
     >
       <div className="mx-auto max-w-4xl text-center">
         <h2 className={`text-cta-heading ${anybody.className}`}>
-          <span style={{ color: "var(--color-secondary)" }}>
-            LET&apos;S WORK{" "}
+          <span style={{ color: "var(--color-secondary)" }} className="block">
+            LET&apos;S WORK
           </span>
-          <span style={{ color: "var(--color-primary)" }} className="block">
-            TOGETHER!
+          <span
+            style={{ color: "var(--color-primary)" }}
+            className="block"
+            aria-label="TOGETHER!"
+          >
+            {renderHoverLetters("TOGETHER!", "cta-together")}
           </span>
         </h2>
         <address
@@ -50,7 +79,7 @@ export function ContactSection() {
           <button
             type="button"
             onClick={handleCopyEmail}
-            className={`text-nav-item inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 min-w-45 transition-all cursor-pointer ${!copied && "hover:opacity-80"}`}
+            className={`text-nav-item inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 min-w-45 transition-all cursor-pointer active:translate-y-px active:scale-[0.98] ${!copied && "hover:opacity-80"}`}
             style={{
               background: copied
                 ? "var(--color-primary)"
@@ -58,6 +87,9 @@ export function ContactSection() {
               color: copied
                 ? "var(--color-secondary)"
                 : "var(--color-bg-black)",
+              boxShadow: copied
+                ? "none"
+                : "0 1px 0 rgba(255, 255, 255, 0.08) inset",
             }}
           >
             {copied ? "COPIED!" : "COPY EMAIL"}
@@ -109,12 +141,12 @@ export function ContactSection() {
               target="_blank"
               rel="noreferrer"
               aria-label="Connect on LinkedIn (opens in new window)"
-              className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
+              className="group flex flex-col items-center gap-4"
             >
               <img
                 src="/platforms/linkedin.svg"
                 alt="LinkedIn"
-                className="h-14 w-auto"
+                className="h-14 w-auto transform-gpu transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 group-hover:scale-110 group-hover:rotate-1"
               />
               <p
                 className="text-nav-item inline-flex items-center gap-1"
@@ -130,12 +162,12 @@ export function ContactSection() {
               target="_blank"
               rel="noreferrer"
               aria-label="View on GitHub (opens in new window)"
-              className="flex flex-col items-center gap-4 transition-opacity hover:opacity-80"
+              className="group flex flex-col items-center gap-4"
             >
               <img
                 src="/platforms/github.svg"
                 alt="GitHub"
-                className="h-14 w-auto"
+                className="h-14 w-auto transform-gpu transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 group-hover:scale-110 group-hover:-rotate-1"
               />
               <p
                 className="text-nav-item inline-flex items-center gap-1"

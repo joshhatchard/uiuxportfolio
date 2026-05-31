@@ -35,7 +35,10 @@ function ProjectCardView({
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
     >
-      <Link href={href} className="block">
+      <Link
+        href={href}
+        className="block transform-gpu transition-transform duration-100 ease-out active:translate-y-px active:scale-[0.99]"
+      >
         <figure className="aspect-square overflow-hidden rounded-xs m-0">
           <PixelTransition
             className="h-full w-full"
@@ -70,7 +73,10 @@ function ProjectCardView({
         </figure>
       </Link>
 
-      <Link href={href} className="mt-6 block">
+      <Link
+        href={href}
+        className="mt-6 block transform-gpu transition-transform duration-100 ease-out active:translate-y-px active:scale-[0.99]"
+      >
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="text-case-study-title">{title}</h3>

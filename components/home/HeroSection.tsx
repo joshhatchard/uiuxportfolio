@@ -47,7 +47,7 @@ export function HeroSection() {
           <Link
             href="#selected-work"
             onClick={handleExploreWorkClick}
-            className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-[background-color,border-color,color,opacity] duration-75 ease-out hover:opacity-80"
+            className="text-nav-item inline-flex items-center gap-1 rounded-full px-8 py-4 transition-[background-color,border-color,color,opacity,transform] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
             style={{
               background: "var(--color-bg-black)",
               color: "var(--color-secondary)",

@@ -202,7 +202,7 @@ function NextCaseSection({ card }: { card: NextCaseCard }) {
     <section className="mt-6 w-full sm:mt-8">
       <Link
         href={card.href}
-        className="group block border border-(--color-surface) transition-all duration-300 hover:-translate-y-1"
+        className="group block border border-(--color-surface) transform-gpu transition-all duration-100 ease-out hover:-translate-y-1 active:translate-y-px active:scale-[0.99]"
       >
         <article
           className="relative p-0 md:grid md:grid-cols-2 md:items-center md:gap-10"
@@ -557,6 +557,17 @@ export function CaseTemplate({
   const formatNavLabel = (label: string) =>
     label.slice(0, 1).toUpperCase() + label.slice(1).toLowerCase();
 
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const targetId = event.currentTarget.getAttribute("href")?.slice(1);
+    if (!targetId) return;
+
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const [activeId, setActiveId] = useState<string>(navItems[0]?.id ?? "");
 
   useEffect(() => {
@@ -594,7 +605,7 @@ export function CaseTemplate({
           <div className="fixed top-6 left-8 z-40 lg:sticky lg:top-16 lg:self-start lg:pt-2 lg:z-20 lg:left-auto lg:right-auto">
             <Link
               href={backHref}
-              className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transition-opacity hover:opacity-80"
+              className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
               style={{
                 background: "var(--color-bg-black)",
                 color: "var(--color-secondary)",
@@ -727,7 +738,8 @@ export function CaseTemplate({
                     <a
                       key={item.id}
                       href={`#${item.id}`}
-                      className="text-contents-link relative z-20 inline-flex cursor-pointer transition-opacity hover:opacity-80"
+                      onClick={handleNavClick}
+                      className="text-contents-link relative z-20 inline-flex cursor-pointer px-2 py-2 -mx-2 -my-2 transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                       aria-current={isActive ? "true" : undefined}
                       style={{
                         color: isActive

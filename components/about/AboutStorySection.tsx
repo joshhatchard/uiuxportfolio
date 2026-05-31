@@ -60,16 +60,16 @@ export function AboutStorySection() {
         {storyTiles.map((tile, index) => (
           <div
             key={tile.image}
-            className={`group flex flex-col transition-all duration-300 hover:-translate-y-1 ${index === 0 ? "order-2 md:order-0" : ""} ${index === 1 ? "order-1 md:order-0" : ""} ${index === 2 ? "order-4 md:order-0" : ""} ${index === 3 ? "order-3 md:order-0" : ""}`}
+            className={`flex flex-col transition-all duration-300 hover:-translate-y-1 ${index === 0 ? "order-2 md:order-0" : ""} ${index === 1 ? "order-1 md:order-0" : ""} ${index === 2 ? "order-4 md:order-0" : ""} ${index === 3 ? "order-3 md:order-0" : ""}`}
           >
             <div className={tile.textAbove ? "order-1 md:order-2" : ""}>
-              <div className="overflow-hidden rounded-xs">
+              <div className="group/image overflow-hidden rounded-xs">
                 <Image
                   src={tile.image}
                   alt={tile.alt}
                   width={900}
                   height={1100}
-                  className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-auto w-full object-cover transition-transform duration-500 group-hover/image:scale-105"
                 />
               </div>
             </div>

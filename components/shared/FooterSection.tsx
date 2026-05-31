@@ -1,7 +1,17 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 
 export function FooterSection() {
+  const pathname = usePathname();
+
+  const handleWorkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== "/") return;
+
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer
       id="footer"
@@ -16,8 +26,9 @@ export function FooterSection() {
             <ul className="mt-6 flex flex-col gap-4 list-none">
               <li>
                 <a
-                  href="#selected-work"
-                  className="text-nav-item py-2 -my-2 hover:opacity-80"
+                  href="/"
+                  onClick={handleWorkClick}
+                  className="text-nav-item py-2 -my-2 inline-flex transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
                   WORK
@@ -26,7 +37,7 @@ export function FooterSection() {
               <li>
                 <a
                   href="/creative"
-                  className="text-nav-item py-2 -my-2 hover:opacity-80"
+                  className="text-nav-item py-2 -my-2 inline-flex transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
                   CREATIVE
@@ -35,7 +46,7 @@ export function FooterSection() {
               <li>
                 <a
                   href="/about"
-                  className="text-nav-item py-2 -my-2 hover:opacity-80"
+                  className="text-nav-item py-2 -my-2 inline-flex transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
                   ABOUT
@@ -52,7 +63,7 @@ export function FooterSection() {
                 <a
                   href="mailto:joshualhatchard@gmail.com"
                   aria-label="Send email"
-                  className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 hover:opacity-80"
+                  className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
                   CONTACT
@@ -65,7 +76,7 @@ export function FooterSection() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Connect on LinkedIn (opens in new window)"
-                  className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 hover:opacity-80"
+                  className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
                   LINKEDIN
@@ -78,7 +89,7 @@ export function FooterSection() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="View GitHub (opens in new window)"
-                  className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 hover:opacity-80"
+                  className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
                   GITHUB

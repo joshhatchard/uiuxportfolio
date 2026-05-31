@@ -103,11 +103,18 @@
   align-items: center;
   text-decoration: none;
   border-radius: 4px;
-  transition: opacity 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease-out;
+  transform: translate3d(0, 0, 0);
 }
 
 .logoloop__link:hover {
   opacity: 0.8;
+}
+
+.logoloop__link:active {
+  transform: translate3d(0, 1px, 0) scale(0.98);
 }
 
 .logoloop__link:focus-visible {

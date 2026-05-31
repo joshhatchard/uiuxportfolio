@@ -45,7 +45,7 @@ function ExternalLink({
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noreferrer"}
       onClick={onClick}
-      className="text-nav-item flex items-center gap-1 px-4 transition-opacity hover:opacity-80"
+      className="text-nav-item flex items-center gap-1 px-4 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
       style={{ color: "var(--color-secondary)" }}
     >
       {label}
@@ -99,7 +99,7 @@ export function NavBar() {
           <Link
             href="/"
             onClick={handleLogoClick}
-            className="flex items-center gap-3 px-3 py-2 -mx-3 transition-opacity hover:opacity-80"
+            className="flex items-center gap-3 px-3 py-2 -mx-3 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
             aria-label="Home"
           >
             <img
@@ -142,8 +142,10 @@ export function NavBar() {
                   aria-current={isActive ? "page" : undefined}
                   className={`
                     text-nav-item relative flex items-center justify-center
-                    rounded-full px-2 py-3 text-center transition-opacity
+                    rounded-full px-2 py-3 text-center transform-gpu
+                    transition-[transform,opacity] duration-100 ease-out
                     flex-1 min-[420px]:flex-none min-[420px]:w-24
+                    active:translate-y-px active:scale-[0.98]
                     ${!isActive && "hover:opacity-80"}
                   `}
                   style={{
