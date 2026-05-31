@@ -26,8 +26,18 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+/* native smooth scrolling disabled because Lenis provides custom smooth scrolling */
+/* Improve scroll rendering when Lenis is active */
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { PageFadeIn } from "@/components/shared/PageFadeIn";
+import SmoothScrollProvider from "@/components/shared/SmoothScrollProvider";
 import { ShowNav } from "@/components/shared/ShowNav";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ClickSpark from "@/components/animations/ClickSpark";
@@ -124,7 +125,9 @@ export default function RootLayout({
             className="relative z-10 mx-auto w-full max-w-7xl px-8 py-0 xs:px-12 md:px-16 lg:px-24"
           >
             <ShowNav>
-              <PageFadeIn>{children}</PageFadeIn>
+              <SmoothScrollProvider>
+                <PageFadeIn>{children}</PageFadeIn>
+              </SmoothScrollProvider>
             </ShowNav>
           </main>
         </ClickSpark>

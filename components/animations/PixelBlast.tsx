@@ -399,12 +399,12 @@ type ThreeState = {
     uEdgeFade: { value: number };
   };
   resizeObserver: ResizeObserver;
-  raf: number;
   quad: THREE.Mesh;
   clickIx: number;
   composer?: EffectComposer;
   touch?: ReturnType<typeof createTouchTexture>;
   liquidEffect?: Effect;
+  noiseEffect?: Effect;
   pointerEventTarget: EventTarget;
   onPointerDown: EventListener;
   onPointerMove: EventListener;
@@ -438,6 +438,8 @@ const PixelBlast = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const visibilityRef = useRef({ visible: true });
   const speedRef = useRef(speed);
+  const playheadTimeRef = useRef(0);
+  const lastTickTimeRef = useRef<number | null>(null);
   const threeRef = useRef<ThreeState | null>(null);
   const prevConfigRef = useRef<{
     antialias: boolean;
@@ -464,6 +466,39 @@ const PixelBlast = ({
 
     return () => observer.disconnect();
   }, [autoPauseOffscreen]);
+
+  // Enable ripples during Lenis scrolling
+  useEffect(() => {
+    const onScrollStart = () => {
+      const t = threeRef.current;
+      if (t && t.uniforms?.uEnableRipples) {
+        try {
+          t.uniforms.uEnableRipples.value = 1;
+        } catch (e) {
+          /* ignore */
+        }
+      }
+    };
+
+    const onScrollEnd = () => {
+      const t = threeRef.current;
+      if (t && t.uniforms?.uEnableRipples) {
+        try {
+          t.uniforms.uEnableRipples.value = enableRipples ? 1 : 0;
+        } catch (e) {
+          /* ignore */
+        }
+      }
+    };
+
+    window.addEventListener("lenis:scroll-start", onScrollStart);
+    window.addEventListener("lenis:scroll-end", onScrollEnd);
+
+    return () => {
+      window.removeEventListener("lenis:scroll-start", onScrollStart);
+      window.removeEventListener("lenis:scroll-end", onScrollEnd);
+    };
+  }, [enableRipples]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -496,7 +531,6 @@ const PixelBlast = ({
       if (threeRef.current) {
         const t = threeRef.current;
         t.resizeObserver.disconnect();
-        cancelAnimationFrame(t.raf);
         t.pointerEventTarget.removeEventListener(
           "pointerdown",
           t.onPointerDown,
@@ -619,17 +653,6 @@ const PixelBlast = ({
       const ro = new ResizeObserver(setSize);
       ro.observe(container);
 
-      const randomFloat = () => {
-        if (window.crypto?.getRandomValues) {
-          const u32 = new Uint32Array(1);
-          window.crypto.getRandomValues(u32);
-          return u32[0] / 0xffffffff;
-        }
-        return Math.random();
-      };
-
-      const timeOffset = randomFloat() * 1000;
-
       let composer: EffectComposer | undefined;
       let touch: ReturnType<typeof createTouchTexture> | undefined;
       let liquidEffect: Effect | undefined;
@@ -726,59 +749,6 @@ const PixelBlast = ({
         passive: true,
       });
 
-      let raf = 0;
-      const animate = () => {
-        const state = threeRef.current;
-
-        if (autoPauseOffscreen && !visibilityRef.current.visible) {
-          if (state) state.raf = requestAnimationFrame(animate);
-          else raf = requestAnimationFrame(animate);
-          return;
-        }
-
-        timer.update();
-        uniforms.uTime.value =
-          timeOffset + timer.getElapsed() * speedRef.current;
-
-        if (liquidEffect) {
-          const uTime = liquidEffect.uniforms.get("uTime") as
-            | THREE.Uniform<number>
-            | undefined;
-          if (uTime) {
-            uTime.value = uniforms.uTime.value;
-          }
-        }
-
-        if (state?.composer) {
-          if (state.touch) {
-            state.touch.update();
-          }
-
-          if (noiseEffect) {
-            const noiseTime = noiseEffect.uniforms?.get("uTime") as
-              | THREE.Uniform<number>
-              | undefined;
-            if (noiseTime) {
-              noiseTime.value = uniforms.uTime.value;
-            }
-          }
-
-          state.composer.render();
-        } else {
-          // Use the locally captured scene and camera — guaranteed in scope here
-          // since animate is defined inside the mustReinit block.
-          renderer.render(scene, camera);
-        }
-
-        if (state) {
-          state.raf = requestAnimationFrame(animate);
-        } else {
-          raf = requestAnimationFrame(animate);
-        }
-      };
-
-      raf = requestAnimationFrame(animate);
-
       threeRef.current = {
         renderer,
         scene,
@@ -786,12 +756,12 @@ const PixelBlast = ({
         material,
         uniforms,
         resizeObserver: ro,
-        raf,
         quad,
         clickIx: 0,
         composer,
         touch,
         liquidEffect,
+        noiseEffect,
         pointerEventTarget,
         onPointerDown,
         onPointerMove,
@@ -848,7 +818,6 @@ const PixelBlast = ({
 
       const t = threeRef.current;
       t.resizeObserver.disconnect();
-      cancelAnimationFrame(t.raf);
       t.pointerEventTarget.removeEventListener("pointerdown", t.onPointerDown);
       t.pointerEventTarget.removeEventListener("pointermove", t.onPointerMove);
       t.quad.geometry.dispose();
@@ -884,6 +853,63 @@ const PixelBlast = ({
     color,
     speed,
   ]);
+
+  useEffect(() => {
+    const onTick = (event: Event) => {
+      const { time } = (event as CustomEvent).detail;
+      const state = threeRef.current;
+      if (!state) return;
+      const isPausedByVisibility =
+        autoPauseOffscreen && !visibilityRef.current.visible;
+      const isScrolling =
+        document.documentElement.classList.contains("is-scrolling");
+
+      if (lastTickTimeRef.current === null) {
+        lastTickTimeRef.current = time;
+        playheadTimeRef.current = time * 0.001 * speedRef.current;
+      }
+
+      if (isPausedByVisibility || isScrolling) {
+        lastTickTimeRef.current = time;
+        return;
+      }
+
+      const lastTickTime = lastTickTimeRef.current ?? time;
+      const deltaTime = Math.max(time - lastTickTime, 0);
+      playheadTimeRef.current += deltaTime * 0.001 * speedRef.current;
+      lastTickTimeRef.current = time;
+
+      state.uniforms.uTime.value = playheadTimeRef.current;
+
+      if (state.liquidEffect) {
+        const uTime = state.liquidEffect.uniforms.get("uTime") as
+          | THREE.Uniform<number>
+          | undefined;
+        if (uTime) {
+          uTime.value = state.uniforms.uTime.value;
+        }
+      }
+
+      if (state.noiseEffect) {
+        const noiseTime = state.noiseEffect.uniforms?.get("uTime") as
+          | THREE.Uniform<number>
+          | undefined;
+        if (noiseTime) {
+          noiseTime.value = state.uniforms.uTime.value;
+        }
+      }
+
+      if (state.composer) {
+        state.touch?.update();
+        state.composer.render();
+      } else {
+        state.renderer.render(state.scene, state.camera);
+      }
+    };
+
+    window.addEventListener("lenis:tick", onTick);
+    return () => window.removeEventListener("lenis:tick", onTick);
+  }, [autoPauseOffscreen, speedRef]);
 
   return (
     <div
