@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  type ReactNode,
+} from "react";
 import {
   motion,
   useMotionValue,
@@ -8,6 +14,20 @@ import {
   useTransform,
 } from "motion/react";
 import "./ShinyText.css";
+
+type ShinyTextProps = {
+  text?: ReactNode;
+  disabled?: boolean;
+  speed?: number;
+  className?: string;
+  color?: string;
+  shineColor?: string;
+  spread?: number;
+  yoyo?: boolean;
+  pauseOnHover?: boolean;
+  direction?: "left" | "right";
+  delay?: number;
+};
 
 const ShinyText = ({
   text,
@@ -21,7 +41,7 @@ const ShinyText = ({
   pauseOnHover = false,
   direction = "left",
   delay = 0,
-}) => {
+}: ShinyTextProps) => {
   const [isPaused, setIsPaused] = useState(false);
   const progress = useMotionValue(0);
   const elapsedRef = useRef(0);
