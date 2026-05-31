@@ -62,10 +62,10 @@ export default function HomePage() {
           }}
         >
           <PixelBlast
-            className="opacity-40"
+            className="opacity-100"
             variant="square"
             pixelSize={8}
-            color="#1e1e24"
+            color="#36363f"
             patternScale={3.5}
             patternDensity={0.5}
             pixelSizeJitter={0}
@@ -73,7 +73,7 @@ export default function HomePage() {
             liquid={false}
             speed={0.6}
             edgeFade={0}
-            noiseAmount={0.08}
+            noiseAmount={0}
             interactionMode="window"
             transparent
           />

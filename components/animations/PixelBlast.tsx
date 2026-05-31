@@ -558,14 +558,29 @@ const PixelBlast = ({
 
       const scene = new THREE.Scene();
       const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      // Detect WebGL2 availability — if it's not available, adjust the
+      // fragment shader to GLSL1 (use `gl_FragColor`) and avoid setting
+      // `glslVersion` which would force GLSL3 compilation and fail.
+      const gl = renderer.getContext();
+      const isWebGL2 =
+        typeof WebGL2RenderingContext !== "undefined" &&
+        gl instanceof WebGL2RenderingContext;
+
+      const fragmentSrc = isWebGL2
+        ? FRAGMENT_SRC
+        : FRAGMENT_SRC.replace(/\bout vec4 fragColor;\b/, "").replace(
+            /\bfragColor\s*=\s*/g,
+            "gl_FragColor = ",
+          );
+
       const material = new THREE.ShaderMaterial({
         vertexShader: VERTEX_SRC,
-        fragmentShader: FRAGMENT_SRC,
+        fragmentShader: fragmentSrc,
         uniforms,
         transparent: true,
         depthTest: false,
         depthWrite: false,
-        glslVersion: THREE.GLSL3,
+        glslVersion: isWebGL2 ? THREE.GLSL3 : undefined,
       });
 
       const quadGeom = new THREE.PlaneGeometry(2, 2);
