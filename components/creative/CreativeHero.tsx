@@ -1,6 +1,7 @@
 "use client";
 import { Anybody } from "next/font/google";
 import PixelBlast from "@/components/animations/PixelBlast";
+import { TiltText } from "@/components/animations/TiltText";
 
 const anybody = Anybody({
   weight: ["400", "700", "900"],
@@ -9,7 +10,7 @@ const anybody = Anybody({
 
 export function CreativeHero() {
   return (
-    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-32 lg:py-48">
+    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-32 md:pb-48 md:pt-32">
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
@@ -39,16 +40,20 @@ export function CreativeHero() {
         />
       </div>
 
-      <div className={`relative z-10 space-y-2 ${anybody.className}`}>
+      <div
+        className={`relative z-10 space-y-0 text-center ${anybody.className}`}
+      >
         <p className="text-hero-caption">
-          <span style={{ color: "var(--color-slate)" }}>CREATIVE</span>
+          <span style={{ color: "var(--color-slate)" }}>CREATIVE WORKS</span>
         </p>
 
-        <h1 className="text-hero-small">
+        <TiltText
+          className={`text-hero-small mt-4 md:mt-8 ${anybody.className}`}
+        >
           <span style={{ color: "var(--color-secondary)" }}>WHERE I </span>
           <span style={{ color: "var(--color-primary)" }}>EXPLORE</span>
           <span style={{ color: "var(--color-secondary)" }}> NEW IDEAS </span>
-        </h1>
+        </TiltText>
 
         {/* Subheading removed */}
       </div>

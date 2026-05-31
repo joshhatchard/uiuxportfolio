@@ -1,6 +1,7 @@
 "use client";
 import { Anybody } from "next/font/google";
 import PixelBlast from "@/components/animations/PixelBlast";
+import { TiltText } from "@/components/animations/TiltText";
 
 const anybody = Anybody({
   weight: ["400", "700", "900"],
@@ -9,7 +10,7 @@ const anybody = Anybody({
 
 export function AboutHero() {
   return (
-    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-32 lg:py-48">
+    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-32 md:pb-48 md:pt-32">
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
@@ -39,18 +40,22 @@ export function AboutHero() {
         />
       </div>
 
-      <div className={`relative z-10 space-y-2 ${anybody.className}`}>
+      <div
+        className={`relative z-10 space-y-0 text-center ${anybody.className}`}
+      >
         <p className="text-hero-caption">
           <span style={{ color: "var(--color-slate)" }}>ABOUT ME</span>
         </p>
 
-        <h1 className="text-hero-small">
+        <TiltText
+          className={`text-hero-small mt-4 md:mt-8 ${anybody.className}`}
+        >
           <span style={{ color: "var(--color-secondary)" }}>I </span>
           <span style={{ color: "var(--color-primary)" }}>CREATE</span>
           <span style={{ color: "var(--color-secondary)" }}> AND </span>
           <span style={{ color: "var(--color-primary)" }}>BUILD</span>
           <span style={{ color: "var(--color-secondary)" }}> PRODUCTS</span>
-        </h1>
+        </TiltText>
       </div>
     </section>
   );
