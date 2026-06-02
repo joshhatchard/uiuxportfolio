@@ -113,7 +113,7 @@ export function ProjectCards({
         variants={cardGrid}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.15 }}
+        viewport={{ once: true, amount: 0.1 }}
       >
         {cards.map((card) => (
           <motion.div key={card.href} variants={cardEnter}>

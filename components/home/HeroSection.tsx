@@ -27,7 +27,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="page-container relative overflow-hidden mt-20 min-[420px]:mt-20 md:mt-0 pt-8 md:pt-16 lg:pt-20 pb-0 min-[420px]:pb-8 md:pb-4 lg:pb-6">
+    <section className="page-container relative mt-20 min-[420px]:mt-20 md:mt-0 pt-8 md:pt-16 lg:pt-20 pb-0 min-[420px]:pb-8 md:pb-4 lg:pb-6">
       <motion.div
         className="relative z-10 space-y-0"
         variants={heroContainer}
