@@ -18,7 +18,7 @@ const anybody = Anybody({
 
 export function AboutHero() {
   return (
-    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-32 md:pb-32 md:pt-24">
+    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-24 md:pb-32 md:pt-24">
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{

@@ -6,7 +6,7 @@ export function CreativeProjectCards() {
     <ProjectCards
       cards={creativeCards}
       sectionId="creative-projects"
-      spacing="mt-16 scroll-mt-8 lg:mt-16"
+      spacing="mt-4 scroll-mt-8 lg:mt-16"
     />
   );
 }
