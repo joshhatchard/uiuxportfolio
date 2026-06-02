@@ -1,24 +1,34 @@
 "use client";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
+import { heroContainer, fadeUp } from "@/components/animations/loadAnimations";
 
 export function FooterSection() {
   const pathname = usePathname();
 
   const handleWorkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname !== "/") return;
-
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer
+    <motion.footer
       id="footer"
       className="page-container mt-24 lg:mt-28 border-t border-white/10 pt-12 pb-20"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between sm:justify-start sm:gap-16">
+      <motion.div
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+        variants={heroContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <motion.div
+          variants={fadeUp}
+          className="flex justify-between sm:justify-start sm:gap-16"
+        >
           <nav>
             <h2 className="text-nav-item text-(--color-slate) uppercase sr-only">
               Main
@@ -98,8 +108,9 @@ export function FooterSection() {
               </li>
             </ul>
           </nav>
-        </div>
-        <div className="mt-10">
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="mt-10">
           <p
             className="text-footer-link"
             style={{ color: "var(--color-secondary)", fontWeight: 600 }}
@@ -112,9 +123,9 @@ export function FooterSection() {
           >
             Designed and coded with heart and soul &lt;3
           </p>
-        </div>
-      </div>
-    </footer>
+        </motion.div>
+      </motion.div>
+    </motion.footer>
   );
 }
 

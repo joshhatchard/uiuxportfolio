@@ -215,8 +215,18 @@ function PixelTransition({
     [animationStepDuration],
   );
 
+  const hasMountedRef = useRef(false);
+
   useEffect(() => {
     if (typeof isHovered !== "boolean") return;
+
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      isHoveredRef.current = isHovered;
+      return;
+    }
+
+    if (!isHovered && !isHoveredRef.current) return;
 
     isHoveredRef.current = isHovered;
 

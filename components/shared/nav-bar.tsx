@@ -12,6 +12,8 @@ import {
 import { motion } from "framer-motion";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 
+import { navEnter } from "@/components/animations/loadAnimations";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const navItems = [
@@ -81,7 +83,10 @@ export function NavBar() {
   }, [isDropdownOpen]);
 
   return (
-    <header
+    <motion.header
+      variants={navEnter}
+      initial="hidden"
+      animate="show"
       id="main-nav"
       className={`sticky top-0 z-50 site-header${inter.className}`}
     >
@@ -226,7 +231,7 @@ export function NavBar() {
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
 

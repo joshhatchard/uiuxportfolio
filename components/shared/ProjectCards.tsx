@@ -1,8 +1,9 @@
 "use client";
-
 import Link from "next/link";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import PixelTransition from "@/components/animations/PixelTransition";
+import { cardGrid, cardEnter } from "@/components/animations/loadAnimations";
 
 export type ProjectCard = {
   href: string;
@@ -25,7 +26,7 @@ function ProjectCardView({
   title,
   subtitle,
 }: ProjectCard) {
-  const overlayBackgroundColor = "rgba(20, 20, 24, 0.8";
+  const overlayBackgroundColor = "rgba(20, 20, 24, 0.8)";
   const pixelHoverColor = "rgba(20, 20, 24, 0.8)";
   const [isCardHovered, setIsCardHovered] = useState(false);
 
@@ -72,7 +73,6 @@ function ProjectCardView({
           />
         </figure>
       </Link>
-
       <Link
         href={href}
         className="mt-6 block transform-gpu transition-transform duration-100 ease-out active:translate-y-px active:scale-[0.99]"
@@ -108,11 +108,19 @@ export function ProjectCards({
 }: ProjectCardsProps) {
   return (
     <section id={sectionId} className={`page-container ${spacing}`}>
-      <div className="grid gap-8 md:grid-cols-2 md:gap-10">
+      <motion.div
+        className="grid gap-8 md:grid-cols-2 md:gap-10"
+        variants={cardGrid}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+      >
         {cards.map((card) => (
-          <ProjectCardView key={card.href} {...card} />
+          <motion.div key={card.href} variants={cardEnter}>
+            <ProjectCardView {...card} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

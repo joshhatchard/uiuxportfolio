@@ -1,7 +1,15 @@
 "use client";
 import { Anybody } from "next/font/google";
+import { motion } from "framer-motion";
 import PixelBlast from "@/components/animations/PixelBlast";
 import { TiltText } from "@/components/animations/TiltText";
+import HoverLiftText from "@/components/animations/HoverLiftText";
+import {
+  heroContainer,
+  slideDown,
+  heroScale,
+  accentPop,
+} from "@/components/animations/loadAnimations";
 
 const anybody = Anybody({
   weight: ["400", "700", "900"],
@@ -10,7 +18,7 @@ const anybody = Anybody({
 
 export function AboutHero() {
   return (
-    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-32 md:pb-48 md:pt-32">
+    <section className="page-container relative overflow-hidden -top-8 min-[420px]:top-0 py-32 md:pb-32 md:pt-24">
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
@@ -40,23 +48,50 @@ export function AboutHero() {
         />
       </div>
 
-      <div
+      <motion.div
         className={`relative z-10 space-y-0 text-center ${anybody.className}`}
+        variants={heroContainer}
+        initial="hidden"
+        animate="show"
       >
-        <p className="text-hero-caption">
-          <span style={{ color: "var(--color-slate)" }}>ABOUT ME</span>
-        </p>
+        <div style={{ overflow: "hidden" }}>
+          <motion.p variants={slideDown} className="text-hero-caption">
+            <span style={{ color: "var(--color-slate)" }}>
+              <HoverLiftText text="ABOUT ME" />
+            </span>
+          </motion.p>
+        </div>
 
-        <TiltText
-          className={`text-hero-small mt-4 md:mt-8 ${anybody.className}`}
-        >
-          <span style={{ color: "var(--color-secondary)" }}>I </span>
-          <span style={{ color: "var(--color-primary)" }}>CREATE</span>
-          <span style={{ color: "var(--color-secondary)" }}> AND </span>
-          <span style={{ color: "var(--color-primary)" }}>BUILD</span>
-          <span style={{ color: "var(--color-secondary)" }}> PRODUCTS</span>
-        </TiltText>
-      </div>
+        <div style={{ overflow: "hidden" }}>
+          <motion.div variants={heroScale}>
+            <TiltText
+              className={`text-hero-small mt-4 md:mt-8 ${anybody.className}`}
+            >
+              <span style={{ color: "var(--color-secondary)" }}>I </span>
+              <motion.span
+                variants={accentPop}
+                style={{
+                  color: "var(--color-primary)",
+                  display: "inline-block",
+                }}
+              >
+                CREATE
+              </motion.span>
+              <span style={{ color: "var(--color-secondary)" }}> AND </span>
+              <motion.span
+                variants={accentPop}
+                style={{
+                  color: "var(--color-primary)",
+                  display: "inline-block",
+                }}
+              >
+                BUILD
+              </motion.span>
+              <span style={{ color: "var(--color-secondary)" }}> PRODUCTS</span>
+            </TiltText>
+          </motion.div>
+        </div>
+      </motion.div>
     </section>
   );
 }

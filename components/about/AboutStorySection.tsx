@@ -1,4 +1,8 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { cardEnter } from "@/components/animations/loadAnimations";
 
 type StoryTile = {
   image: string;
@@ -39,6 +43,18 @@ const storyTiles: StoryTile[] = [
   },
 ];
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isMobile;
+}
+
 function StoryText({ heading, body }: Pick<StoryTile, "heading" | "body">) {
   return (
     <div className="max-w-xl px-0 sm:px-4 py-8">
@@ -54,42 +70,53 @@ function StoryText({ heading, body }: Pick<StoryTile, "heading" | "body">) {
 }
 
 export function AboutStorySection() {
+  const isMobile = useIsMobile();
+
   return (
     <section className="page-container mb-16 mt-4 lg:mb-16 lg:mt-16">
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">
         {storyTiles.map((tile, index) => (
-          <div
+          <motion.div
             key={tile.image}
-            className={`flex flex-col transition-all duration-300 hover:-translate-y-1 ${index === 0 ? "order-2 md:order-0" : ""} ${index === 1 ? "order-1 md:order-0" : ""} ${index === 2 ? "order-4 md:order-0" : ""} ${index === 3 ? "order-3 md:order-0" : ""}`}
+            custom={isMobile ? 0 : index}
+            variants={cardEnter}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className={`${index === 0 ? "order-2 md:order-0" : ""} ${index === 1 ? "order-1 md:order-0" : ""} ${index === 2 ? "order-4 md:order-0" : ""} ${index === 3 ? "order-3 md:order-0" : ""}`}
           >
-            <div className={tile.textAbove ? "order-1 md:order-2" : ""}>
-              <div className="group/image overflow-hidden rounded-xs">
-                <Image
-                  src={tile.image}
-                  alt={tile.alt}
-                  width={900}
-                  height={1100}
-                  className="h-auto w-full object-cover transition-transform duration-500 group-hover/image:scale-105"
-                />
+            <div className="flex flex-col transition-transform duration-300 hover:-translate-y-1">
+              <div className={tile.textAbove ? "order-1 md:order-2" : ""}>
+                <div className="group/image overflow-hidden rounded-xs">
+                  <Image
+                    src={tile.image}
+                    alt={tile.alt}
+                    width={900}
+                    height={1100}
+                    className="h-auto w-full object-cover transition-transform duration-500 group-hover/image:scale-105"
+                  />
+                </div>
+              </div>
+              <div
+                className={`${tile.textAbove ? "mt-6 md:mt-[-8] mb-[-16] md:mb-4 order-2 md:order-1" : "mt-6 mb-[-24]"}`}
+              >
+                <StoryText heading={tile.heading} body={tile.body} />
+                {index === 2 && (
+                  <div className="max-w-xl px-0 sm:px-4 py-0">
+                    <h3
+                      className="text-about-body"
+                      style={{
+                        color: "var(--color-secondary)",
+                        fontWeight: 600,
+                      }}
+                    >
+                      Thanks for stopping by :)
+                    </h3>
+                  </div>
+                )}
               </div>
             </div>
-
-            <div
-              className={`${tile.textAbove ? "mt-6 md:mt-[-8] mb-[-16] md:mb-4 order-2 md:order-1" : "mt-6 mb-[-24]"}`}
-            >
-              <StoryText heading={tile.heading} body={tile.body} />
-              {index === 2 && (
-                <div className="max-w-xl px-0 sm:px-4 py-0">
-                  <h3
-                    className="text-about-body"
-                    style={{ color: "var(--color-secondary)", fontWeight: 600 }}
-                  >
-                    Thanks for stopping by :)
-                  </h3>
-                </div>
-              )}
-            </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

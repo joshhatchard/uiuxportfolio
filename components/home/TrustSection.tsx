@@ -3,6 +3,9 @@
 import LogoLoop from "@/components/animations/LogoLoop";
 import { useEffect, useState } from "react";
 
+import { motion } from "framer-motion";
+import { trustEnter } from "@/components/animations/loadAnimations";
+
 const trustLogos = [
   {
     src: "/orgs/usydv3.svg",
@@ -42,26 +45,28 @@ export function TrustSection() {
   }, []);
 
   return (
-    <section
-      id="partners"
-      className="page-container border-y border-white/10 lg:px-6 py-6 md:py-8 mt-0 md:mt-8"
-    >
-      <h2 className="sr-only">Partner Organizations</h2>
-      <div className="h-5 md:h-8 w-full">
-        <LogoLoop
-          logos={trustLogos}
-          speed={30}
-          direction="left"
-          logoHeight={logoHeight}
-          gap={gap}
-          pauseOnHover={true}
-          scaleOnHover={true}
-          fadeOut={true}
-          fadeOutColor="#0d0d0d"
-          ariaLabel="Partner organizations"
-        />
-      </div>
-    </section>
+    <motion.div variants={trustEnter} initial="hidden" animate="show">
+      <section
+        id="partners"
+        className="page-container border-y border-white/10 lg:px-6 py-6 md:py-8 mt-0 md:mt-8"
+      >
+        <h2 className="sr-only">Partner Organizations</h2>
+        <div className="h-5 md:h-8 w-full">
+          <LogoLoop
+            logos={trustLogos}
+            speed={30}
+            direction="left"
+            logoHeight={logoHeight}
+            gap={gap}
+            pauseOnHover={true}
+            scaleOnHover={true}
+            fadeOut={true}
+            fadeOutColor="#0d0d0d"
+            ariaLabel="Partner organizations"
+          />
+        </div>
+      </section>
+    </motion.div>
   );
 }
 

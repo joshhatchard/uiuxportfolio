@@ -1,14 +1,74 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Anybody } from "next/font/google";
+import { motion } from "framer-motion";
 import PixelTransition from "@/components/animations/PixelTransition";
 
+// ── Animation variants ────────────────────────────────────────────────────────
+import type { Variants } from "framer-motion";
+
+const heroContainer: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const navEnter: Variants = {
+  hidden: { opacity: 0, y: -8 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+};
+
+const navStagger: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.07 },
+  },
+};
+
+const navItem: Variants = {
+  hidden: { opacity: 0, y: -10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const heroScale: Variants = {
+  hidden: { opacity: 0, scale: 0.96, y: 12 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+// Shared viewport settings for scroll-triggered animations
+const viewport = { once: true, margin: "-10% 0px" };
+
+// ── Font ──────────────────────────────────────────────────────────────────────
 const anybody = Anybody({
   weight: ["400", "700", "900"],
   subsets: ["latin"],
 });
+
 import {
   GallerySection,
   type GalleryImage,
@@ -150,6 +210,18 @@ type CaseTemplateProps = {
   nextCard?: NextCaseCard | null;
 };
 
+// ── Moved outside component so it's not recreated on every render ─────────────
+const isNavigableSection = (
+  section: CaseTemplateSection,
+): section is
+  | HeroSection
+  | InfoSection
+  | FeatureSection
+  | HeroFeatureSection
+  | TextSection
+  | GalleryContentSection
+  | GalleryGridContentSection => section.type !== "divider";
+
 function renderBodyWithLineBreaks(text: string) {
   const paragraphs = text.split("||").map((para) => {
     const lines = para.split("|").map((line) => line.trim());
@@ -199,7 +271,13 @@ function NextCaseSection({ card }: { card: NextCaseCard }) {
   const pixelHoverColor = "rgba(20, 20, 24, 0.8)";
 
   return (
-    <section className="mt-6 w-full sm:mt-8">
+    <motion.section
+      className="mt-6 w-full sm:mt-8"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
       <Link
         href={card.href}
         className="group block border border-(--color-surface) transform-gpu transition-all duration-100 ease-out hover:-translate-y-1 active:translate-y-px active:scale-[0.99]"
@@ -292,7 +370,7 @@ function NextCaseSection({ card }: { card: NextCaseCard }) {
           </figure>
         </article>
       </Link>
-    </section>
+    </motion.section>
   );
 }
 
@@ -455,9 +533,14 @@ function renderSection(section: CaseTemplateSection) {
   switch (section.type) {
     case "hero":
       return (
-        <div className="py-8 sm:pt-12 sm:pb-4">
+        <motion.div
+          className="py-8 sm:pt-12 sm:pb-4 overflow-hidden"
+          variants={heroScale}
+          initial="hidden"
+          animate="show"
+        >
           <HeroImage src={section.src} alt={section.alt ?? "Hero image"} />
-        </div>
+        </motion.div>
       );
     case "info":
       return <InfoCardsSection id={section.id} cards={section.cards} />;
@@ -478,9 +561,14 @@ function renderSection(section: CaseTemplateSection) {
     case "heroFeature":
       return (
         <>
-          <div className="py-8 sm:pt-12 sm:pb-4">
+          <motion.div
+            className="py-8 sm:pt-12 sm:pb-4 overflow-hidden"
+            variants={heroScale}
+            initial="hidden"
+            animate="show"
+          >
             <HeroImage src={section.src} alt={section.alt ?? "Hero image"} />
-          </div>
+          </motion.div>
           <div className="py-4 sm:py-8">
             <FeatureSectionView
               id={section.id}
@@ -534,24 +622,16 @@ export function CaseTemplate({
   backHref = "/",
   nextCard,
 }: CaseTemplateProps) {
-  const isNavigableSection = (
-    section: CaseTemplateSection,
-  ): section is
-    | HeroSection
-    | InfoSection
-    | FeatureSection
-    | HeroFeatureSection
-    | TextSection
-    | GalleryContentSection
-    | GalleryGridContentSection => section.type !== "divider";
-
-  const navItems = content.sections
-    ? content.sections.flatMap((section) =>
-        isNavigableSection(section) && section.id && section.label
-          ? [{ id: section.id, label: section.label }]
-          : [],
-      )
-    : (content.contents ?? []);
+  // ── Memoized so the array reference is stable across renders ─────────────────
+  const navItems = useMemo(() => {
+    return content.sections
+      ? content.sections.flatMap((section) =>
+          isNavigableSection(section) && section.id && section.label
+            ? [{ id: section.id, label: section.label }]
+            : [],
+        )
+      : (content.contents ?? []);
+  }, [content.sections, content.contents]);
 
   const sidebarLabel = "CONTENT";
   const formatNavLabel = (label: string) =>
@@ -568,7 +648,7 @@ export function CaseTemplate({
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const [activeId, setActiveId] = useState<string>(navItems[0]?.id ?? "");
+  const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -601,11 +681,19 @@ export function CaseTemplate({
     <>
       <article className="relative pt-6 lg:pt-32">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[120px_minmax(0,1fr)_120px] lg:gap-10">
-          {/* Back button */}
-          <div className="fixed top-6 left-8 z-40 lg:sticky lg:top-16 lg:self-start lg:pt-2 lg:z-20 lg:left-auto lg:right-auto">
+          {/* Back button — slides in from top on mount */}
+          <motion.div
+            className="
+    sticky top-8 self-start z-40
+    lg:top-16 lg:pt-2
+  "
+            variants={navEnter}
+            initial="hidden"
+            animate="show"
+          >
             <Link
               href={backHref}
-              className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
+              className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transform-gpu hover:opacity-80 active:translate-y-px active:scale-[0.98]"
               style={{
                 background: "var(--color-bg-black)",
                 color: "var(--color-secondary)",
@@ -624,21 +712,30 @@ export function CaseTemplate({
               </svg>
               BACK
             </Link>
-          </div>
+          </motion.div>
 
           {/* Main content */}
           <div className="space-y-0">
-            {/* Header */}
-            <header className="mt-24 lg:mt-0 space-y-4 text-center">
-              <h1
+            {/* Header — staggered fade-up on mount */}
+            <motion.header
+              className="mt-24 lg:mt-0 space-y-4 text-center"
+              variants={heroContainer}
+              initial="hidden"
+              animate="show"
+            >
+              <motion.h1
+                variants={fadeUp}
                 className={`max-w-full wrap-break-word text-hero-small text-(--color-secondary) uppercase ${anybody.className}`}
               >
                 {content.title}
-              </h1>
-              <p className="text-case-subheading text-(--color-slate)">
+              </motion.h1>
+              <motion.p
+                variants={fadeUp}
+                className="text-case-subheading text-(--color-slate)"
+              >
                 {content.subtitle}
-              </p>
-            </header>
+              </motion.p>
+            </motion.header>
 
             {content.sections && content.sections.length > 0 ? (
               <div className="flex flex-col">
@@ -660,7 +757,11 @@ export function CaseTemplate({
                     (isHero && nextIsInfo) || (isHero && nextIsGallery);
                   const paddingClass =
                     isInfo && prevIsHero ? "pb-4 sm:pb-4" : "py-4 sm:py-4";
-                  return (
+
+                  const isHeroType =
+                    section.type === "hero" || section.type === "heroFeature";
+
+                  return isHeroType ? (
                     <div
                       key={section.type + "-" + index}
                       className={paddingClass}
@@ -673,45 +774,96 @@ export function CaseTemplate({
                           </div>
                         )}
                     </div>
+                  ) : (
+                    <motion.div
+                      key={section.type + "-" + index}
+                      className={paddingClass}
+                      variants={fadeUp}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={viewport}
+                    >
+                      {renderSection(section)}
+                      {!shouldHideDivider &&
+                        index < content.sections!.length - 1 && (
+                          <div className="py-6 sm:py-8">
+                            <hr className="border-white/15" />
+                          </div>
+                        )}
+                    </motion.div>
                   );
                 })}
               </div>
             ) : (
               <>
                 {content.heroImage && (
-                  <div className="py-12 sm:py-16">
+                  <motion.div
+                    className="py-12 sm:py-16 overflow-hidden"
+                    variants={heroScale}
+                    initial="hidden"
+                    animate="show"
+                  >
                     <HeroImage
                       src={content.heroImage}
                       alt={content.heroImageAlt ?? content.title}
                     />
-                  </div>
+                  </motion.div>
                 )}
 
                 {content.infoCards && content.infoCards.length > 0 && (
-                  <InfoCardsSection cards={content.infoCards} />
+                  <motion.div
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={viewport}
+                  >
+                    <InfoCardsSection cards={content.infoCards} />
+                  </motion.div>
                 )}
 
                 {content.featureHeading && content.featureBody && (
-                  <FeatureSectionView
-                    label={content.featureEyebrow ?? content.featureHeading}
-                    subEyebrow={content.featureEyebrow}
-                    heading={content.featureHeading}
-                    body={content.featureBody}
-                    image={content.featureImage}
-                    imageAlt={content.featureImageAlt}
-                  />
+                  <motion.div
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={viewport}
+                  >
+                    <FeatureSectionView
+                      label={content.featureEyebrow ?? content.featureHeading}
+                      subEyebrow={content.featureEyebrow}
+                      heading={content.featureHeading}
+                      body={content.featureBody}
+                      image={content.featureImage}
+                      imageAlt={content.featureImageAlt}
+                    />
+                  </motion.div>
                 )}
 
                 {content.blocks && content.blocks.length > 0 && (
                   <div className="space-y-14 sm:space-y-18">
                     {content.blocks.map((block) => (
-                      <TextSectionView key={block.id} block={block} />
+                      <motion.div
+                        key={block.id}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={viewport}
+                      >
+                        <TextSectionView block={block} />
+                      </motion.div>
                     ))}
                   </div>
                 )}
 
                 {content.galleryImages && content.galleryImages.length > 0 && (
-                  <GallerySection images={content.galleryImages} />
+                  <motion.div
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={viewport}
+                  >
+                    <GallerySection images={content.galleryImages} />
+                  </motion.div>
                 )}
               </>
             )}
@@ -725,21 +877,28 @@ export function CaseTemplate({
             {nextCard && <NextCaseSection card={nextCard} />}
           </div>
 
-          {/* Contents nav */}
-          <aside className="hidden lg:block lg:relative lg:z-20 lg:pt-4">
+          {/* Contents nav — slides in from top with a slight delay */}
+          <motion.aside
+            className="hidden lg:block lg:relative lg:z-20 lg:pt-4"
+            variants={navEnter}
+            initial="hidden"
+            animate="show"
+            transition={{ delay: 0.2 }}
+          >
             <div className="sticky top-16 space-y-6">
               <p className="text-nav-item text-(--color-secondary)">
                 {sidebarLabel}
               </p>
-              <nav className="flex flex-col gap-6">
+              <motion.nav className="flex flex-col gap-6" variants={navStagger}>
                 {navItems.map((item) => {
                   const isActive = item.id === activeId;
                   return (
-                    <a
+                    <motion.a
                       key={item.id}
                       href={`#${item.id}`}
                       onClick={handleNavClick}
-                      className="text-contents-link relative z-20 inline-flex cursor-pointer px-2 py-2 -mx-2 -my-2 transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
+                      variants={navItem}
+                      className="text-contents-link relative z-20 inline-flex cursor-pointer px-2 py-2 -mx-2 -my-2 hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                       aria-current={isActive ? "true" : undefined}
                       style={{
                         color: isActive
@@ -748,12 +907,12 @@ export function CaseTemplate({
                       }}
                     >
                       {formatNavLabel(item.label)}
-                    </a>
+                    </motion.a>
                   );
                 })}
-              </nav>
+              </motion.nav>
             </div>
-          </aside>
+          </motion.aside>
         </div>
       </article>
       <FooterSection />

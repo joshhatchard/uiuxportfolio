@@ -1,8 +1,11 @@
 "use client";
 import { useCallback, useState } from "react";
 import { Anybody } from "next/font/google";
+import { motion } from "framer-motion";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 import ShinyText from "@/components/animations/ShinyText";
+import HoverLiftText from "@/components/animations/HoverLiftText";
+import { heroContainer, fadeUp } from "@/components/animations/loadAnimations";
 
 const anybody = Anybody({
   weight: ["400", "700", "900"],
@@ -10,31 +13,6 @@ const anybody = Anybody({
 });
 
 const emailAddress = "joshualhatchard@gmail.com";
-
-function renderHoverLetters(text: string, keyPrefix: string) {
-  return Array.from(text).map((letter, index) =>
-    letter === " " ? (
-      <span
-        key={`${keyPrefix}-space-${index}`}
-        className="inline-block w-[0.35em]"
-      >
-        &nbsp;
-      </span>
-    ) : (
-      <span
-        key={`${keyPrefix}-${letter}-${index}`}
-        className="group/letter inline-block align-baseline"
-      >
-        <span
-          className="inline-block transform-gpu transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover/letter:-translate-y-1.5 group-hover/letter:scale-110"
-          aria-hidden="true"
-        >
-          {letter}
-        </span>
-      </span>
-    ),
-  );
-}
 
 export function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -50,8 +28,17 @@ export function ContactSection() {
       id="contact"
       className="page-container mt-8 md:mt-12 lg:mt-16 border-t border-white/10 pt-24 lg:pt-28"
     >
-      <div className="mx-auto max-w-4xl text-center">
-        <h2 className={`text-cta-heading ${anybody.className}`}>
+      <motion.div
+        className="mx-auto max-w-4xl text-center"
+        variants={heroContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <motion.h2
+          variants={fadeUp}
+          className={`text-cta-heading ${anybody.className}`}
+        >
           <span style={{ color: "var(--color-secondary)" }} className="block">
             LET&apos;S WORK
           </span>
@@ -60,10 +47,12 @@ export function ContactSection() {
             className="block"
             aria-label="TOGETHER!"
           >
-            {renderHoverLetters("TOGETHER!", "cta-together")}
+            <HoverLiftText text="TOGETHER!" />
           </span>
-        </h2>
-        <address
+        </motion.h2>
+
+        <motion.address
+          variants={fadeUp}
           className={`mt-16 max-w-full break-all text-email ${anybody.className} not-italic`}
         >
           <ShinyText
@@ -74,8 +63,9 @@ export function ContactSection() {
             spread={120}
             direction="left"
           />
-        </address>
-        <div className="mt-8 flex justify-center">
+        </motion.address>
+
+        <motion.div variants={fadeUp} className="mt-8 flex justify-center">
           <button
             type="button"
             onClick={handleCopyEmail}
@@ -94,7 +84,6 @@ export function ContactSection() {
           >
             {copied ? "COPIED!" : "COPY EMAIL"}
             {copied ? (
-              // Checkmark icon
               <svg
                 width="20"
                 height="20"
@@ -111,7 +100,6 @@ export function ContactSection() {
                 />
               </svg>
             ) : (
-              // Copy icon
               <svg
                 width="20"
                 height="20"
@@ -132,9 +120,9 @@ export function ContactSection() {
           <span className="sr-only" aria-live="polite">
             {copied ? "Email copied to clipboard" : ""}
           </span>
-        </div>
+        </motion.div>
 
-        <div className="mt-20 space-y-4">
+        <motion.div variants={fadeUp} className="mt-20 space-y-4">
           <div className="flex justify-center gap-12">
             <a
               href="https://www.linkedin.com/in/joshhatchard"
@@ -178,8 +166,8 @@ export function ContactSection() {
               </p>
             </a>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
