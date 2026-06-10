@@ -1,5 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
 import { heroContainer, fadeUp } from "@/components/animations/loadAnimations";
@@ -73,6 +74,7 @@ export function FooterSection() {
                 <a
                   href="mailto:joshualhatchard@gmail.com"
                   aria-label="Send email"
+                  onClick={() => posthog.capture("footer_contact_clicked")}
                   className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
@@ -86,6 +88,7 @@ export function FooterSection() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Connect on LinkedIn (opens in new window)"
+                  onClick={() => posthog.capture("footer_linkedin_clicked")}
                   className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >
@@ -99,6 +102,7 @@ export function FooterSection() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="View GitHub (opens in new window)"
+                  onClick={() => posthog.capture("footer_github_clicked")}
                   className="text-nav-item py-2 -my-2 inline-flex items-center gap-1 transform-gpu transition-[transform,opacity] duration-100 ease-out hover:opacity-80 active:translate-y-px active:scale-[0.98]"
                   style={{ color: "var(--color-secondary)" }}
                 >

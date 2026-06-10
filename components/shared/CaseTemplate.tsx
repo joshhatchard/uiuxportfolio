@@ -652,6 +652,11 @@ export function CaseTemplate({
     const target = document.getElementById(targetId);
     if (!target) return;
 
+    const label = event.currentTarget.textContent?.trim() ?? targetId;
+    posthog.capture("case_study_sidebar_nav_clicked", {
+      section_label: label,
+    });
+
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -700,6 +705,11 @@ export function CaseTemplate({
           >
             <Link
               href={backHref}
+              onClick={() =>
+                posthog.capture("case_study_back_clicked", {
+                  project_title: content.title,
+                })
+              }
               className="text-nav-item inline-flex items-center gap-2 rounded-full px-8 py-4 transform-gpu hover:opacity-80 active:translate-y-px active:scale-[0.98]"
               style={{
                 background: "var(--color-bg-black)",
