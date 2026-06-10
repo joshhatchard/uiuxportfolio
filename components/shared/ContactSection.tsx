@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useState } from "react";
+import posthog from "posthog-js";
 import { Anybody } from "next/font/google";
 import { motion } from "framer-motion";
 import { ExternalArrow } from "@/lib/icons/ExternalArrow";
@@ -21,6 +22,7 @@ export function ContactSection() {
     await navigator.clipboard.writeText(emailAddress);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+    posthog.capture("contact_email_copied");
   }, []);
 
   return (
@@ -130,6 +132,7 @@ export function ContactSection() {
               rel="noreferrer"
               aria-label="Connect on LinkedIn (opens in new window)"
               className="group flex flex-col items-center gap-4"
+              onClick={() => posthog.capture("contact_linkedin_clicked")}
             >
               <img
                 src="/platforms/linkedin.svg"
@@ -151,6 +154,7 @@ export function ContactSection() {
               rel="noreferrer"
               aria-label="View on GitHub (opens in new window)"
               className="group flex flex-col items-center gap-4"
+              onClick={() => posthog.capture("contact_github_clicked")}
             >
               <img
                 src="/platforms/github.svg"

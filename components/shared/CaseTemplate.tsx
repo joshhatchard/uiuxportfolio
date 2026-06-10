@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useMemo } from "react";
+import posthog from "posthog-js";
 import { Anybody } from "next/font/google";
 import { motion } from "framer-motion";
 import PixelTransition from "@/components/animations/PixelTransition";
@@ -280,6 +281,12 @@ function NextCaseSection({ card }: { card: NextCaseCard }) {
     >
       <Link
         href={card.href}
+        onClick={() =>
+          posthog.capture("case_study_next_project_clicked", {
+            project_title: card.title,
+            project_href: card.href,
+          })
+        }
         className="group block border border-(--color-surface) transform-gpu transition-all duration-100 ease-out hover:-translate-y-1 active:translate-y-px active:scale-[0.99]"
       >
         <article

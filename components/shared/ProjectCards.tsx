@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import posthog from "posthog-js";
 import PixelTransition from "@/components/animations/PixelTransition";
 import { cardGrid, cardEnter } from "@/components/animations/loadAnimations";
 
@@ -30,6 +31,13 @@ function ProjectCardView({
   const pixelHoverColor = "rgba(20, 20, 24, 0.8)";
   const [isCardHovered, setIsCardHovered] = useState(false);
 
+  const handleProjectClick = () => {
+    const event = href.startsWith("/creative/")
+      ? "creative_project_clicked"
+      : "work_project_clicked";
+    posthog.capture(event, { project_title: title, project_href: href });
+  };
+
   return (
     <article
       className="group transition-all duration-300 hover:-translate-y-1 hover:opacity-100"
@@ -38,6 +46,7 @@ function ProjectCardView({
     >
       <Link
         href={href}
+        onClick={handleProjectClick}
         className="block transform-gpu transition-transform duration-100 ease-out active:translate-y-px active:scale-[0.99]"
       >
         <figure className="aspect-square overflow-hidden rounded-xs m-0">
@@ -75,6 +84,7 @@ function ProjectCardView({
       </Link>
       <Link
         href={href}
+        onClick={handleProjectClick}
         className="mt-6 block transform-gpu transition-transform duration-100 ease-out active:translate-y-px active:scale-[0.99]"
       >
         <div className="space-y-2">

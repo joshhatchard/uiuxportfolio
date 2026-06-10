@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import posthog from "posthog-js";
 import { Inter } from "next/font/google";
 import {
   useState,
@@ -189,7 +190,18 @@ export function NavBar() {
           {/* lg+: plain text links */}
           <div className="hidden lg:flex items-center h-full">
             {externalLinks.map((link) => (
-              <ExternalLink key={link.href} {...link} showArrow />
+              <ExternalLink
+                key={link.href}
+                {...link}
+                showArrow
+                onClick={() =>
+                  posthog.capture(
+                    link.href.startsWith("mailto:")
+                      ? "nav_contact_clicked"
+                      : "nav_linkedin_clicked",
+                  )
+                }
+              />
             ))}
           </div>
 
@@ -223,7 +235,14 @@ export function NavBar() {
                     key={link.href}
                     {...link}
                     showArrow
-                    onClick={() => setIsDropdownOpen(false)}
+                    onClick={() => {
+                      posthog.capture(
+                        link.href.startsWith("mailto:")
+                          ? "nav_contact_clicked"
+                          : "nav_linkedin_clicked",
+                      );
+                      setIsDropdownOpen(false);
+                    }}
                   />
                 ))}
               </div>

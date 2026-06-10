@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import posthog from "posthog-js";
 import { Inter } from "next/font/google";
 import { Anybody } from "next/font/google";
 import { TiltText } from "@/components/animations/TiltText";
@@ -20,6 +21,7 @@ const anybody = Anybody({ weight: ["400", "700", "900"], subsets: ["latin"] });
 export function HeroSection() {
   const handleExploreWorkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    posthog.capture("hero_explore_work_clicked");
     document.getElementById("selected-work")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
