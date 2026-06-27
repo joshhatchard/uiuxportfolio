@@ -84,7 +84,7 @@ export default function RootLayout({
     name: "Josh Hatchard",
     url: "https://joshhatchard.com",
     jobTitle: "UI/UX Designer & Frontend Developer",
-    image: "https://joshhatchard.com/og-image.png",
+    image: "https://joshhatchard.com/thumbnail.png",
     sameAs: [
       "https://www.linkedin.com/in/joshhatchard",
       "https://github.com/joshhatchard",
