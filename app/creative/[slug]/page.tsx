@@ -41,9 +41,9 @@ export async function generateMetadata({
       description: work.summary,
       images: [
         {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
+          url: "/thumbnail.png",
+          width: 1280,
+          height: 720,
           alt: work.title,
         },
       ],

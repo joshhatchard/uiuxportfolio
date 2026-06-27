@@ -41,8 +41,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/thumbnail.png",
-        width: 1200,
-        height: 630,
+        width: 1280,
+        height: 720,
         alt: "Josh Hatchard Portfolio",
         type: "image/png",
       },

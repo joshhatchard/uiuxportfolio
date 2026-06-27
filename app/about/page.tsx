@@ -16,9 +16,9 @@ export const metadata: Metadata = {
       "Learn about Josh Hatchard's design philosophy and approach to user-centred product design.",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/thumbnail.png",
+        width: 1280,
+        height: 720,
         alt: "About Josh Hatchard",
       },
     ],

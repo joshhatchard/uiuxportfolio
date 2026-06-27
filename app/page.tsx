@@ -19,9 +19,9 @@ export const metadata: Metadata = {
       "Explore Josh Hatchard's portfolio of UI/UX design work and digital products.",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/thumbnail.png",
+        width: 1280,
+        height: 720,
         alt: "Josh Hatchard Portfolio",
       },
     ],

@@ -16,9 +16,9 @@ export const metadata: Metadata = {
       "Explore creative design projects including branding, graphic design, and product design.",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/thumbnail.png",
+        width: 1280,
+        height: 720,
         alt: "Josh Hatchard Creative Work",
       },
     ],
